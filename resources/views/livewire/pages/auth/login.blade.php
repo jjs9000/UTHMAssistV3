@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use App\Livewire\Forms\LoginForm;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Session;
@@ -21,11 +22,17 @@ new #[Layout('layouts.guest')] class extends Component
 
         Session::regenerate();
 
+        $authenticatedUser = Auth::user();
+
+    if ($authenticatedUser && $authenticatedUser->usertype == 'admin') {
+        $this->redirect('admin/dashboard');
+    } else {
         $this->redirect(
             session('url.intended', RouteServiceProvider::HOME),
             navigate: true
         );
     }
+}
 }; ?>
 
 <div>

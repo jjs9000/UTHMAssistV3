@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,11 +18,17 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'welcome');
 
 Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'redirect.if.admin'])
     ->name('dashboard');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('admin/dashboard', [HomeController::class, 'index'])->name('admin.dashboard'); 
+});
+
 
 require __DIR__.'/auth.php';
