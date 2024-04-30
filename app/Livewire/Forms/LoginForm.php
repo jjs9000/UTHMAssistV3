@@ -12,8 +12,8 @@ use Livewire\Form;
 
 class LoginForm extends Form
 {
-    #[Validate('required|string|email')]
-    public string $email = '';
+    #[Validate('required|string')]
+    public string $identity = ''; // Updated field name to 'identity'
 
     #[Validate('required|string')]
     public string $password = '';
@@ -30,11 +30,19 @@ class LoginForm extends Form
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only(['email', 'password']), $this->remember)) {
+        // Check if the identity is an email address
+        if (filter_var($this->identity, FILTER_VALIDATE_EMAIL)) {
+            $credentials = ['email' => $this->identity];
+        } else {
+            $credentials = ['username' => $this->identity];
+        }
+
+        // Attempt to authenticate with either email or username
+        if (! Auth::attempt(array_merge($credentials, ['password' => $this->password]), $this->remember)) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'identity' => trans('auth.failed'),
             ]);
         }
 
@@ -67,6 +75,6 @@ class LoginForm extends Form
      */
     protected function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->email).'|'.request()->ip());
+        return Str::transliterate(Str::lower($this->identity).'|'.request()->ip());
     }
 }
