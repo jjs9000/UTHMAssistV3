@@ -5,15 +5,13 @@
         </h2>
     </x-slot>
 
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('This is your messages page.') }}
-    </div>
-    
-    <!-- Display Messages Here -->
-
-    <div class="flex items-center justify-end mt-4">
-        <a href="{{ route('dashboard') }}" class="underline text-sm text-gray-600 hover:text-gray-900">
-            {{ __('Back to Dashboard') }}
-        </a>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    {{ __("This is the messaging page") }}
+                </div>
+            </div>
+        </div>
     </div>
 </x-app-layout>
