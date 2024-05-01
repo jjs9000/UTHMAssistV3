@@ -51,4 +51,28 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function applications(){
+        return $this->hasMany(Application::class);
+    }
+
+    public function taskPostings()
+    {
+        return $this->hasMany(TaskPosting::class);
+    }
+
+    public function feedbackGiven()
+    {
+        return $this->hasMany(Feedback::class, 'user_id');
+    }
+
+    public function feedbackReceived()
+    {
+        return $this->hasMany(Feedback::class, 'user_id');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

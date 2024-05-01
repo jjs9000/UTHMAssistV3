@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('task_postings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained(); // assuming you have a 'users' table
+            $table->string('title');
+            $table->text('description');
+            $table->text('requirement');
+            $table->decimal('salary');
+            $table->string('location');
+            $table->date('deadline');
+            $table->enum('status', ['available', 'not_available'])->default('available');
             $table->timestamps();
         });
     }
