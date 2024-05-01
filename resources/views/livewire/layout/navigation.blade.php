@@ -33,6 +33,13 @@ new class extends Component
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <!-- Only display Message link to usertype = 'user' -->
+                    @if (Auth::check() && Auth::user()->usertype === 'user')
+                        <x-nav-link :href="route('message.index')" :active="request()->routeIs('message.index')">
+                            {{ __('Message') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

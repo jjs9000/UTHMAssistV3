@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use App\Http\Middleware\Admin;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,16 +18,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified', 'redirect.if.admin'])
-    ->name('dashboard');
+Route::middleware(['auth', 'verified', 'redirect.if.admin'])->group(function () {
+    Route::get('/message', [MessageController::class, 'index'])->name('message.index');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
 Route::middleware(['auth', 'admin'])->group(function () {
-
+    // Display Admin Dashboard
     Route::get('admin/dashboard', [HomeController::class, 'index'])->name('admin.dashboard'); 
 });
 
