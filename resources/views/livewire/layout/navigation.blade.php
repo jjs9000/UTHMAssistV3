@@ -36,9 +36,18 @@ new class extends Component
 
                     <!-- Only display Message link to usertype = 'user' -->
                     @if (Auth::check() && Auth::user()->usertype === 'user')
+                        <x-nav-link :href="route('task-posting.index')" :active="request()->routeIs('task-posting.index')">
+                            {{ __('Home') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('task-posting-page')" :active="request()->routeIs('task-posting-page')">
+                            {{ __('Task') }}
+                        </x-nav-link>
+                        
                         <x-nav-link :href="route('message.index')" :active="request()->routeIs('message.index')">
                             {{ __('Message') }}
                         </x-nav-link>
+
                     @endif
                 </div>
             </div>
