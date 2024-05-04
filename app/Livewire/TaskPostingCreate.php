@@ -35,7 +35,6 @@ class TaskPostingCreate extends Component
             'salary' => 'required',
             'location' => 'required',
             'deadline' => 'required|date',
-            // 'tags' => 'required|array|min:1',
         ]);
 
         // Clean and cast salary to a decimal
@@ -57,23 +56,11 @@ class TaskPostingCreate extends Component
         // Attach the tags to the task
         $taskPosting->tags()->attach($this->selectedTags);
 
-        $this->resetFields();
+        // $this->resetFields();
+        $this->reset();
 
         session()->flash('success', 'Task created successfully');
 
         return redirect()->route('task-posting-page');
     }
-
-    private function resetFields()
-    {
-        $this->title = '';
-        $this->description = '';
-        $this->requirement = '';
-        $this->salary = '';
-        $this->location = '';
-        $this->deadline = '';
-        $this->selectedTags = [];
-    }
-
-    
 }
