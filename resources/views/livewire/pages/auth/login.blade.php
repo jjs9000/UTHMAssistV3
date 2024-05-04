@@ -27,10 +27,7 @@ new #[Layout('layouts.guest')] class extends Component
     if ($authenticatedUser && $authenticatedUser->usertype == 'admin') {
         $this->redirect('admin/dashboard');
     } else {
-        $this->redirect(
-            session('url.intended', RouteServiceProvider::HOME),
-            navigate: true
-        );
+        $this->redirect(route('task-posting.index'));
     }
 }
 }; ?>
