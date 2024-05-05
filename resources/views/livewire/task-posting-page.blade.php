@@ -29,7 +29,7 @@
                     <p class="text-center">No task posted found.</p>
                 @else
                     @foreach ($postedTasks as $task)
-                        <div class="bg-white rounded-lg shadow-md">
+                        <div class="bg-gray-500 rounded-lg shadow-md">
                             <div class="p-4">
                                 <h3 class="text-lg font-semibold">{{ $task->title }}</h3>
                                 <p class="text-gray-700">Posted on {{ $task->created_at->format('M d, Y') }}</p>
@@ -39,9 +39,14 @@
                                     </div>
                                 @endforeach
                             </div>
-                            <div class="flex justify-end p-2">
-                                <button wire:click="deleteTask({{ $task->id }})" wire:confirm='Are you sure you want to delete this post?' class="text-red-500 hover:underline">Delete Task</button>
-                            </div>
+                            <div class="flex justify-end space-x-4 p-2">
+                                <div>
+                                    <x-primary-button wire:click="editTask({{ $task->id }})">Edit</x-primary-button>
+                                </div>
+                                <div>
+                                    <x-danger-button wire:click="deleteTask({{ $task->id }})" wire:confirm='Are you sure you want to delete this post?'>Delete Task</x-danger-button>
+                                </div>
+                            </div>                            
                         </div>
                     @endforeach
                 </div>
@@ -52,7 +57,22 @@
         </div>
         
         <div class="w-1/2 p-4">
-            @livewire('task-posting-create', key('task-posting-create-' . time()))
+            <div class="bg-gray-500 shadow-md rounded-lg p-6">
+                <div class="flex flex-col">
+                    @if ($editTaskId)
+                        {{-- Update form --}}
+                        <livewire:task-posting-create :task="$editTaskDetails" :key="'edit-' . $editTaskId" />
+                        <div class="flex items-center justify-end mt-4" wire:click="cancelEdit">
+                            <x-primary-button class="bg-gray-500 text-white rounded hover:bg-gray-600">
+                                Cancel
+                            </x-primary-button>
+                        </div>
+                    @else
+                        {{-- Task creation form --}}
+                        <livewire:task-posting-create />
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
-</div>    
+</div>

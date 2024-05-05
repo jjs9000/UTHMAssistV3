@@ -1,5 +1,5 @@
 <div class="max-w-2xl mx-auto mt-10">
-    <h2 class="text-2xl font-semibold mb-4">Create Task Posting</h2>
+    <h2 class="text-2xl font-semibold mb-4">Task Posting Form</h2>
 
     <form wire:submit.prevent="createTask" class="mx-auto">
         @csrf
@@ -58,8 +58,8 @@
         
 
         <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Create Task Posting') }}
+            <x-primary-button class="bg-gray-500 text-white rounded hover:bg-gray-600">
+                {{ __('Submit') }}
             </x-primary-button>
         </div>
     </form>

@@ -12,6 +12,9 @@ class TaskPostingPage extends Component
 {
     use WithPagination;
 
+    public $editTaskId;
+    public $editTaskDetails;
+
     public function render()
     {   
         $user = Auth::user();
@@ -36,5 +39,19 @@ class TaskPostingPage extends Component
 
         // Flash a success message
         Session::flash('success', 'Task deleted successfully');
+    }
+
+    public function editTask($taskId)
+    {
+        $task = TaskPosting::with('tags')->findOrFail($taskId);
+        $this->editTaskId = $taskId;
+        $this->editTaskDetails = $task;
+    }
+    
+
+    public function cancelEdit()
+    {
+        $this->editTaskId = null;
+        $this->editTaskDetails = null;
     }
 }
