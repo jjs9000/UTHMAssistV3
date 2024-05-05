@@ -13,46 +13,39 @@
         </div>
     @endif
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("This is the task page") }}
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="flex">
         <div class="w-1/2 p-4">
-            <div class="grid grid-cols-1 gap-4">
                 @if ($postedTasks->isEmpty())
-                    <p class="text-center">No task posted found.</p>
+                    <div class="bg-gray-500 shadow-md rounded-lg p-6 text-center">
+                        <p class="text-lg font-semibold">No task posted found.</p>
+                    </div>
                 @else
-                    @foreach ($postedTasks as $task)
-                        <div class="bg-gray-500 rounded-lg shadow-md">
-                            <div class="p-4">
-                                <h3 class="text-lg font-semibold">{{ $task->title }}</h3>
-                                <p class="text-gray-700">Posted on {{ $task->created_at->format('M d, Y') }}</p>
-                                @foreach($task->tags as $tag)
-                                    <div class="mb-4 tag-container">
-                                        <span class="inline-block bg-white text-yellow px-2 py-1 rounded-full text-xs font-semibold">{{ $tag->name }}</span>
+                    <div class="grid grid-cols-1 gap-4">
+                        @foreach ($postedTasks as $task)
+                            <div class="bg-gray-500 rounded-lg shadow-md">
+                                <div class="p-4">
+                                    <h3 class="text-lg font-semibold">{{ $task->title }}</h3>
+                                    <p class="text-gray-700">Posted on {{ $task->created_at->format('M d, Y') }}</p>
+                                    @foreach($task->tags as $tag)
+                                        <div class="mb-4 tag-container">
+                                            <span class="inline-block bg-white text-yellow px-2 py-1 rounded-full text-xs font-semibold">{{ $tag->name }}</span>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="flex justify-end space-x-4 p-2">
+                                    <div>
+                                        <x-primary-button wire:click="editTask({{ $task->id }})">Edit</x-primary-button>
                                     </div>
-                                @endforeach
+                                    <div>
+                                        <x-danger-button wire:click="deleteTask({{ $task->id }})" wire:confirm='Are you sure you want to delete this post?'>Delete Task</x-danger-button>
+                                    </div>
+                                </div>                            
                             </div>
-                            <div class="flex justify-end space-x-4 p-2">
-                                <div>
-                                    <x-primary-button wire:click="editTask({{ $task->id }})">Edit</x-primary-button>
-                                </div>
-                                <div>
-                                    <x-danger-button wire:click="deleteTask({{ $task->id }})" wire:confirm='Are you sure you want to delete this post?'>Delete Task</x-danger-button>
-                                </div>
-                            </div>                            
-                        </div>
-                    @endforeach
-                </div>
-                <div class="mt-2 mb-12 p-2">
-                    {{ $postedTasks->links() }}
-                </div>
+                        @endforeach
+                    </div>
+                    <div class="mt-2 mb-12 p-2">
+                        {{ $postedTasks->links() }}
+                    </div>
                 @endif
         </div>
         
@@ -75,4 +68,6 @@
             </div>
         </div>
     </div>
+    
+    
 </div>
