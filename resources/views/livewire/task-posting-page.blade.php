@@ -34,10 +34,14 @@
                                 </div>
                                 <div class="flex justify-end space-x-4 p-2">
                                     <div>
-                                        <x-primary-button wire:click="editTask({{ $task->id }})">Edit</x-primary-button>
+                                        <button wire:click="editTask({{ $task->id }})">
+                                            <img src="{{ asset('svg/edit-icon.svg') }}" alt="Edit Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
+                                        </button>
                                     </div>
                                     <div>
-                                        <x-danger-button wire:click="deleteTask({{ $task->id }})" wire:confirm='Are you sure you want to delete this post?'>Delete Task</x-danger-button>
+                                        <button wire:click="deleteTask({{ $task->id }})" wire:confirm='Are you sure you want to delete this post?'>
+                                            <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
+                                        </button>
                                     </div>
                                 </div>                            
                             </div>

@@ -43,6 +43,10 @@ new class extends Component
                         <x-nav-link :href="route('task-posting-page')" :active="request()->routeIs('task-posting-page')">
                             {{ __('Task') }}
                         </x-nav-link>
+
+                        <x-nav-link :href="route('application')" :active="request()->routeIs('application')">
+                            {{ __('Application') }}
+                        </x-nav-link>
                         
                         <x-nav-link :href="route('message.index')" :active="request()->routeIs('message.index')">
                             {{ __('Message') }}

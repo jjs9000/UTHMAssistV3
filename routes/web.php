@@ -11,6 +11,7 @@ use App\Livewire\TaskPostingIndex;
 use App\Livewire\TaskPostingShow;
 use App\Livewire\TaskPostingCreate;
 use App\Livewire\TaskPostingEdit;
+use App\Livewire\Application;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,8 @@ Route::middleware(['auth', 'redirect.if.admin'])->group(function () {
     Route::get('/task-posting/{taskPosting}', [TaskPostingShow::class, 'show'])->name('task-posting.show');
     Route::get('/task-posting/create', [TaskPostingCreate::class, 'create'])->name('task-posting.create');
     Route::get('/task-posting/{taskPosting}/edit', [TaskPostingEdit::class, 'edit'])->name('task-posting.edit');
+
+    Route::get('/application', Application::class)->name('application');
 });
 
 
