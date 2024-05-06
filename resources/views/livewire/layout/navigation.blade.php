@@ -30,10 +30,6 @@ new class extends Component
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-
                     <!-- Only display Message link to usertype = 'user' -->
                     @if (Auth::check() && Auth::user()->usertype === 'user')
                         <x-nav-link :href="route('task-posting.index')" :active="request()->routeIs('task-posting.index')">
@@ -72,8 +68,16 @@ new class extends Component
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile')" wire:navigate>
+                        <x-dropdown-link :href="route('dashboard')" wire:navigate>
                             {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('saved-task')" wire:navigate>
+                            {{ __('Saved tasks') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('profile')" wire:navigate>
+                            {{ __('Setting') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->

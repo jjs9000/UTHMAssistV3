@@ -12,6 +12,7 @@ use App\Livewire\TaskPostingShow;
 use App\Livewire\TaskPostingCreate;
 use App\Livewire\TaskPostingEdit;
 use App\Livewire\Application;
+use App\Livewire\SavedTask;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,8 @@ Route::middleware(['auth', 'redirect.if.admin'])->group(function () {
     Route::get('/task-posting/{taskPosting}/edit', [TaskPostingEdit::class, 'edit'])->name('task-posting.edit');
 
     Route::get('/application', Application::class)->name('application');
+
+    Route::get('/saved-task', SavedTask::class)->name('saved-task');
 });
 
 
