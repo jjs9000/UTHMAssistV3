@@ -46,7 +46,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::middleware(['auth', 'redirect.if.admin'])->group(function () {
     Route::get('/task-posting-page', TaskPostingPage::class)->name('task-posting-page');
     Route::get('/task-posting', TaskPostingIndex::class)->name('task-posting.index');
-    Route::get('/task-posting/{taskPosting}', [TaskPostingShow::class, 'show'])->name('task-posting.show');
+    Route::get('/task-posting/{id}', TaskPostingShow::class)->name('task-posting.show');
     Route::get('/task-posting/create', [TaskPostingCreate::class, 'create'])->name('task-posting.create');
     Route::get('/task-posting/{taskPosting}/edit', [TaskPostingEdit::class, 'edit'])->name('task-posting.edit');
 

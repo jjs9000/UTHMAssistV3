@@ -69,8 +69,12 @@
                                         <!-- User is not the original poster, display "Apply" button -->
                                         <button wire:click="apply" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Apply</button>
                                     @else
-                                        <!-- User is the original poster, display "Edit" button -->
-                                        <a href="{{ route('task-posting.edit', $selectedTask) }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Edit</a>
+                                    <!-- User is the original poster, display a button to redirect to their task-posting page -->
+                                    <button 
+                                    wire:click="dispatch('redirectToTaskPostingPage')" 
+                                    class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
+                                    View My Tasks
+                                    </button>
                                     @endif
                                 @else
                                     <!-- Task is expired, display a message -->
@@ -80,9 +84,9 @@
                         
                             {{-- Expand Icon --}}
                             <div class="ml-4">
-                                <button>
+                                <a href="{{ route('task-posting.show', ['id' => $selectedTask->id]) }}" target="_blank">
                                     <img src="{{ asset('svg/expand-icon.svg') }}" alt="Expand Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
-                                </button>
+                                </a>
                             </div>
                         </div>                        
                     </div>

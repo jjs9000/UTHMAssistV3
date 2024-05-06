@@ -7,11 +7,11 @@ use App\Models\TaskPosting;
 
 class TaskPostingShow extends Component
 {
-    public $taskPosting;
+    public $task;
 
-    public function mount($taskPosting)
+    public function mount($id)
     {
-        $this->taskPosting = $taskPosting;
+        $this->task = TaskPosting::findOrFail($id);
     }
 
     public function render()
