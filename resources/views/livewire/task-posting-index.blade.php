@@ -7,7 +7,12 @@
         <div class="bg-white p-4 rounded-lg shadow">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
                 @foreach($taskPostings as $taskPosting)
-                    <div>
+                    <div class="relative">
+                        <!-- Save icon button positioned at the top right corner -->
+                        <button class="absolute top-0 right-0 mt-2 mr-2">
+                            <img src="{{ asset('svg/save-icon.svg') }}" alt="Save Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
+                        </button>
+                        <!-- Task list card content -->
                         <div wire:click="showTask({{ $taskPosting->id }})" class="bg-white p-4 rounded-lg shadow cursor-pointer hover:shadow-md">
                             <h2 class="text-xl font-semibold">{{ $taskPosting->title }}</h2>
                             <p class="text-gray-700">Salary: RM {{ $taskPosting->salary }}</p>
@@ -16,7 +21,7 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
+            </div>            
         </div>
         @endif
     </div>
@@ -32,9 +37,9 @@
                         
                         <p class="text-gray-700 mb-4">
                             @if(auth()->user()->id == $selectedTask->user->id)
-                                Posted by you on {{ $selectedTask->created_at->format('Y-m-d') }}
+                                You posted {{ $selectedTask->created_at->diffForHumans() }}
                             @else
-                                Posted by: {{ $selectedTask->user->username }}
+                                Posted {{ $selectedTask->created_at->diffForHumans() }}
                             @endif
                         </p>
                         

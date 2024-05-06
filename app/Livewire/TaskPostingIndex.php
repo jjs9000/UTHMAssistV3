@@ -42,11 +42,6 @@ class TaskPostingIndex extends Component
     #[On('redirectToTaskPostingShow')]
     public function redirectToTaskPostingShow()
     {
-        // if (!$this->selectedTask) {
-        //     // Handle the case where selectedTask is not set
-        //     return;
-        // }
-    
         $taskId = $this->selectedTask->id;
         $url = route('task-posting.show', ['id' => $taskId]);
         
