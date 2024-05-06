@@ -55,28 +55,36 @@
                             <h2 class="text-xl font-semibold mb-2">Description</h2>
                             <p class="text-gray-700">{{ $selectedTask->description }}</p>
                         </div>
-                
-                        {{-- Display the apply button if not expired | Display edit if original poster --}}
-                        @if (auth()->check())
-                            @if (!$selectedTask->isExpired())
-                                @php
-                                    $existingApplication = auth()->user()->applications()->where('task_id', $selectedTask->id)->count() > 0;
-                                @endphp
-                                @if ($existingApplication)
-                                    <!-- User has already applied, display a message -->
-                                    <p>You already applied to this task</p>
-                                @elseif (auth()->user()->id !== $selectedTask->user_id)
-                                    <!-- User is not the original poster, display "Apply" button -->
-                                    <button wire:click="apply" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Apply</button>
+                        <div class="flex items-center">
+                            {{-- Apply Button --}}
+                            @if (auth()->check())
+                                @if (!$selectedTask->isExpired())
+                                    @php
+                                        $existingApplication = auth()->user()->applications()->where('task_id', $selectedTask->id)->count() > 0;
+                                    @endphp
+                                    @if ($existingApplication)
+                                        <!-- User has already applied, display a message -->
+                                        <p>You already applied to this task</p>
+                                    @elseif (auth()->user()->id !== $selectedTask->user_id)
+                                        <!-- User is not the original poster, display "Apply" button -->
+                                        <button wire:click="apply" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Apply</button>
+                                    @else
+                                        <!-- User is the original poster, display "Edit" button -->
+                                        <a href="{{ route('task-posting.edit', $selectedTask) }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Edit</a>
+                                    @endif
                                 @else
-                                    <!-- User is the original poster, display "Edit" button -->
-                                    <a href="{{ route('task-posting.edit', $selectedTask) }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Edit</a>
+                                    <!-- Task is expired, display a message -->
+                                    <p>Task expired. Applications are no longer accepted.</p>
                                 @endif
-                            @else
-                                <!-- Task is expired, display a message -->
-                                <p>Task expired. Applications are no longer accepted.</p>
                             @endif
-                        @endif
+                        
+                            {{-- Expand Icon --}}
+                            <div class="ml-4">
+                                <button>
+                                    <img src="{{ asset('svg/expand-icon.svg') }}" alt="Expand Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
+                                </button>
+                            </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
