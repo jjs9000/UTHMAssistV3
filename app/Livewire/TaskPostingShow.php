@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\TaskPosting;
+use Livewire\Attributes\On;
 
 class TaskPostingShow extends Component
 {
@@ -17,5 +18,14 @@ class TaskPostingShow extends Component
     public function render()
     {
         return view('livewire.task-posting-show');
+    }
+
+    #[On('apply')]
+    public function apply()
+    {
+        // Redirect the user to the ApplicationCreateForm component
+        return redirect()->route('application-create-form', [
+            'taskId' => $this->task->id
+        ]);
     }
 }

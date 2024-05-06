@@ -72,7 +72,7 @@
                                         <p>You already applied to this task</p>
                                     @elseif (auth()->user()->id !== $selectedTask->user_id)
                                         <!-- User is not the original poster, display "Apply" button -->
-                                        <button wire:click="apply" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Apply</button>
+                                        <button wire:click="dispatch('apply')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Apply</button>
                                     @else
                                     <!-- User is the original poster, display a button to redirect to their task-posting page -->
                                     <button 

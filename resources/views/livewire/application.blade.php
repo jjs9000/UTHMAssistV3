@@ -6,4 +6,19 @@
             </div>
         </div>
     </div>
+
+    <div>
+        <h1>Applied Tasks</h1>
+    
+        @if ($applications->isEmpty())
+            <p>No applications found.</p>
+        @else
+            <ul>
+                @foreach ($applications as $application)
+                    <li>{{ $application->task->title }} - {{ $application->created_at->diffForHumans() }}</li>
+                @endforeach
+            </ul>
+        @endif
+    </div>
 </div>
+

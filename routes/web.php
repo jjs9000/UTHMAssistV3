@@ -12,6 +12,7 @@ use App\Livewire\TaskPostingShow;
 use App\Livewire\TaskPostingCreate;
 use App\Livewire\TaskPostingEdit;
 use App\Livewire\Application;
+use App\Livewire\ApplicationCreateForm;
 use App\Livewire\SavedTask;
 
 /*
@@ -52,6 +53,7 @@ Route::middleware(['auth', 'redirect.if.admin'])->group(function () {
     Route::get('/task-posting/{taskPosting}/edit', [TaskPostingEdit::class, 'edit'])->name('task-posting.edit');
 
     Route::get('/application', Application::class)->name('application');
+    Route::get('/application/create/{taskId}', ApplicationCreateForm::class)->name('application-create-form');
 
     Route::get('/saved-task', SavedTask::class)->name('saved-task');
 });
