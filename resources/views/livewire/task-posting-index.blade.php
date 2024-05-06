@@ -97,6 +97,12 @@
                     </div>
                 </div>
             </div>
+        @else
+            <!-- Placeholder content when no task is selected -->
+            <div class="bg-white p-4 rounded-lg shadow flex flex-col items-center">
+                <h1 class="text-2xl font-bold text-gray-700 mb-4">Select a task to view its details.</h1>
+                <img src="{{ asset('svg/job-illustration.svg') }}" alt="Job Illustration" class="w-3/4 h-auto">
+            </div>
         @endif
     </div>
 </div>
