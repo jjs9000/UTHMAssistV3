@@ -12,7 +12,9 @@
     <!-- Task postings -->
     <div>
         @if($noTasksAvailable)
-            <p>No task postings available.</p>
+        <div class="bg-gray-500 shadow-md rounded-lg p-6 text-center">
+            <p class="text-lg font-semibold">No task posted found.</p>
+        </div>
         @else
         <div class="bg-white p-4 rounded-lg shadow">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
