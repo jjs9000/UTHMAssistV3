@@ -4,25 +4,32 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\TaskPosting;
-use Illuminate\Support\Facades\Redirect;
 
 use Livewire\Attributes\On;
+use Livewire\WithPagination;
 
 class TaskPostingIndex extends Component
 {
-    public $taskPostings;
-    public $selectedTask;
 
-    public function mount()
-    {
-        $this->taskPostings = TaskPosting::all();
-    }
+    use WithPagination;
+
+    // public $taskPostings;
+    public $selectedTask;
+    public $search = '';
 
     public function render()
     {
-        $noTasksAvailable = $this->taskPostings->isEmpty();
-
+        // Apply search filter if search term is not empty
+        if (!empty($this->search)) {
+            $taskPostings = TaskPosting::where('title', 'like', "%{$this->search}%")->paginate(5);
+        } else {
+            $taskPostings = TaskPosting::paginate(5);
+        }
+        
+        $noTasksAvailable = $taskPostings->isEmpty();
+    
         return view('livewire.task-posting-index', [
+            'taskPostings' => $taskPostings,
             'noTasksAvailable' => $noTasksAvailable,
         ]);
     }
@@ -48,5 +55,11 @@ class TaskPostingIndex extends Component
         // Open the URL in a new tab using JavaScript
         $script = "<script>window.open('{$url}', '_blank')</script>";
         return $script;
+    }
+
+    #[On('search')]
+    public function updateSearch($search)
+    {
+        $this->search = $search;
     }
 }
