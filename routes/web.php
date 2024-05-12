@@ -1,8 +1,13 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MessageController;
+use App\Livewire\AdminApplication;
+use App\Livewire\AdminDashboard;
+use App\Livewire\AdminFeedback;
+use App\Livewire\AdminTag;
+use App\Livewire\AdminTask;
+use App\Livewire\AdminUser;
 use Illuminate\Support\Facades\Route;
 
 //Livewire Components 
@@ -13,6 +18,8 @@ use App\Livewire\TaskPostingCreate;
 use App\Livewire\TaskPostingEdit;
 use App\Livewire\Application;
 use App\Livewire\ApplicationCreateForm;
+use App\Livewire\ApplicationList;
+use App\Livewire\ApplicationReceive;
 use App\Livewire\SavedTask;
 
 /*
@@ -41,7 +48,12 @@ Route::view('profile', 'profile')
 
 // Admin Route
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('admin/dashboard', [HomeController::class, 'index'])->name('admin.dashboard'); 
+    Route::get('admin/dashboard', AdminDashboard::class)->name('admin-dashboard');
+    Route::get('/admin/user', AdminUser::class)->name('admin-user');
+    Route::get('/admin/task', AdminTask::class)->name('admin-task');
+    Route::get('/admin/application', AdminApplication::class)->name('admin-application');
+    Route::get('/admin/tag', AdminTag::class)->name('admin-tag');
+    Route::get('/admin/feedback', AdminFeedback::class)->name('admin-feedback'); 
 });
 
 // Task Posting Route (Livewire Component)
@@ -54,6 +66,8 @@ Route::middleware(['auth', 'redirect.if.admin'])->group(function () {
 
     Route::get('/application', Application::class)->name('application');
     Route::get('/application/create/{taskId}', ApplicationCreateForm::class)->name('application-create-form');
+    Route::get('/application-list', ApplicationList::class)->name('application.list');
+    Route::get('/application-receive', ApplicationReceive::class)->name('application.receive');
 
     Route::get('/saved-task', SavedTask::class)->name('saved-task');
 });

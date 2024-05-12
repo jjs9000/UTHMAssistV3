@@ -47,7 +47,29 @@ new class extends Component
                         <x-nav-link :href="route('message.index')" :active="request()->routeIs('message.index')">
                             {{ __('Message') }}
                         </x-nav-link>
+                    @endif
 
+                    <!-- Displayed for admin -->
+                    @if (Auth::check() && Auth::user()->usertype === 'admin')
+                        <x-nav-link :href="route('admin-user')" :active="request()->routeIs('admin-user')">
+                            {{ __('User') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('admin-task')" :active="request()->routeIs('admin-task')">
+                            {{ __('Task Post') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('admin-application')" :active="request()->routeIs('admin-application')">
+                            {{ __('Application') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('admin-tag')" :active="request()->routeIs('admin-tag')">
+                            {{ __('Tag') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('admin-feedback')" :active="request()->routeIs('admin-feedback')">
+                            {{ __('Feedback & Reviews') }}
+                        </x-nav-link>
                     @endif
                 </div>
             </div>
@@ -68,12 +90,12 @@ new class extends Component
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('dashboard')" wire:navigate>
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
-
+                        @if (Auth::check() && Auth::user()->usertype === 'user')
                         <x-dropdown-link :href="route('saved-task')" wire:navigate>
                             {{ __('Saved tasks') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('admin-dashboard')" wire:navigate>
+                            {{ __('Profile') }}
                         </x-dropdown-link>
 
                         <x-dropdown-link :href="route('profile')" wire:navigate>
@@ -86,6 +108,22 @@ new class extends Component
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </button>
+                        @else
+                        <x-dropdown-link :href="route('admin-dashboard')" wire:navigate>
+                            {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('profile')" wire:navigate>
+                            {{ __('Setting') }}
+                        </x-dropdown-link>
+
+                        <!-- Authentication -->
+                        <button wire:click="logout" class="w-full text-start">
+                            <x-dropdown-link>
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </button>
+                        @endif
                     </x-slot>
                 </x-dropdown>
             </div>
