@@ -52,6 +52,15 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function scopeSearch($query, $value)
+    {
+        $query->where('username', 'like', "%{$value}%")
+              ->orWhere('email', 'like', "%{$value}%")
+              ->orWhere('first_name', 'like', "%{$value}%")
+              ->orWhere('last_name', 'like', "%{$value}%");
+    }
+    
+
     public function applications(){
         return $this->hasMany(Application::class);
     }

@@ -1,7 +1,7 @@
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900 dark:text-gray-100">
+        <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900 ">
                 {{ __("This is the application page") }}
             </div>
         </div>
@@ -15,13 +15,13 @@
             <p class="text-lg font-semibold">No application found</p>
         </div>
         @else
-            <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+            <ul class="divide-y divide-gray-200">
                 @foreach ($applications as $application)
                     <li class="py-4">
                         <div class="flex justify-between items-center">
                             <div>
                                 <h2 class="text-lg text-gray-100 font-semibold">{{ $application->task->title }}</h2>
-                                <p class="text-gray-100 dark:text-gray-400">{{ $application->message }}</p>
+                                <p class="text-gray-100 ">{{ $application->message }}</p>
                             </div>
                             <div>
                                 <span class="px-2 py-1 text-sm font-semibold {{ $application->status === 'accepted' ? 'bg-green-500 text-white' : 'bg-blue-500 text-white' }} rounded">{{ ucfirst($application->status) }}</span>
