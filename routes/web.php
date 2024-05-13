@@ -49,7 +49,7 @@ Route::view('profile', 'profile')
 // Admin Route
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard', AdminDashboard::class)->name('admin-dashboard');
-    Route::get('/admin/user', AdminUser::class)->name('admin-user');
+    Route::get('/admin/user/{showUserTable?}', AdminUser::class)->name('admin-user');
     Route::get('/admin/task', AdminTask::class)->name('admin-task');
     Route::get('/admin/application', AdminApplication::class)->name('admin-application');
     Route::get('/admin/tag', AdminTag::class)->name('admin-tag');
