@@ -10,4 +10,8 @@
     <p class="mt-2">Post Code: {{ $user->post_code }}</p>
     <p class="mt-2">State: {{ $user->state }}</p>
     <p class="mt-2">City: {{ $user->city }}</p>
+
+    <div class="mt-6 flex justify-end">
+        <x-secondary-button wire:click="closeUserModal">Close</x-secondary-button>
+    </div>
 </div>

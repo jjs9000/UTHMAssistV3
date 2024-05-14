@@ -11,7 +11,7 @@ class UserTable extends Component
 {
     use WithPagination;
     
-    protected $listeners = ['userDeleted' => '$refresh'];
+    protected $listeners = ['userDeleted' => '$refresh', 'showViewUserModal', 'openViewUserModal'];
 
 
     #[Url(history:true)]
@@ -33,6 +33,12 @@ class UserTable extends Component
     public function updatedSearch()
     {
         $this->resetPage();
+    }
+
+    public function openViewUserModal($userId)
+    {
+        $this->dispatch('openModal', 'view-user-modal', ['user' => $userId]);
+        $this->dispatch('admin-user', 'modalOpened');
     }
 
     public function delete(User $user)

@@ -15,8 +15,16 @@ class ViewUserModal extends ModalComponent
         $this->user = $user;
     }
 
+    public function closeUserModal()
+    {
+        $this->dispatch('viewUserModalClosed');
+        $this->closeModal();  // Call the existing method from LivewireUI\Modal\ModalComponent
+    }
+
     public function render(): View
     {
-        return view('livewire.view-user-modal');
+        return view('livewire.view-user-modal',[
+            'user' => $this->user,   
+        ]);
     }
 }
