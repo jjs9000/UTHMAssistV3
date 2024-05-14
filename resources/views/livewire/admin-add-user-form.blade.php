@@ -81,6 +81,7 @@
                         <div>
                             <x-input-label for="usertype" :value="__('User Type')" />
                             <select wire:model="usertype" id="usertype" class="block w-full mt-1 rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="usertype" required>
+                                <option value="">Set user as:</option>
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
                             </select>
