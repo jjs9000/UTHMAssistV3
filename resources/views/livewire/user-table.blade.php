@@ -70,7 +70,7 @@
                                 <td class="px-4 py-3">{{ $user->created_at->format('Y-m-d H:i:s') }}</td>
                                 <td class="px-4 py-3">{{ $user->updated_at->format('Y-m-d H:i:s') }}</td>
                                 <td class="px-4 py-3 flex items-center justify-end space-x-2">
-                                    <button onclick="confirm('Are you sure you want to delete {{ $user->first_name }} {{ $user->last_name }} ?') || event.stopImmediatePropagation()" wire:click="delete({{ $user->id }})" class="px-3 py-1 bg-slate-100 text-white rounded flex items-center justify-center">
+                                    <button wire:click="$dispatch('openModal', { component: 'delete-confirmation-modal', arguments: { userId: {{ $user->id }} }})" class="px-3 py-1 bg-slate-100 text-white rounded flex items-center justify-center">
                                         <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="h-5 w-20">
                                     </button>
                                     <button wire:click="$dispatch('openModal', { component: 'view-user-modal', arguments: { user: {{ $user }} }})" class="px-3 py-1 bg-slate-100 text-white rounded flex items-center justify-center">

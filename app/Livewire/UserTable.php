@@ -10,6 +10,9 @@ use Livewire\WithPagination;
 class UserTable extends Component
 {
     use WithPagination;
+    
+    protected $listeners = ['userDeleted' => '$refresh'];
+
 
     #[Url(history:true)]
     public $search = '';
