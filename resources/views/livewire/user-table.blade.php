@@ -57,11 +57,14 @@
                         </thead>
                         <tbody>
                             @foreach($users as $user)
-                            <tr wire:key="{{ $user->id }}" class="border-b ">
+                            <tr wire:key="{{ $user->id }}" class="border-b group">
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
                                     {{ $user->username }}</td>
                                 <td class="px-4 py-3">{{ $user->first_name }} {{ $user->last_name }}</td>
-                                <td class="px-4 py-3">{{ $user->ic }}</td>
+                                <td class="px-4 py-3 relative">
+                                    <div class="absolute inset-0 bg-gray-300 text-gray-300 group-hover:bg-transparent group-hover:text-transparent transition-none">{{ $user->ic }}</div>
+                                    <div class="group-hover:opacity-100 opacity-100">{{ $user->ic }}</div>
+                                </td>
                                 <td class="px-4 py-3">{{ $user->email }}</td>
                                 <td class="px-4 py-3 text-green-500">{{ $user->usertype }}</td>
                                 <td class="px-4 py-3">{{ $user->date_of_birth }}</td>
