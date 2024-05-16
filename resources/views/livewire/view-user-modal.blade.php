@@ -1,6 +1,6 @@
 <div class="p-6 bg-white rounded-lg shadow-lg max-w-md mx-auto">
     <div class="flex flex-col items-center mb-6">
-        <img src="https://via.placeholder.com/150" alt="Profile Picture" class="w-32 h-32 rounded-full shadow-lg mb-4">
+        <img src="{{ $user->profile_picture ? asset('profile_pictures/' . basename($user->profile_picture)) : 'https://via.placeholder.com/150' }}" alt="Profile Picture" class="w-32 h-32 rounded-full shadow-lg mb-4 object-cover">
         <h2 class="text-2xl font-semibold text-gray-800">{{ $user->first_name }} {{ $user->last_name }}</h2>
         <p class="text-gray-600">{{ $user->usertype }}</p>
     </div>

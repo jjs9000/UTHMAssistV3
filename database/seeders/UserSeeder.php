@@ -28,7 +28,8 @@ class UserSeeder extends Seeder
             'post_code' => '12345', // Sample postal code
             'city' => 'Admin City', // Sample city
             'state' => 'Admin State', // Sample state
-            // Add other fields as needed
+            'profile_picture' => 'https://via.placeholder.com/150', // Placeholder image URL
+            'ic' => 'A1234567', // Sample IC
         ]);
 
         // Seed one regular user
@@ -45,27 +46,29 @@ class UserSeeder extends Seeder
             'post_code' => '54321', // Sample postal code
             'city' => 'User City', // Sample city
             'state' => 'User State', // Sample state
-            // Add other fields as needed
+            'profile_picture' => 'https://via.placeholder.com/150', // Placeholder image URL
+            'ic' => 'B7654321', // Sample IC
         ]);
 
-                // Seed 50 random users using Faker
-                $faker = Faker::create();
-                for ($i = 0; $i < 50; $i++) {
-                    User::create([
-                        'username' => $faker->userName,
-                        'first_name' => $faker->firstName,
-                        'last_name' => $faker->lastName,
-                        'email' => $faker->unique()->safeEmail,
-                        'password' => bcrypt('password'), // Hash the password
-                        'usertype' => 'user',
-                        'date_of_birth' => $faker->date(),
-                        'contact_number' => $faker->phoneNumber,
-                        'address' => $faker->address,
-                        'post_code' => $faker->postcode,
-                        'city' => $faker->city,
-                        'state' => $faker->state,
-                        // Add other fields as needed
-                    ]);
-                }
+        // Seed 50 random users using Faker
+        $faker = Faker::create();
+        for ($i = 0; $i < 50; $i++) {
+            User::create([
+                'username' => $faker->userName,
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName,
+                'email' => $faker->unique()->safeEmail,
+                'password' => bcrypt('password'), // Hash the password
+                'usertype' => 'user',
+                'date_of_birth' => $faker->date(),
+                'contact_number' => $faker->phoneNumber,
+                'address' => $faker->address,
+                'post_code' => $faker->postcode,
+                'city' => $faker->city,
+                'state' => $faker->state,
+                'profile_picture' => $faker->imageUrl(150, 150, 'people'), // Random image URL
+                'ic' => strtoupper($faker->bothify('??######')), // Random string for IC
+            ]);
+        }
     }
 }

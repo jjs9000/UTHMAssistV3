@@ -16,7 +16,7 @@
     <section class="mt-10">
         <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
             <div class="bg-white relative shadow-md sm:rounded-lg overflow-hidden">
-                <form wire:submit.prevent="saveUser" class="p-6 space-y-6">
+                <form wire:submit.prevent="saveUser" enctype="multipart/form-data" class="p-6 space-y-6">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <x-input-label for="first_name" :value="__('First Name')" />
@@ -28,6 +28,12 @@
                             <x-input-label for="last_name" :value="__('Last Name')" />
                             <x-text-input wire:model="last_name" id="last_name" class="block mt-1 w-full" type="text" name="last_name" required autocomplete="last_name" />
                             <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+                        </div>
+
+                        <div>
+                            <x-input-label for="ic" :value="__('Identification Card (IC)')" />
+                            <x-text-input wire:model="ic" id="ic" class="block mt-1 w-full" type="text" name="ic" required autocomplete="ic"/>
+                            <x-input-error :messages="$errors->get('ic')" class="mt-2" />
                         </div>
     
                         <div>
@@ -52,6 +58,12 @@
                             <x-input-label for="contact_number" :value="__('Contact Number')" />
                             <x-text-input wire:model="contact_number" id="contact_number" class="block mt-1 w-full" type="text" name="contact_number" required autocomplete="contact_number" />
                             <x-input-error :messages="$errors->get('contact_number')" class="mt-2" />
+                        </div>
+
+                        <div>
+                            <x-input-label for="profile_picture" :value="__('Profile Picture')" />
+                            <input wire:model="profile_picture" id="profile_picture" type="file" name="profile_picture">
+                            <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />
                         </div>
     
                         <div class="col-span-2">

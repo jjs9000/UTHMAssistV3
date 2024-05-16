@@ -21,6 +21,7 @@ use App\Livewire\ApplicationCreateForm;
 use App\Livewire\ApplicationList;
 use App\Livewire\ApplicationReceive;
 use App\Livewire\SavedTask;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,17 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
+// Profile Picture route
+Route::get('profile-pictures/{filename}', function ($filename) {
+    $path = Storage::disk('local')->path('profile_pictures/' . $filename);
+    
+    if (!Storage::disk('local')->exists('profile_pictures/' . $filename)) {
+        abort(404);
+    }
+
+    return response()->file($path);
+})->name('profile-picture');
+
 // Admin Route
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard', AdminDashboard::class)->name('admin-dashboard');
@@ -53,7 +65,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/task', AdminTask::class)->name('admin-task');
     Route::get('/admin/application', AdminApplication::class)->name('admin-application');
     Route::get('/admin/tag', AdminTag::class)->name('admin-tag');
-    Route::get('/admin/feedback', AdminFeedback::class)->name('admin-feedback'); 
+    Route::get('/admin/feedback', AdminFeedback::class)->name('admin-feedback');
 });
 
 // Task Posting Route (Livewire Component)

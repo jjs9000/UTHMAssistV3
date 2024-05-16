@@ -1,6 +1,6 @@
 <div>
     <section class="mt-10">
-        <div class="mx-auto max-w-screen-2xl px-4 lg:px-12">
+        <div class="mx-auto max-w-screen-3xl px-4 lg:px-12">
             <!-- Start coding here -->
             <div class="bg-white  relative shadow-md sm:rounded-lg overflow-hidden">
                 <div class="flex items-center justify-between d p-4">
@@ -40,6 +40,7 @@
                             <tr>
                                 @include('livewire.includes.table-sortable-th', ['name' => 'username', 'displayName' => 'Username'])
                                 @include('livewire.includes.table-sortable-th', ['name' => 'first_name', 'displayName' => 'Name'])
+                                <th scope="col" class="px-4 py-3">IC</th>
                                 @include('livewire.includes.table-sortable-th', ['name' => 'email', 'displayName' => 'Email'])
                                 @include('livewire.includes.table-sortable-th', ['name' => 'usertype', 'displayName' => 'User Type'])
                                 @include('livewire.includes.table-sortable-th', ['name' => 'date_of_birth', 'displayName' => 'Date of Birth'])
@@ -60,6 +61,7 @@
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
                                     {{ $user->username }}</td>
                                 <td class="px-4 py-3">{{ $user->first_name }} {{ $user->last_name }}</td>
+                                <td class="px-4 py-3">{{ $user->ic }}</td>
                                 <td class="px-4 py-3">{{ $user->email }}</td>
                                 <td class="px-4 py-3 text-green-500">{{ $user->usertype }}</td>
                                 <td class="px-4 py-3">{{ $user->date_of_birth }}</td>
@@ -71,10 +73,10 @@
                                 <td class="px-4 py-3">{{ $user->updated_at->format('Y-m-d H:i:s') }}</td>
                                 <td class="px-4 py-3 flex items-center justify-end space-x-2">
                                     <button wire:click="$dispatch('openModal', { component: 'delete-confirmation-modal', arguments: { userId: {{ $user->id }} }})" class="px-3 py-1 bg-slate-100 text-white rounded flex items-center justify-center">
-                                        <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="h-5 w-40">
+                                        <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="h-6 w-40">
                                     </button>
                                     <button wire:click="openViewUserModal({{ $user->id }})" class="px-3 py-1 bg-slate-100 text-white rounded flex items-center justify-center">
-                                        <img src="{{ asset('svg/view-icon.svg') }}" alt="View Icon" class="h-5 w-40">
+                                        <img src="{{ asset('svg/view-icon.svg') }}" alt="View Icon" class="h-6 w-40">
                                     </button>
                                 </td>                                                                                               
                             </tr>

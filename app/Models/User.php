@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -17,20 +18,24 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'username',
-        'first_name',
-        'last_name',
-        'email',
-        'password',
-        'usertype',
-        'date_of_birth',
-        'contact_number',
-        'address',
-        'post_code',
-        'city',
-        'state',
-    ];
+    // protected $fillable = [
+    //     'username',
+    //     'first_name',
+    //     'last_name',
+    //     'ic',
+    //     'email',
+    //     'password',
+    //     'usertype',
+    //     'date_of_birth',
+    //     'contact_number',
+    //     'address',
+    //     'post_code',
+    //     'city',
+    //     'state',
+    //     'profile_picture'
+    // ];
+
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -59,7 +64,26 @@ class User extends Authenticatable
               ->orWhere('first_name', 'like', "%{$value}%")
               ->orWhere('last_name', 'like', "%{$value}%");
     }
-    
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($user) {
+            // Delete profile picture from profile_pictures directory
+            if ($user->profile_picture && Storage::disk('local')->exists('profile_pictures/' . basename($user->profile_picture))) {
+                Storage::disk('local')->delete('profile_pictures/' . basename($user->profile_picture));
+            }
+
+            // Clean up temporary files in livewire-tmp directory
+            $files = Storage::disk('local')->files('livewire-tmp');
+            foreach ($files as $file) {
+                if (strpos($file, basename($user->profile_picture)) !== false) {
+                    Storage::disk('local')->delete($file);
+                }
+            }
+        });
+    }
 
     public function applications(){
         return $this->hasMany(Application::class);
