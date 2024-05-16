@@ -41,11 +41,6 @@ class UserTable extends Component
         $this->dispatch('admin-user', 'modalOpened');
     }
 
-    public function delete(User $user)
-    {
-        $user->delete();
-    }
-
     public function setSortBy($sortByField)
     {
         if($this->sortBy === $sortByField){
