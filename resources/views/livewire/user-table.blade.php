@@ -72,13 +72,15 @@
                                 <td class="px-4 py-3">{{ $user->created_at->format('Y-m-d H:i:s') }}</td>
                                 <td class="px-4 py-3">{{ $user->updated_at->format('Y-m-d H:i:s') }}</td>
                                 <td class="px-4 py-3 flex items-center justify-end space-x-2">
-                                    <button wire:click="$dispatch('openModal', { component: 'delete-confirmation-modal', arguments: { userId: {{ $user->id }} }})" class="px-3 py-1 bg-slate-100 text-white rounded flex items-center justify-center">
-                                        <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="h-6 w-40">
-                                    </button>
+                                    @if(auth()->user()->id !== $user->id)
+                                        <button wire:click="$dispatch('openModal', { component: 'delete-confirmation-modal', arguments: { userId: {{ $user->id }} }})" class="px-3 py-1 bg-slate-100 text-white rounded flex items-center justify-center">
+                                            <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="h-6 w-40">
+                                        </button>
+                                    @endif
                                     <button wire:click="openViewUserModal({{ $user->id }})" class="px-3 py-1 bg-slate-100 text-white rounded flex items-center justify-center">
                                         <img src="{{ asset('svg/view-icon.svg') }}" alt="View Icon" class="h-6 w-40">
                                     </button>
-                                </td>                                                                                               
+                                </td>                                                                                                                               
                             </tr>
                             @endforeach
                         </tbody>
