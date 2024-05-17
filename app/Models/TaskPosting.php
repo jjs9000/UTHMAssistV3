@@ -17,6 +17,8 @@ class TaskPosting extends Model
         'requirement',
         'salary',
         'location',
+        'location_detail',
+        'location',
         'deadline',
         'status',
         'tags',

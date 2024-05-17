@@ -22,7 +22,7 @@
                 @else
                     <div class="grid grid-cols-1 gap-4">
                         @foreach ($postedTasks as $task)
-                            <div class="bg-gray-500 rounded-lg shadow-md">
+                            <div class="bg-neutral-100 rounded-lg shadow-md">
                                 <div class="p-4">
                                     <h3 class="text-lg font-semibold">{{ $task->title }}</h3>
                                     <p class="text-gray-700">Posted on {{ $task->created_at->format('M d, Y') }}</p>
@@ -54,7 +54,7 @@
         </div>
         
         <div class="w-1/2 p-4">
-            <div class="bg-gray-500 shadow-md rounded-lg p-6">
+            <div class="bg-neutral-100 border-8 border-blue-700 shadow-md rounded-lg p-6">
                 <div class="flex flex-col">
                     @if ($editTaskId)
                         {{-- Update form --}}

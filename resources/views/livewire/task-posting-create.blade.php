@@ -1,5 +1,5 @@
 <div class="max-w-2xl mx-auto mt-10">
-    <h2 class="text-2xl font-semibold mb-4">Task Posting Form</h2>
+    <h2 class="text-3xl text-center font-semibold mb-4">Task Posting Form</h2>
 
     <form wire:submit.prevent="createTask" class="mx-auto">
         @csrf
