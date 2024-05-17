@@ -28,9 +28,9 @@
                                     <p class="text-gray-700 absolute top-4 right-4"><strong>Posted</strong> {{ $task->created_at->diffForHumans() }}</p>
                                     <div class="flex items-center mt-2">
                                         <p class="px-2 py-1 rounded text-md font-semibold text-white inline-block {{ $task->status == 'available' ? 'bg-green-500' : 'bg-red-500' }}">
-                                            {{ $task->status }}
+                                            {{ $task->status == 'available' ? 'Available' : 'Not Available' }}
                                         </p>
-                                    </div>
+                                    </div>                                    
                                 </div>                                
                                 <div class="flex justify-end space-x-4 p-2">
                                     <div>
@@ -59,7 +59,7 @@
         </div>
         
         <div class="w-1/2 p-4">
-            <div class="bg-gray-100 border-8 border-blue-700 shadow-md rounded-lg p-6">
+            <div class="bg-white border-8 border-gray-900 shadow-md rounded-lg p-6">
                 <div class="flex flex-col">
                     @if ($editTaskId)
                         {{-- Update form --}}

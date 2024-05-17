@@ -11,11 +11,11 @@
 
     <!-- Task information -->
     <div class="mb-4">
-        <div class="flex items-center mb-2">
-            <p class="px-2 py-1 rounded text-md font-semibold mr-2 mb-2 text-white inline-block {{ $task->status == 'available' ? 'bg-green-500' : 'bg-red-500' }}">
-                {{ $task->status }}
+        <div class="flex items-center mt-2">
+            <p class="px-2 py-1 rounded text-md font-semibold text-white inline-block {{ $task->status == 'available' ? 'bg-green-500' : 'bg-red-500' }}">
+                {{ $task->status == 'available' ? 'Available' : 'Not Available' }}
             </p>
-        </div>
+        </div>        
         <div class="flex items-center mb-2">
             <p class="text-gray-700 inline-block"><strong>Posted:</strong> {{ $task->created_at->diffForHumans() }}</p>
         </div>

@@ -15,7 +15,9 @@ class TaskPostingCreate extends Component
     public $requirement;
     public $salary;
     public $location;
+    public $location_detail;
     public $deadline;
+    public $status;
     public $selectedTags = [];
 
     public $task;
@@ -30,7 +32,9 @@ class TaskPostingCreate extends Component
             $this->requirement = $task['requirement'];
             $this->salary = $task['salary'];
             $this->location = $task['location'];
+            $this->location_detail = $task['location_detail'];
             $this->deadline = $task['deadline'];
+            $this->status = $task['status'];
             $this->selectedTags = $task->tags->pluck('id')->toArray();
         }
     }
@@ -44,6 +48,8 @@ class TaskPostingCreate extends Component
             'requirement' => 'required',
             'salary' => 'required',
             'location' => 'required',
+            'location_detail' => 'required',
+            'status' => 'required',
             'deadline' => 'required|date',
         ];
 
@@ -62,9 +68,12 @@ class TaskPostingCreate extends Component
                 'requirement' => $this->requirement,
                 'salary' => $cleanedSalary,
                 'location' => $this->location,
+                'location_detail' => $this->location_detail,
+                'status' => $this->status,
                 'deadline' => $this->deadline,
             ]);
             $task->tags()->sync($this->selectedTags);
+            $message = 'Task updated successfully.';
         } else {
             $task = TaskPosting::create([
                 'user_id' => Auth::id(),
@@ -73,15 +82,18 @@ class TaskPostingCreate extends Component
                 'requirement' => $this->requirement,
                 'salary' => $cleanedSalary,
                 'location' => $this->location,
+                'location_detail' => $this->location_detail,
+                'status' => $this->status,
                 'deadline' => $this->deadline,
             ]);
             $task->tags()->attach($this->selectedTags);
+            $message = 'Task created successfully.';
         }
 
         // Reset fields
         $this->reset();
 
-        session()->flash('success', 'Task ' . ($this->task ? 'updated' : 'created') . ' successfully.');
+        session()->flash('success', $message);
 
         // Redirect to task posting page
         return redirect()->route('task-posting-page');
@@ -90,7 +102,7 @@ class TaskPostingCreate extends Component
     public function render()
     {
         $tags = Tag::all();
-        return view('livewire.task-posting-create',[
+        return view('livewire.task-posting-create', [
             'tags' => $tags,
         ]);
     }
