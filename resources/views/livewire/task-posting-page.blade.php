@@ -22,17 +22,22 @@
                 @else
                     <div class="grid grid-cols-1 gap-4">
                         @foreach ($postedTasks as $task)
-                            <div class="bg-neutral-100 rounded-lg shadow-md">
-                                <div class="p-4">
+                            <div class="bg-white border-2 border-gray-900 rounded-lg shadow-md">
+                                <div class="p-4 relative">
                                     <h3 class="text-lg font-semibold">{{ $task->title }}</h3>
-                                    <p class="text-gray-700">Posted on {{ $task->created_at->format('M d, Y') }}</p>
-                                    @foreach($task->tags as $tag)
-                                        <div class="mb-4 tag-container">
-                                            <span class="inline-block bg-white text-yellow px-2 py-1 rounded-full text-xs font-semibold">{{ $tag->name }}</span>
-                                        </div>
-                                    @endforeach
-                                </div>
+                                    <p class="text-gray-700 absolute top-4 right-4"><strong>Posted</strong> {{ $task->created_at->diffForHumans() }}</p>
+                                    <div class="flex items-center mt-2">
+                                        <p class="px-2 py-1 rounded text-md font-semibold text-white inline-block {{ $task->status == 'available' ? 'bg-green-500' : 'bg-red-500' }}">
+                                            {{ $task->status }}
+                                        </p>
+                                    </div>
+                                </div>                                
                                 <div class="flex justify-end space-x-4 p-2">
+                                    <div>
+                                        <button wire:click="$dispatch('openModal', { component: 'view-task-modal', arguments: { taskId: {{ $task->id }} }})">
+                                            <img src="{{ asset('svg/view-icon.svg') }}" alt="View Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
+                                        </button>
+                                    </div>
                                     <div>
                                         <button wire:click="editTask({{ $task->id }})">
                                             <img src="{{ asset('svg/edit-icon.svg') }}" alt="Edit Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
@@ -54,7 +59,7 @@
         </div>
         
         <div class="w-1/2 p-4">
-            <div class="bg-neutral-100 border-8 border-blue-700 shadow-md rounded-lg p-6">
+            <div class="bg-gray-100 border-8 border-blue-700 shadow-md rounded-lg p-6">
                 <div class="flex flex-col">
                     @if ($editTaskId)
                         {{-- Update form --}}

@@ -16,15 +16,25 @@ class TaskPostingIndex extends Component
     // public $taskPostings;
     public $selectedTask;
     public $search = '';
+    public $location = '';
 
     public function render()
     {
+        // Start with base query to retrieve all task postings
+        $query = TaskPosting::query();
+    
         // Apply search filter if search term is not empty
         if (!empty($this->search)) {
-            $taskPostings = TaskPosting::where('title', 'like', "%{$this->search}%")->paginate(5);
-        } else {
-            $taskPostings = TaskPosting::paginate(5);
+            $query->where('title', 'like', "%{$this->search}%");
         }
+    
+        // Apply location filter if location is not empty
+        if (!empty($this->location)) {
+            $query->where('location', $this->location);
+        }
+    
+        // Fetch task postings based on the applied filters
+        $taskPostings = $query->orderBy('created_at', 'desc')->paginate(5);
         
         $noTasksAvailable = $taskPostings->isEmpty();
     
@@ -62,4 +72,10 @@ class TaskPostingIndex extends Component
     {
         $this->search = $search;
     }
+
+    #[On('location')]
+    public function updateLocation($location)
+    {
+        $this->location = $location;
+    }    
 }
