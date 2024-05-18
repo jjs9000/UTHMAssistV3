@@ -92,11 +92,7 @@
                             </div>
 
                             <p class="text-gray-700 mb-4">
-                                @if (auth()->user()->id == $selectedTask->user->id)
-                                    You posted {{ $selectedTask->created_at->diffForHumans() }}
-                                @else
-                                    Posted {{ $selectedTask->created_at->diffForHumans() }}
-                                @endif
+                                    <strong>Posted</strong> {{ $selectedTask->created_at->diffForHumans() }}
                             </p>
 
                             <!-- Display tag with random color -->
@@ -126,27 +122,19 @@
                             </div>
                             <div class="flex items-center mt-4">
                                 <!-- Apply Button -->
-                                @if (auth()->check())
-                                    @if (!$selectedTask->isExpired())
-                                        @php
-                                            $existingApplication = auth()->user()->applications()->where('task_id', $selectedTask->id)->count() > 0;
-                                        @endphp
-                                        @if ($existingApplication)
-                                            <!-- User has already applied, display a message -->
-                                            <p>You already applied to this task</p>
-                                        @elseif (auth()->user()->id !== $selectedTask->user_id)
-                                            <!-- User is not the original poster, display "Apply" button -->
-                                            <button wire:click="dispatch('apply')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Apply</button>
-                                        @else
-                                            <!-- User is the original poster, display a button to redirect to their task-posting page -->
-                                            <button wire:click="dispatch('redirectToTaskPostingPage')" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">View My Tasks</button>
-                                        @endif
+                                @if (auth()->check() && !$selectedTask->isExpired())
+                                    @php
+                                        $existingApplication = auth()->user()->applications()->where('task_id', $selectedTask->id)->count() > 0;
+                                    @endphp
+                                    @if ($existingApplication)
+                                        <!-- User has already applied, display a message -->
+                                        <p>You already applied to this task</p>
                                     @else
-                                        <!-- Task is expired, display a message -->
-                                        <p class="font-semibold">Task expired. Applications are no longer accepted.</p>
+                                        <!-- User is not the original poster, display "Apply" button -->
+                                        <button wire:click="dispatch('apply')" class="bg-blue-700 text-white px-4 py-2 rounded hover:shadow-lg hover:ring-2 ring-gray-900">Apply</button>
                                     @endif
                                 @endif
-                            </div>
+                            </div>                            
                         </div>
                     </div>
                 </div>

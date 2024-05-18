@@ -22,18 +22,20 @@ class TaskPostingIndex extends Component
     public function render()
     {
         // Start with base query to retrieve all task postings
-        $query = TaskPosting::query();
-    
+        $query = TaskPosting::where('user_id', '!=', auth()->id()) // Exclude tasks by the original poster
+                            ->where('status', '!=', 'not_available') // Exclude tasks with status 'not_available'
+                            ->whereDate('deadline', '>=', now()); // Exclude expired tasks
+        
         // Apply search filter if search term is not empty
         if (!empty($this->search)) {
             $query->where('title', 'like', "%{$this->search}%");
         }
-    
+        
         // Apply location filter if location is not empty
         if (!empty($this->location)) {
             $query->where('location', $this->location);
         }
-
+    
         // Apply sorting based on sortBy property
         switch ($this->sortBy) {
             case 'latest':
@@ -49,8 +51,8 @@ class TaskPostingIndex extends Component
                 $query->orderBy('salary', 'asc');
                 break;
         }
-    
-        // Fetch task postings based on the applied filters
+        
+        // Fetch task postings based on the applied filters and paginate the results
         $taskPostings = $query->paginate(5);
         
         $noTasksAvailable = $taskPostings->isEmpty();
@@ -60,6 +62,7 @@ class TaskPostingIndex extends Component
             'noTasksAvailable' => $noTasksAvailable,
         ]);
     }
+       
 
     public function showTask($taskId)
     {
