@@ -16,7 +16,7 @@
     <div class="flex">
         <div class="w-1/2 p-4">
                 @if ($postedTasks->isEmpty())
-                    <div class="bg-gray-500 shadow-md rounded-lg p-6 text-center">
+                    <div class="bg-white shadow-md rounded-lg p-6 text-center">
                         <p class="text-lg font-semibold">No task posted found.</p>
                     </div>
                 @else
@@ -44,7 +44,7 @@
                                         </button>
                                     </div>
                                     <div>
-                                        <button wire:click="deleteTask({{ $task->id }})" wire:confirm='Are you sure you want to delete this post?'>
+                                        <button wire:click="$dispatch('openModal', { component: 'delete-task-confirmation-modal', arguments: { taskId: {{ $task->id }} }})">
                                             <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
                                         </button>
                                     </div>

@@ -35,7 +35,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="mb-4">
                 <x-input-label for="location" :value="__('Location')" />
-                <select wire:model.defer="location" id="location" name="location" class="mt-1 block w-full">
+                <select wire:model.defer="location" id="location" name="location" class="mt-1 block border-gray-300 w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                     <option value="">Select Location</option>
                     <option value="UTHM Parit Raja">UTHM Parit Raja</option>
                     <option value="UTHM Pagoh">UTHM Pagoh</option>
@@ -59,7 +59,7 @@
 
             <div class="mb-4">
                 <x-input-label for="status" :value="__('Status')" />
-                <select wire:model.defer="status" id="status" name="status" class="mt-1 block w-full">
+                <select wire:model.defer="status" id="status" name="status" class="mt-1 block border-gray-300 w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                     <option value="">Select Status</option>
                     <option value="available">Available</option>
                     <option value="not_available">Not Available</option>
