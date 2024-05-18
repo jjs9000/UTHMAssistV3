@@ -16,7 +16,7 @@
     <div class="flex">
         <div class="w-1/2 p-4">
                 @if ($postedTasks->isEmpty())
-                    <div class="bg-white shadow-md rounded-lg p-6 text-center">
+                    <div class="bg-white border shadow-md rounded-lg p-6 text-center">
                         <p class="text-lg font-semibold">No task posted found.</p>
                     </div>
                 @else
