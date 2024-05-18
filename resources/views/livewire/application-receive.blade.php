@@ -34,12 +34,23 @@
                         <td class="py-4 px-6 text-sm text-gray-900">{{ $application->task->title }}</td>
                         <td class="py-4 px-6 text-sm text-gray-900">{{ $application->user->username }}</td>
                         <td class="py-4 px-6 text-sm">
-                            <button wire:click="acceptApplication({{ $application->id }})" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mr-2">
+                        @if ($application->status === 'pending')
+                            <button wire:click="acceptApplication({{ $application->id }})" wire:loading.attr="disabled" wire:target="acceptApplication" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mr-2">
                                 Accept
                             </button>
-                            <button wire:click="rejectApplication({{ $application->id }})" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+                            <button wire:click="rejectApplication({{ $application->id }})" wire:loading.attr="disabled" wire:target="rejectApplication" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
                                 Reject
                             </button>
+                        @elseif ($application->status === 'accepted')
+                            <button disabled class="bg-green-500 text-white px-4 py-2 rounded mr-2">
+                                Accepted
+                            </button>
+                        @elseif ($application->status === 'rejected')
+                            <button disabled class="bg-red-500 text-white px-4 py-2 rounded">
+                                Rejected
+                            </button>
+                        @endif
+                                                     
                         </td>
                         <td class="py-4 px-6 text-sm text-center">
                             <button wire:click="$dispatch('openModal', { component: 'view-received-application-modal', arguments: { application: {{ $application->id }} } })">
