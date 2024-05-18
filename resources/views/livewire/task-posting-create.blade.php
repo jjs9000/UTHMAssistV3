@@ -25,9 +25,12 @@
                 <x-input-error :messages="$errors->get('requirement')" class="text-red-500" />
             </div>
 
-            <div class="mb-4">
+            <div class="mb-4 relative">
                 <x-input-label for="salary" :value="__('Salary')" />
-                <x-text-input wire:model.defer="salary" id="salary" class="mt-1 block w-full" type="text" name="salary" required />
+                <div class="flex items-center">
+                    <span class="absolute left-3 text-gray-700">RM</span>
+                    <x-text-input wire:model.defer="salary" id="salary" class="pl-10 mt-1 block w-full" type="text" name="salary" required oninput="formatSalary(this)" />
+                </div>
                 <x-input-error :messages="$errors->get('salary')" class="text-red-500" />
             </div>
         </div>
@@ -85,3 +88,27 @@
         </div>
     </form>
 </div>
+
+<script>
+    function formatSalary(input) {
+        let value = input.value.replace(/[^0-9.]/g, '');
+        
+        if (value.includes('.')) {
+            let parts = value.split('.');
+            parts[0] = parts[0].slice(0, 7); // Limit integer part length
+            parts[1] = parts[1].slice(0, 2); // Limit decimal part length
+            value = parts.join('.');
+        } else {
+            value = value.slice(0, 7); // Limit integer part length if no decimal
+        }
+        
+        input.value = value;
+    }
+
+    document.getElementById('salary').addEventListener('blur', function() {
+        let value = parseFloat(this.value);
+        if (!isNaN(value)) {
+            this.value = value.toFixed(2);
+        }
+    });
+</script>

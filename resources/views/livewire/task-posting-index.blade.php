@@ -114,8 +114,12 @@
                                 <img src="{{ asset('svg/user-icon.svg') }}" alt="User Icon" class="h-6 w-6 mr-2">
                                 <p class="text-gray-700">{{ $selectedTask->user->username }}</p>
                             </div>
+                            <div class="flex items-center mt-4">
+                                <p class="text-gray-700">
+                                    <strong>Deadline:</strong> {{ \Carbon\Carbon::parse($selectedTask->deadline)->format('d-m-Y') }}
+                                </p>
+                            </div>                            
 
-                            <!-- Add other task details as needed -->
                             <div class="mt-4">
                                 <h2 class="text-xl font-semibold mb-2">Description</h2>
                                 <p class="text-gray-700">{{ $selectedTask->description }}</p>

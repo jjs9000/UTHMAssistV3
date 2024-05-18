@@ -20,38 +20,52 @@
                         <p class="text-lg font-semibold">No task posted found.</p>
                     </div>
                 @else
-                    <div class="grid grid-cols-1 gap-4">
-                        @foreach ($postedTasks as $task)
-                            <div class="bg-white border rounded-lg shadow-md">
-                                <div class="p-4 relative">
-                                    <h3 class="text-lg font-semibold">{{ $task->title }}</h3>
-                                    <p class="text-gray-700 absolute top-4 right-4"><strong>Posted</strong> {{ $task->created_at->diffForHumans() }}</p>
-                                    <div class="flex items-center mt-2">
-                                        <p class="px-2 py-1 rounded text-md font-semibold text-white inline-block {{ $task->status == 'available' ? 'bg-green-500' : 'bg-red-500' }}">
-                                            {{ $task->status == 'available' ? 'Available' : 'Not Available' }}
-                                        </p>
-                                    </div>                                    
-                                </div>                                
-                                <div class="flex justify-end space-x-4 p-2">
-                                    <div>
-                                        <button wire:click="$dispatch('openModal', { component: 'view-task-modal', arguments: { taskId: {{ $task->id }} }})">
-                                            <img src="{{ asset('svg/view-icon.svg') }}" alt="View Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
-                                        </button>
-                                    </div>
-                                    <div>
-                                        <button wire:click="editTask({{ $task->id }})">
-                                            <img src="{{ asset('svg/edit-icon.svg') }}" alt="Edit Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
-                                        </button>
-                                    </div>
-                                    <div>
-                                        <button wire:click="$dispatch('openModal', { component: 'delete-task-confirmation-modal', arguments: { taskId: {{ $task->id }} }})">
-                                            <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
-                                        </button>
-                                    </div>
-                                </div>                            
-                            </div>
-                        @endforeach
-                    </div>
+                <div class="grid grid-cols-1 gap-4">
+                    @foreach ($postedTasks as $task)
+                        <div class="bg-white border rounded-lg shadow-md">
+                            <div class="p-4 relative">
+                                <h3 class="text-lg font-semibold">{{ $task->title }}</h3>
+                                <p class="text-gray-700 absolute top-4 right-4"><strong>Posted</strong> {{ $task->created_at->diffForHumans() }}</p>
+                                <div class="flex items-center mt-2">
+                                    <p class="px-2 py-1 rounded text-md font-semibold text-white inline-block {{ $task->status == 'available' ? 'bg-green-500' : 'bg-red-500' }}">
+                                        {{ $task->status == 'available' ? 'Available' : 'Not Available' }}
+                                    </p>
+                                </div>
+                                <div class="flex items-center mt-2">                                 
+                                    <!-- Calculate time remaining until the deadline -->
+                                    @if ($task->deadline)
+                                        @php
+                                            $expirationDate = \Carbon\Carbon::parse($task->deadline);
+                                            $expiredIn = $expirationDate->diffForHumans(\Carbon\Carbon::now(), [
+                                                'parts' => 2,
+                                                'short' => true,
+                                                'syntax' => \Carbon\CarbonInterface::DIFF_ABSOLUTE
+                                            ]);
+                                        @endphp
+                                        <p class="text-md"><strong>Expired in:</strong> {{ $expiredIn }}</p>
+                                    @endif
+                                </div>
+                            </div>                                
+                            <div class="flex justify-end space-x-4 p-2">
+                                <div>
+                                    <button wire:click="$dispatch('openModal', { component: 'view-task-modal', arguments: { taskId: {{ $task->id }} }})">
+                                        <img src="{{ asset('svg/view-icon.svg') }}" alt="View Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
+                                    </button>
+                                </div>
+                                <div>
+                                    <button wire:click="editTask({{ $task->id }})">
+                                        <img src="{{ asset('svg/edit-icon.svg') }}" alt="Edit Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
+                                    </button>
+                                </div>
+                                <div>
+                                    <button wire:click="$dispatch('openModal', { component: 'delete-task-confirmation-modal', arguments: { taskId: {{ $task->id }} }})">
+                                        <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
+                                    </button>
+                                </div>
+                            </div>                            
+                        </div>
+                    @endforeach
+                </div>                
                     <div class="mt-2 mb-12 p-2">
                         {{ $postedTasks->links() }}
                     </div>

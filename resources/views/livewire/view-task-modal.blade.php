@@ -11,7 +11,7 @@
 
     <!-- Task information -->
     <div class="mb-4">
-        <div class="flex items-center mt-2">
+        <div class="flex items-center mt-2 mb-2">
             <p class="px-2 py-1 rounded text-md font-semibold text-white inline-block {{ $task->status == 'available' ? 'bg-green-500' : 'bg-red-500' }}">
                 {{ $task->status == 'available' ? 'Available' : 'Not Available' }}
             </p>
@@ -23,7 +23,7 @@
             <p class="text-gray-700 inline-block"><strong>Updated:</strong> {{ $task->updated_at->diffForHumans() }}</p>
         </div>
         <div class="flex items-center mb-2">
-            <p class="text-gray-700 inline-block"><strong>Deadline:</strong> {{ $task->deadline }}</p>
+            <p class="text-gray-700 inline-block"><strong>Deadline:</strong> {{ \Carbon\Carbon::parse($task->deadline)->format('d-m-Y') }}</p>
         </div>
         <div class="flex items-center mb-2">
             <img src="{{ asset('svg/salary-icon.svg') }}" alt="Salary Icon" class="h-6 w-6 mr-2">
