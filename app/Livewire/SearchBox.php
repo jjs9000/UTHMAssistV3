@@ -8,8 +8,6 @@ class SearchBox extends Component
 {
     public $search = '';
     public $location = '';
-    public $salaryMin = '';
-    public $salaryMax = '';
 
     public function updatedSearch()
     {

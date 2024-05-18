@@ -17,6 +17,7 @@ class TaskPostingIndex extends Component
     public $selectedTask;
     public $search = '';
     public $location = '';
+    public $sortBy = 'latest';
 
     public function render()
     {
@@ -32,9 +33,25 @@ class TaskPostingIndex extends Component
         if (!empty($this->location)) {
             $query->where('location', $this->location);
         }
+
+        // Apply sorting based on sortBy property
+        switch ($this->sortBy) {
+            case 'latest':
+                $query->orderBy('created_at', 'desc');
+                break;
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+            case 'salary_high':
+                $query->orderBy('salary', 'desc');
+                break;
+            case 'salary_low':
+                $query->orderBy('salary', 'asc');
+                break;
+        }
     
         // Fetch task postings based on the applied filters
-        $taskPostings = $query->orderBy('created_at', 'desc')->paginate(5);
+        $taskPostings = $query->paginate(5);
         
         $noTasksAvailable = $taskPostings->isEmpty();
     
@@ -77,5 +94,5 @@ class TaskPostingIndex extends Component
     public function updateLocation($location)
     {
         $this->location = $location;
-    }    
+    }
 }
