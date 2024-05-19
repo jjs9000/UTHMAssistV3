@@ -134,8 +134,9 @@
                                         <!-- User has already applied, display a message -->
                                         <p>You already applied to this task</p>
                                     @else
-                                        <!-- User is not the original poster, display "Apply" button -->
-                                        <button wire:click="dispatch('apply')" class="bg-blue-700 text-white px-4 py-2 rounded hover:shadow-lg hover:ring-2 ring-gray-900">Apply</button>
+                                        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                                            <a href="{{ route('task-posting.show', ['id' => $selectedTask->id]) }}" target="_blank">Click here to apply!</a>
+                                        </button>
                                     @endif
                                 @endif
                             </div>                            
