@@ -18,6 +18,7 @@ class TaskPostingCreate extends Component
     public $location_detail;
     public $deadline;
     public $status;
+    public $availability;
     public $selectedTags = [];
 
     public $task;
@@ -35,6 +36,7 @@ class TaskPostingCreate extends Component
             $this->location_detail = $task['location_detail'];
             $this->deadline = $task['deadline'];
             $this->status = $task['status'];
+            $this->availability = $task['availability'];
             $this->selectedTags = $task->tags->pluck('id')->toArray();
         }
     }
@@ -51,6 +53,7 @@ class TaskPostingCreate extends Component
             'location_detail' => 'required',
             'status' => 'required',
             'deadline' => 'required|date',
+            'availability' => 'required',
         ];
 
         // Validate the request
@@ -71,6 +74,7 @@ class TaskPostingCreate extends Component
                 'location_detail' => $this->location_detail,
                 'status' => $this->status,
                 'deadline' => $this->deadline,
+                'availability' => $this->availability,
             ]);
             $task->tags()->sync($this->selectedTags);
             $message = 'Task updated successfully.';
@@ -85,6 +89,7 @@ class TaskPostingCreate extends Component
                 'location_detail' => $this->location_detail,
                 'status' => $this->status,
                 'deadline' => $this->deadline,
+                'availability' => $this->availability,
             ]);
             $task->tags()->attach($this->selectedTags);
             $message = 'Task created successfully.';

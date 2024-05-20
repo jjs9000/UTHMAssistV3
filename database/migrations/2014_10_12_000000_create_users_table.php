@@ -18,11 +18,11 @@ return new class extends Migration
                 $table->string('last_name');
                 $table->string('email')->unique();
                 $table->string('profile_picture')->nullable();
-                $table->string('ic')->nullable();
+                $table->string('ic');
                 $table->timestamp('email_verified_at')->nullable();
                 $table->enum('usertype', ['user', 'admin'])->default('user');
                 $table->string('password');
-                $table->date('date_of_birth')->nullable();
+                $table->date('date_of_birth');
                 $table->string('contact_number');
                 $table->string('address');
                 $table->string('post_code');

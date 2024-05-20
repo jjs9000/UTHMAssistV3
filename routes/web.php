@@ -20,6 +20,8 @@ use App\Livewire\Application;
 use App\Livewire\ApplicationCreateForm;
 use App\Livewire\ApplicationList;
 use App\Livewire\ApplicationReceive;
+use App\Livewire\Bookmark\Index as BookmarkIndex;
+use App\Livewire\Dashboard\Index;
 use App\Livewire\SavedTask;
 use Illuminate\Support\Facades\Storage;
 
@@ -39,7 +41,7 @@ Route::view('/', 'welcome');
 // Navigation Link For User
 Route::middleware(['auth', 'verified', 'redirect.if.admin'])->group(function () {
     Route::get('/message', [MessageController::class, 'index'])->name('message.index');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', Index::class)->name('dashboard.index');
 });
 
 // Admin & User Profile View Route
@@ -81,7 +83,7 @@ Route::middleware(['auth', 'redirect.if.admin'])->group(function () {
     Route::get('/application-list', ApplicationList::class)->name('application.list');
     Route::get('/application-receive', ApplicationReceive::class)->name('application.receive');
 
-    Route::get('/saved-task', SavedTask::class)->name('saved-task');
+    Route::get('/bookmark', BookmarkIndex::class)->name('bookmark.index');
 });
 
 

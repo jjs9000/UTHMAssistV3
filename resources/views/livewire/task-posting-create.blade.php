@@ -10,21 +10,34 @@
                 <x-text-input wire:model.defer="title" id="title" class="mt-1 block w-full" type="text" name="title" required />
                 <x-input-error :messages="$errors->get('title')" class="text-red-500" />
             </div>
-
             <div class="mb-4">
-                <x-input-label for="description" :value="__('Description')" />
-                <x-textarea-input wire:model.defer="description" id="description" class="mt-1 block w-full" name="description" required />
-                <x-input-error :messages="$errors->get('description')" class="text-red-500" />
+                <x-input-label for="location" :value="__('Location')" />
+                <select wire:model.defer="location" id="location" name="location" class="mt-1 block border-gray-300 w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <option value="">Select Location</option>
+                    <option value="UTHM Parit Raja">UTHM Parit Raja</option>
+                    <option value="UTHM Pagoh">UTHM Pagoh</option>
+                </select>
+                <x-input-error :messages="$errors->get('location')" class="text-red-500" />
             </div>
+        </div>
+        <div class="mb-4">
+            <x-input-label for="description" :value="__('Description')" />
+            <x-textarea-input wire:model.defer="description" id="description" class="mt-1 block w-full" name="description" required />
+            <x-input-error :messages="$errors->get('description')" class="text-red-500" />
+        </div>
+
+        <div class="mb-4">
+            <x-input-label for="requirement" :value="__('Requirement')" />
+            <x-textarea-input wire:model.defer="requirement" id="requirement" class="mt-1 block w-full" name="requirement" required />
+            <x-input-error :messages="$errors->get('requirement')" class="text-red-500" />
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="mb-4">
-                <x-input-label for="requirement" :value="__('Requirement')" />
-                <x-textarea-input wire:model.defer="requirement" id="requirement" class="mt-1 block w-full" name="requirement" required />
-                <x-input-error :messages="$errors->get('requirement')" class="text-red-500" />
+                <x-input-label for="availability" :value="__('Availability')" />
+                <x-text-input wire:model="availability" id="availability" class="block mt-1 w-full" type="text" name="availability" required autofocus />
+                <x-input-error :messages="$errors->get('availability')" class="mt-2" />
             </div>
-
             <div class="mb-4 relative">
                 <x-input-label for="salary" :value="__('Salary')" />
                 <div class="flex items-center">
@@ -35,22 +48,10 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="mb-4">
-                <x-input-label for="location" :value="__('Location')" />
-                <select wire:model.defer="location" id="location" name="location" class="mt-1 block border-gray-300 w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                    <option value="">Select Location</option>
-                    <option value="UTHM Parit Raja">UTHM Parit Raja</option>
-                    <option value="UTHM Pagoh">UTHM Pagoh</option>
-                </select>
-                <x-input-error :messages="$errors->get('location')" class="text-red-500" />
-            </div>
-
-            <div class="mb-4">
-                <x-input-label for="location_detail" :value="__('Location Detail')" />
-                <x-textarea-input wire:model.defer="location_detail" id="location_detail" class="mt-1 block w-full" name="location_detail" />
-                <x-input-error :messages="$errors->get('location_detail')" class="text-red-500" />
-            </div>
+        <div class="mb-4">
+            <x-input-label for="location_detail" :value="__('Location Detail')" />
+            <x-textarea-input wire:model.defer="location_detail" id="location_detail" class="mt-1 block w-full" name="location_detail" />
+            <x-input-error :messages="$errors->get('location_detail')" class="text-red-500" />
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

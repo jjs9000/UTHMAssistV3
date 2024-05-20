@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('task_postings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained(); // assuming you have a 'users' table
+            $table->foreignId('user_id')->constrained();
             $table->string('title');
             $table->text('description');
             $table->text('requirement');
             $table->decimal('salary');
-            $table->enum('location', ['UTHM Parit Raja', 'UTHM Pagoh']); // predefined locations
-            $table->string('location_detail'); // exact location details
+            $table->enum('location', ['UTHM Parit Raja', 'UTHM Pagoh']);
+            $table->string('location_detail');
             $table->date('deadline');
             $table->enum('status', ['available', 'not_available'])->default('available');
+            $table->string('availability');
             $table->timestamps();
         });
     }

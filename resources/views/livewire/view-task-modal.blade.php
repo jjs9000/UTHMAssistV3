@@ -29,9 +29,13 @@
             <img src="{{ asset('svg/salary-icon.svg') }}" alt="Salary Icon" class="h-6 w-6 mr-2">
             <p class="text-gray-700">RM {{ $task->salary }}</p>
         </div>
-        <div class="flex items-center">
+        <div class="flex items-center mb-2">
             <img src="{{ asset('svg/location-icon.svg') }}" alt="Location Icon" class="h-6 w-6 mr-2">
             <p class="text-gray-700">{{ $task->location }}</p>
+        </div>
+        <div class="flex items-center">
+            <img src="{{ asset('svg/time-icon.svg') }}" alt="Location Icon" class="h-6 w-6 mr-2">
+            <p class="text-gray-700">{{ $task->availability }}</p>
         </div>
     </div>
     

@@ -22,6 +22,7 @@ class TaskPosting extends Model
         'deadline',
         'status',
         'tags',
+        'availability',
     ];
 
     public function user()
@@ -46,5 +47,10 @@ class TaskPosting extends Model
 
         // Compare the deadline with the current date
         return Carbon::now()->greaterThanOrEqualTo($task->deadline);
+    }
+
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class);
     }
 }

@@ -39,8 +39,12 @@
                         @foreach ($taskPostings as $taskPosting)
                             <div class="relative">
                                 <!-- Save icon button positioned at the top right corner -->
-                                <button class="absolute top-0 right-0 mt-2 mr-2">
-                                    <img src="{{ asset('svg/save-icon.svg') }}" alt="Save Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
+                                <button wire:click="toggleBookmark({{ $taskPosting->id }})" class="absolute top-0 right-0 mt-2 mr-2">
+                                    @if(in_array($taskPosting->id, $savedTaskIds))
+                                        <img src="{{ asset('svg/save-icon-filled.svg') }}" alt="Saved Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
+                                    @else
+                                        <img src="{{ asset('svg/save-icon.svg') }}" alt="Save Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
+                                    @endif
                                 </button>
                                 <!-- Task list card content -->
                                 <div wire:click="showTask({{ $taskPosting->id }})" class="bg-white flex flex-col gap-0 ml-40 p-4 rounded-lg cursor-pointer hover:ring ring-gray-900 shadow-md">
@@ -113,6 +117,10 @@
                             <div class="flex items-center">
                                 <img src="{{ asset('svg/user-icon.svg') }}" alt="User Icon" class="h-6 w-6 mr-2">
                                 <p class="text-gray-700">{{ $selectedTask->user->username }}</p>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="{{ asset('svg/time-icon.svg') }}" alt="User Icon" class="h-6 w-6 mr-2">
+                                <p class="text-gray-700">{{ $selectedTask->availability }}</p>
                             </div>
                             <div class="flex items-center mt-4">
                                 <p class="text-gray-700">

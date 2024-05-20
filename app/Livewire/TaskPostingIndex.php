@@ -2,9 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Models\Bookmark;
 use Livewire\Component;
 use App\Models\TaskPosting;
-
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
 
@@ -13,11 +14,12 @@ class TaskPostingIndex extends Component
 
     use WithPagination;
 
-    // public $taskPostings;
+    public $savedTask;
     public $selectedTask;
     public $search = '';
     public $location = '';
     public $sortBy = 'latest';
+    public $savedTaskIds = [];
 
     public function render()
     {
@@ -56,10 +58,17 @@ class TaskPostingIndex extends Component
         $taskPostings = $query->paginate(5);
         
         $noTasksAvailable = $taskPostings->isEmpty();
+
+        $this->savedTaskIds = Bookmark::where('user_id', Auth::id())
+                                           ->pluck('task_posting_id')
+                                           ->toArray();
+        
     
         return view('livewire.task-posting-index', [
             'taskPostings' => $taskPostings,
             'noTasksAvailable' => $noTasksAvailable,
+            'savedTask' => $this->savedTask,
+            'savedTaskIds' => $this->savedTaskIds,
         ]);
     }
        
@@ -97,5 +106,23 @@ class TaskPostingIndex extends Component
     public function updateLocation($location)
     {
         $this->location = $location;
+    }
+
+    public function toggleBookmark($taskId)
+    {
+        $this->savedTask = TaskPosting::find($taskId);
+
+        if (in_array($taskId, $this->savedTaskIds)) {
+            Bookmark::where('user_id', Auth::id())
+                    ->where('task_posting_id', $taskId)
+                    ->delete();
+            $this->savedTaskIds = array_diff($this->savedTaskIds, [$taskId]);
+        } else {
+            Bookmark::create([
+                'user_id' => Auth::id(),
+                'task_posting_id' => $taskId,
+            ]);
+            $this->savedTaskIds[] = $taskId;
+        }
     }
 }

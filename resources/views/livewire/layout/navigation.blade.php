@@ -23,7 +23,7 @@ new class extends Component
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('task-posting.index') }}" wire:navigate>
+                    <a href="{{ route('dashboard.index') }}" wire:navigate>
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 " />
                     </a>
                 </div>
@@ -91,10 +91,10 @@ new class extends Component
 
                     <x-slot name="content">
                         @if (Auth::check() && Auth::user()->usertype === 'user')
-                        <x-dropdown-link :href="route('saved-task')" wire:navigate>
-                            {{ __('Saved tasks') }}
+                        <x-dropdown-link :href="route('bookmark.index')" wire:navigate>
+                            {{ __('Saved Task') }}
                         </x-dropdown-link>
-                        <x-dropdown-link :href="route('admin-dashboard')" wire:navigate>
+                        <x-dropdown-link :href="route('dashboard.index')" wire:navigate>
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
@@ -143,7 +143,7 @@ new class extends Component
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+            <x-responsive-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')" wire:navigate>
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>

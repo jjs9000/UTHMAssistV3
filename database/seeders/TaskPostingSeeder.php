@@ -43,6 +43,7 @@ class TaskPostingSeeder extends Seeder
                 'location_detail' => $faker->address, // Generate random location details
                 'deadline' => $randomDeadline, // Set random deadline
                 'status' => $faker->randomElement(['available', 'not_available']),
+                'availability' => $faker->sentence,
             ]);
     
             // Attach random tags to the task posting
