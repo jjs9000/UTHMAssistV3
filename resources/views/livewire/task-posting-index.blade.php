@@ -132,9 +132,9 @@
                                     @endphp
                                     @if ($existingApplication)
                                         <!-- User has already applied, display a message -->
-                                        <p>You already applied to this task</p>
+                                        <p class="bg-gray-700 text-white px-4 py-2 rounded-lg shadow-sm">You already applied to this task</p>
                                     @else
-                                        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                                        <button class="bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-500">
                                             <a href="{{ route('task-posting.show', ['id' => $selectedTask->id]) }}" target="_blank">Click here to apply!</a>
                                         </button>
                                     @endif
@@ -145,9 +145,11 @@
                 </div>
             @else
                 <!-- Placeholder content when no task is selected -->
-                <div class="bg-white mr-20 mt-16 p-4 rounded-lg shadow flex flex-col items-center">
-                    <h1 class="text-2xl font-bold text-gray-700 mb-4">Select a task to view its details.</h1>
-                    <img src="{{ asset('svg/job-illustration.svg') }}" alt="Job Illustration" class="w-1/2 h-auto">
+                <div class="container mx-auto">
+                    <div class="bg-white mr-20 mt-14 p-6 rounded-lg shadow flex flex-col items-center">
+                        <h1 class="text-2xl font-bold text-gray-700 mb-4">Select a task to view its details.</h1>
+                        <img src="{{ asset('svg/job-illustration.svg') }}" alt="Job Illustration" class="w-1/2 h-auto">
+                    </div>
                 </div>
             @endif
         </div>
