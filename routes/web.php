@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MessageController;
+use App\Livewire\Admin\Application\Index as ApplicationIndex;
+use App\Livewire\Admin\Rating\Index as RatingIndex;
+use App\Livewire\Admin\Tag\Index as TagIndex;
+use App\Livewire\Admin\TaskPost\Index as TaskPostIndex;
 use App\Livewire\AdminApplication;
 use App\Livewire\AdminDashboard;
 use App\Livewire\AdminFeedback;
@@ -64,10 +68,10 @@ Route::get('profile-pictures/{filename}', function ($filename) {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard', AdminDashboard::class)->name('admin-dashboard');
     Route::get('/admin/user/{showUserTable?}', AdminUser::class)->name('admin-user');
-    Route::get('/admin/task', AdminTask::class)->name('admin-task');
-    Route::get('/admin/application', AdminApplication::class)->name('admin-application');
-    Route::get('/admin/tag', AdminTag::class)->name('admin-tag');
-    Route::get('/admin/feedback', AdminFeedback::class)->name('admin-feedback');
+    Route::get('/admin/task', TaskPostIndex::class)->name('admin.taskpost.index');
+    Route::get('/admin/application', ApplicationIndex::class)->name('admin.application.index');
+    Route::get('/admin/tag', TagIndex::class)->name('admin.tag.index');
+    Route::get('/admin/feedback', RatingIndex::class)->name('admin.rating.index');
 });
 
 // Task Posting Route (Livewire Component)

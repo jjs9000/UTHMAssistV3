@@ -63,19 +63,19 @@ new class extends Component
                             {{ __('User') }}
                         </x-nav-link>
 
-                        <x-nav-link :href="route('admin-task')" :active="request()->routeIs('admin-task')">
+                        <x-nav-link :href="route('admin.taskpost.index')" :active="request()->routeIs('admin.taskpost.index')">
                             {{ __('Task Post') }}
                         </x-nav-link>
 
-                        <x-nav-link :href="route('admin-application')" :active="request()->routeIs('admin-application')">
+                        <x-nav-link :href="route('admin.application.index')" :active="request()->routeIs('admin.application.index')">
                             {{ __('Application') }}
                         </x-nav-link>
 
-                        <x-nav-link :href="route('admin-tag')" :active="request()->routeIs('admin-tag')">
+                        <x-nav-link :href="route('admin.tag.index')" :active="request()->routeIs('admin.tag.index')">
                             {{ __('Tag') }}
                         </x-nav-link>
 
-                        <x-nav-link :href="route('admin-feedback')" :active="request()->routeIs('admin-feedback')">
+                        <x-nav-link :href="route('admin.rating.index')" :active="request()->routeIs('admin.rating.index')">
                             {{ __('Feedback & Reviews') }}
                         </x-nav-link>
                     @endif
