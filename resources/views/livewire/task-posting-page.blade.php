@@ -79,9 +79,9 @@
                         {{-- Update form --}}
                         <livewire:task-posting-create :task="$editTaskDetails" :key="'edit-' . $editTaskId" />
                         <div class="flex items-center justify-end mt-4" wire:click="cancelEdit">
-                            <x-primary-button class="bg-gray-500 text-white rounded hover:bg-gray-600">
+                            <x-danger-button class="bg-gray-500 text-white rounded hover:bg-gray-600">
                                 Cancel
-                            </x-primary-button>
+                            </x-danger-button>
                         </div>
                     @else
                         {{-- Task creation form --}}
