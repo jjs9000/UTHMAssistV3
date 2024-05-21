@@ -20,7 +20,7 @@
         @else
         <div class="overflow-x-auto">
             <table class="min-w-full shadow-md">
-                <thead class="bg-gray-200 border border-b-gray-900">
+                <thead class="bg-white border-2 border-gray-900">
                     <tr>
                         <th class="py-3 px-6 text-left text-md font-semibold text-gray-700">Task Title</th>
                         <th class="py-3 px-6 text-left text-md font-semibold text-gray-700">Applicant</th>
@@ -28,7 +28,7 @@
                         <th class="py-3 px-6 text-left text-md font-semibold text-gray-700"></th>
                     </tr>
                 </thead>
-                <tbody class="border border-b-gray-900 divide-y divide-gray-900">
+                <tbody class="bg-white border-2 border-gray-900 divide-y divide-gray-900">
                     @foreach ($applications as $application)
                     <tr>
                         <td class="py-4 px-6 text-sm text-gray-900">{{ $application->task->title }}</td>
@@ -63,5 +63,8 @@
             </table>
         </div>
         @endif
+        <div class="mt-4">
+            {{ $applications->links() }}
+        </div>
     </div>
 </div>
