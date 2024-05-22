@@ -14,7 +14,7 @@
         </div>
 
         @if ($applications->isEmpty())
-        <div class="bg-gray-100 p-6 text-center">
+        <div class="p-6 text-center">
             <p class="text-lg font-semibold text-gray-700">No application found</p>
         </div>
         @else
