@@ -30,8 +30,15 @@ class TaskPostingIndex extends Component
         
         // Apply search filter if search term is not empty
         if (!empty($this->search)) {
-            $query->where('title', 'like', "%{$this->search}%");
-        }
+            $searchTerm = "%{$this->search}%";
+            $query->where('title', 'like', $searchTerm)
+                  ->orWhereHas('tags', function ($query) use ($searchTerm) {
+                      $query->where('name', 'like', $searchTerm);
+                  })
+                  ->orWhereHas('user', function ($query) use ($searchTerm) {
+                      $query->where('username', 'like', $searchTerm);
+                  });
+        }        
         
         // Apply location filter if location is not empty
         if (!empty($this->location)) {
