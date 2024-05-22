@@ -3,8 +3,9 @@
         <h2 class="text-3xl font-semibold">Saved Task</h2>
     </div>
     @if ($noBookmarkAvailable)
-        <div class="rounded-lg p-6 text-center">
-            <p class="text-gray-900 text-lg font-semibold">Your saved task will appear here.</p>
+        <div class="flex flex-col rounded-lg p-6 text-center justify-center items-center">
+            <p class="text-gray-900 text-xl font-semibold">Your saved task will appear here.</p>
+                <img src="{{ asset('svg/illustration/bookmark-page.svg') }}" alt="Job Illustration" class="w-64 h-auto">
         </div>
     @else
     <div class="py-4 mx-auto max-w-2xl justify-items-center">

@@ -16,8 +16,11 @@
     <div class="flex">
         <div class="w-1/2 p-4">
                 @if ($postedTasks->isEmpty())
-                    <div class="bg-white border shadow-md rounded-lg p-6 text-center">
-                        <p class="text-lg font-semibold">No task posted found.</p>
+                    <div class="flex flex-col justify-center items-center p-6 text-center">
+                        <p class="text-2xl font-semibold py-4">Post a task!</p>
+                        <div class="mx-auto w-1/2">
+                            <img src="{{ asset('svg/illustration/task-post-page.svg') }}" alt="Job Illustration" class="w-full h-auto">
+                        </div>
                     </div>
                 @else
                 <div class="grid grid-cols-1 gap-4">

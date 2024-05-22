@@ -153,7 +153,7 @@
             @else
                 <!-- Placeholder content when no task is selected -->
                 <div class="container mx-auto">
-                    <div class="bg-white mr-20 mt-14 py-20 h-screen rounded-lg shadow flex flex-col items-center">
+                    <div class="mr-20 mt-14 py-20 h-screen flex flex-col items-center">
                         <h1 class="text-2xl font-bold text-gray-700 mb-4">Select a task to view its details.</h1>
                         <img src="{{ asset('svg/illustration/job-1.svg') }}" alt="Job Illustration" class="w-1/2 h-auto">
                     </div>
