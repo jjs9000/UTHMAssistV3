@@ -14,9 +14,9 @@
 
     <div class="mt-10 ml-28">
         @if($showUserProfile)
-            <livewire:dashboard.profile />
+            <livewire:dashboard.profile.index />
         @else
-            {{-- <livewire:dashboard.user-timetable /> --}}
+            {{-- <livewire:dashboard.profile.profile-picture-card /> --}}
         @endif
     </div>
 </div>

@@ -11,6 +11,8 @@ class Index extends Component
 {
     use WithPagination;
 
+    protected $listeners = ['profilePictureUpdated' => '$refresh'];
+
     public bool $showUserProfile;
     public bool $isModalOpen = false;
 

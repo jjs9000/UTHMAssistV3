@@ -18,22 +18,6 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    // protected $fillable = [
-    //     'username',
-    //     'first_name',
-    //     'last_name',
-    //     'ic',
-    //     'email',
-    //     'password',
-    //     'usertype',
-    //     'date_of_birth',
-    //     'contact_number',
-    //     'address',
-    //     'post_code',
-    //     'city',
-    //     'state',
-    //     'profile_picture'
-    // ];
 
     protected $guarded = [];
 
@@ -63,26 +47,6 @@ class User extends Authenticatable
               ->orWhere('email', 'like', "%{$value}%")
               ->orWhere('first_name', 'like', "%{$value}%")
               ->orWhere('last_name', 'like', "%{$value}%");
-    }
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::deleting(function ($user) {
-            // Delete profile picture from profile_pictures directory
-            if ($user->profile_picture && Storage::disk('local')->exists('profile_pictures/' . basename($user->profile_picture))) {
-                Storage::disk('local')->delete('profile_pictures/' . basename($user->profile_picture));
-            }
-
-            // Clean up temporary files in livewire-tmp directory
-            $files = Storage::disk('local')->files('livewire-tmp');
-            foreach ($files as $file) {
-                if (strpos($file, basename($user->profile_picture)) !== false) {
-                    Storage::disk('local')->delete($file);
-                }
-            }
-        });
     }
 
     public function applications(){

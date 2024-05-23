@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'username' => 'admin',
             'first_name' => 'Admin',
             'last_name' => 'User',
+            'bio' => 'I am an admin, I am a student',
             'email' => 'admin@example.com',
             'password' => bcrypt('password'), // Hash the password
             'usertype' => 'admin',
@@ -28,7 +29,6 @@ class UserSeeder extends Seeder
             'post_code' => '12345', // Sample postal code
             'city' => 'Admin City', // Sample city
             'state' => 'Admin State', // Sample state
-            'profile_picture' => 'https://via.placeholder.com/150', // Placeholder image URL
             'ic' => 'A1234567', // Sample IC
         ]);
 
@@ -37,6 +37,7 @@ class UserSeeder extends Seeder
             'username' => 'user',
             'first_name' => 'Regular',
             'last_name' => 'User',
+            'bio' => 'I am the user, I am a student',
             'email' => 'user@example.com',
             'password' => bcrypt('password'), // Hash the password
             'usertype' => 'user',
@@ -46,7 +47,6 @@ class UserSeeder extends Seeder
             'post_code' => '54321', // Sample postal code
             'city' => 'User City', // Sample city
             'state' => 'User State', // Sample state
-            'profile_picture' => 'https://via.placeholder.com/150', // Placeholder image URL
             'ic' => 'B7654321', // Sample IC
         ]);
 
@@ -57,6 +57,7 @@ class UserSeeder extends Seeder
                 'username' => $faker->userName,
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,
+                'bio' => $faker->paragraph,
                 'email' => $faker->unique()->safeEmail,
                 'password' => bcrypt('password'), // Hash the password
                 'usertype' => 'user',
@@ -66,7 +67,6 @@ class UserSeeder extends Seeder
                 'post_code' => $faker->postcode,
                 'city' => $faker->city,
                 'state' => $faker->state,
-                'profile_picture' => $faker->imageUrl(150, 150, 'people'), // Random image URL
                 'ic' => strtoupper($faker->bothify('??######')), // Random string for IC
             ]);
         }

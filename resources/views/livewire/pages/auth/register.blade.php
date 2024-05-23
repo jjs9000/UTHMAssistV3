@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\User;
-use Livewire\WithFileUploads;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +12,6 @@ use Livewire\Volt\Component;
 
 new #[Layout('layouts.guest')] class extends Component
 {
-    use WithFileUploads;
-
     public string $first_name = '';
     public string $last_name = '';
     public string $username = '';
@@ -28,7 +25,6 @@ new #[Layout('layouts.guest')] class extends Component
     public string $city = '';
     public string $state = '';
     public string $ic = '';
-    public $profile_picture;
     public $usertype = 'user';
 
     /**
@@ -50,12 +46,7 @@ new #[Layout('layouts.guest')] class extends Component
             'city' => 'required|string|max:255',
             'ic' => 'required|string|max:20',
             'date_of_birth' => 'required|date',
-            'profile_picture' => 'nullable|image|max:1024', // Adjust max size as needed
         ]);
-
-        if ($this->profile_picture) {
-            $validated['profile_picture'] = $this->profile_picture->store('profile_pictures', 'local');
-        }
 
         $validated['password'] = Hash::make($validated['password']);
 
@@ -124,12 +115,6 @@ new #[Layout('layouts.guest')] class extends Component
                 <x-input-label for="date_of_birth" :value="__('Date of Birth')" />
                 <x-text-input wire:model="date_of_birth" id="date_of_birth" class="block mt-1 w-full" type="date" name="date_of_birth" required autocomplete="date_of_birth" />
                 <x-input-error :messages="$errors->get('date_of_birth')" class="mt-2" />
-            </div>
-
-            <div>
-                <x-input-label for="profile_picture" :value="__('Profile Picture')" />
-                <input wire:model="profile_picture" id="profile_picture" class="block mt-1 w-full text-sm" type="file" name="profile_picture" accept="image/*" />
-                <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />
             </div>
         </div>
 

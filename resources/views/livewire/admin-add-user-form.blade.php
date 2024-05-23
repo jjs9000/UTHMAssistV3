@@ -59,12 +59,6 @@
                             <x-text-input wire:model="contact_number" id="contact_number" class="block mt-1 w-full" type="text" name="contact_number" required autocomplete="contact_number" />
                             <x-input-error :messages="$errors->get('contact_number')" class="mt-2" />
                         </div>
-
-                        <div>
-                            <x-input-label for="profile_picture" :value="__('Profile Picture')" />
-                            <input wire:model="profile_picture" id="profile_picture" type="file" name="profile_picture">
-                            <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />
-                        </div>
     
                         <div class="col-span-2">
                             <x-input-label for="address" :value="__('Address')" />

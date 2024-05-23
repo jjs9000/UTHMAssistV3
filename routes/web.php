@@ -6,11 +6,7 @@ use App\Livewire\Admin\Application\Index as ApplicationIndex;
 use App\Livewire\Admin\Rating\Index as RatingIndex;
 use App\Livewire\Admin\Tag\Index as TagIndex;
 use App\Livewire\Admin\TaskPost\Index as TaskPostIndex;
-use App\Livewire\AdminApplication;
 use App\Livewire\AdminDashboard;
-use App\Livewire\AdminFeedback;
-use App\Livewire\AdminTag;
-use App\Livewire\AdminTask;
 use App\Livewire\AdminUser;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +22,7 @@ use App\Livewire\ApplicationList;
 use App\Livewire\ApplicationReceive;
 use App\Livewire\Bookmark\Index as BookmarkIndex;
 use App\Livewire\Dashboard\Index;
-use App\Livewire\SavedTask;
+use App\Livewire\Dashboard\Profile\Index as ProfileIndex;
 use Illuminate\Support\Facades\Storage;
 
 /*
@@ -46,23 +42,13 @@ Route::view('/', 'welcome');
 Route::middleware(['auth', 'verified', 'redirect.if.admin'])->group(function () {
     Route::get('/message', [MessageController::class, 'index'])->name('message.index');
     Route::get('/dashboard', Index::class)->name('dashboard.index');
+    Route::get('/dashboards', ProfileIndex::class)->name('dashboard.profile.index');
 });
 
 // Admin & User Profile View Route
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
-
-// Profile Picture route
-Route::get('profile-pictures/{filename}', function ($filename) {
-    $path = Storage::disk('local')->path('profile_pictures/' . $filename);
-    
-    if (!Storage::disk('local')->exists('profile_pictures/' . $filename)) {
-        abort(404);
-    }
-
-    return response()->file($path);
-})->name('profile-picture');
 
 // Admin Route
 Route::middleware(['auth', 'admin'])->group(function () {
