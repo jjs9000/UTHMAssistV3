@@ -19,7 +19,7 @@ class Admin
         if (Auth::check() && Auth::user()->usertype === 'admin') {
             return $next($request);
         } else {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard.index');
         }
 
         abort(403, 'Unauthorized');

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MessageController;
 use App\Livewire\Admin\Application\Index as ApplicationIndex;
 use App\Livewire\Admin\Rating\Index as RatingIndex;
@@ -22,8 +21,6 @@ use App\Livewire\ApplicationList;
 use App\Livewire\ApplicationReceive;
 use App\Livewire\Bookmark\Index as BookmarkIndex;
 use App\Livewire\Dashboard\Index;
-use App\Livewire\Dashboard\Profile\Index as ProfileIndex;
-use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +39,6 @@ Route::view('/', 'welcome');
 Route::middleware(['auth', 'verified', 'redirect.if.admin'])->group(function () {
     Route::get('/message', [MessageController::class, 'index'])->name('message.index');
     Route::get('/dashboard', Index::class)->name('dashboard.index');
-    Route::get('/dashboards', ProfileIndex::class)->name('dashboard.profile.index');
 });
 
 // Admin & User Profile View Route
