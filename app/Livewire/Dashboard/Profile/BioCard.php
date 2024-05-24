@@ -10,6 +10,11 @@ class BioCard extends Component
     public $bio;
     public $isEditing = false;
 
+    protected $messages = [
+        'bio.string' => 'The bio must be in type string.',
+        'bio.max' => 'The bio is too long. Maximum 1000 words.',
+    ];
+
     public function mount()
     {
         $this->bio = Auth::user()->bio;
@@ -23,7 +28,7 @@ class BioCard extends Component
     public function saveBio()
     {
         $this->validate([
-            'bio' => 'required|string|max:1000',
+            'bio' => 'string|max:1000',
         ]);
 
         $user = Auth::user();

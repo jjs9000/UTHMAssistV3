@@ -8,7 +8,7 @@
         <!-- Application Message -->
         <div>
             <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Application Message (Optional):</label>
-            <textarea id="message" wire:model.defer="message" rows="4" cols="50" class="border border-gray-300 rounded-lg w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400" placeholder="Enter your application message (Optional)"></textarea>
+            <textarea id="message" wire:model="message" rows="4" cols="50" class="border border-gray-300 rounded-lg w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400" placeholder="Enter your application message (Optional)"></textarea>
             @error('message') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 

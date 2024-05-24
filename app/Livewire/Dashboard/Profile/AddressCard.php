@@ -13,6 +13,17 @@ class AddressCard extends Component
     public $post_code;
     public $editingField = '';
 
+    protected $messages = [
+        'address.required' => 'Please enter your address',
+        'address.max' => 'The address is too long. Maximum 50 characters.',
+        'state.required' => 'Please enter your state.',
+        'state.max' => 'The state is too long. Maximum 25 characters.',
+        'city.required' => 'Please enter your city.',
+        'city.max' => 'The city is too long. Maximum 25 characters.',
+        'post_code.required' => 'Please enter your post code.',
+        'post_code.max' => 'The post code is too long. Maximum 25 characters.',
+    ];
+
     public function mount()
     {
         $user = Auth::user();
@@ -29,6 +40,14 @@ class AddressCard extends Component
 
     public function save()
     {
+        // Validation rules
+        $this->validate([
+            'address' => 'required|max:50',
+            'state' => 'required|max:25',
+            'city' => 'required|max:25',
+            'post_code' => 'required|max:25',
+        ]);
+
         $user = Auth::user();
         $user->update([
             'address' => $this->address,

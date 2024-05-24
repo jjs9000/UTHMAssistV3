@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('requirement');
             $table->decimal('salary');
             $table->enum('location', ['UTHM Parit Raja', 'UTHM Pagoh']);
-            $table->string('location_detail');
+            $table->text('location_detail');
             $table->date('deadline');
             $table->enum('status', ['available', 'not_available'])->default('available');
             $table->string('availability');
