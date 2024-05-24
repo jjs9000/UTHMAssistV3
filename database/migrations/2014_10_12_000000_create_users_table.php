@@ -21,6 +21,7 @@ return new class extends Migration
                 $table->text('bio')->nullable();
                 $table->timestamp('email_verified_at')->nullable();
                 $table->enum('usertype', ['user', 'admin'])->default('user');
+                $table->enum('gender', ['male', 'female']);
                 $table->string('password');
                 $table->date('date_of_birth');
                 $table->string('contact_number');

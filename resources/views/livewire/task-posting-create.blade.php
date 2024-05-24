@@ -8,7 +8,6 @@
             <div class="mb-4">
                 <x-input-label for="title" :value="__('Title')" />
                 <x-text-input wire:model="title" id="title" class="mt-1 block w-full" type="text" name="title"/>
-                <x-input-error :messages="$errors->get('title')" class="text-red-500" />
             </div>
             <div class="mb-4">
                 <x-input-label for="location" :value="__('Location')" />
@@ -23,20 +22,17 @@
         <div class="mb-4">
             <x-input-label for="description" :value="__('Description')" />
             <x-textarea-input wire:model="description" id="description" class="mt-1 block w-full" name="description" />
-            <x-input-error :messages="$errors->get('description')" class="text-red-500" />
         </div>
 
         <div class="mb-4">
             <x-input-label for="requirement" :value="__('Requirement')" />
             <x-textarea-input wire:model="requirement" id="requirement" class="mt-1 block w-full" name="requirement" />
-            <x-input-error :messages="$errors->get('requirement')" class="text-red-500" />
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="mb-4">
                 <x-input-label for="availability" :value="__('Availability')" />
                 <x-text-input wire:model="availability" id="availability" class="block mt-1 w-full" type="text" name="availability" />
-                <x-input-error :messages="$errors->get('availability')" class="mt-2" />
             </div>
             <div class="mb-4 relative">
                 <x-input-label for="salary" :value="__('Salary')" />
@@ -44,21 +40,18 @@
                     <span class="absolute left-3 text-gray-700">RM</span>
                     <x-text-input wire:model="salary" id="salary" class="pl-10 mt-1 block w-full" type="text" name="salary" oninput="formatSalary(this)" />
                 </div>
-                <x-input-error :messages="$errors->get('salary')" class="text-red-500" />
             </div>
         </div>
 
         <div class="mb-4">
             <x-input-label for="location_detail" :value="__('Location Detail')" />
             <x-textarea-input wire:model="location_detail" id="location_detail" class="mt-1 block w-full" name="location_detail" />
-            <x-input-error :messages="$errors->get('location_detail')" class="text-red-500" />
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="mb-4">
                 <x-input-label for="deadline" :value="__('Deadline')" />
                 <x-text-input wire:model="deadline" id="deadline" class="mt-1 block w-full" type="date" name="deadline" />
-                <x-input-error :messages="$errors->get('deadline')" class="text-red-500" />
             </div>
 
             <div class="mb-4">

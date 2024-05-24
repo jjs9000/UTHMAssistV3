@@ -20,9 +20,10 @@ class UserSeeder extends Seeder
             'first_name' => 'Admin',
             'last_name' => 'User',
             'bio' => 'I am an admin, I am a student',
-            'email' => 'admin@example.com',
+            'email' => 'admin@student.uthm.edu.my',
             'password' => bcrypt('password'), // Hash the password
             'usertype' => 'admin',
+            'gender' => 'male',
             'date_of_birth' => '1990-01-01', // Sample date of birth
             'contact_number' => '123456789', // Sample contact number
             'address' => '123 Admin Street', // Sample address
@@ -38,9 +39,10 @@ class UserSeeder extends Seeder
             'first_name' => 'Regular',
             'last_name' => 'User',
             'bio' => 'I am the user, I am a student',
-            'email' => 'user@example.com',
+            'email' => 'user@student.uthm.edu.my',
             'password' => bcrypt('password'), // Hash the password
             'usertype' => 'user',
+            'gender' => 'male',
             'date_of_birth' => '1990-01-01', // Sample date of birth
             'contact_number' => '123456789', // Sample contact number
             'address' => '123 User Street', // Sample address
@@ -58,9 +60,10 @@ class UserSeeder extends Seeder
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,
                 'bio' => $faker->paragraph,
-                'email' => $faker->unique()->safeEmail,
+                'email' => $faker->unique()->userName . '@student.uthm.edu.my',
                 'password' => bcrypt('password'), // Hash the password
                 'usertype' => 'user',
+                'gender' => $faker->randomElement(['male', 'female']),
                 'date_of_birth' => $faker->date(),
                 'contact_number' => $faker->phoneNumber,
                 'address' => $faker->address,
