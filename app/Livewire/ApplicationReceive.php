@@ -9,6 +9,8 @@ class ApplicationReceive extends Component
 {
     public $applicationId;
 
+    protected $listeners = ['applicationAccepted' => '$refresh', 'applicationRejected' => '$refresh'];
+
     public function render()
     {
         // Fetch applications received by the user for their tasks
@@ -20,23 +22,4 @@ class ApplicationReceive extends Component
             'applications' => $applications,
         ]);
     }
-
-    public function acceptApplication($applicationId)
-    {
-        $application = Application::find($applicationId);
-        if ($application) {
-            $application->status = 'accepted';
-            $application->save();
-        }
-    }
-
-    public function rejectApplication($applicationId)
-    {
-        $application = Application::find($applicationId);
-        
-        if ($application) {
-            $application->status = 'rejected';
-            $application->save();
-        }
-    }   
 }

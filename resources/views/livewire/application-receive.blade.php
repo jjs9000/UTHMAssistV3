@@ -1,6 +1,6 @@
 <div class="py-12">
     <div class="mt-8 max-w-7xl mx-auto">
-        <h1 class="text-2xl text-gray-900 font-semibold mb-4">Received Tasks</h1>
+        <h1 class="text-2xl text-gray-900 font-semibold mb-4">Received Applications</h1>
 
         <div class="flex justify-between mb-4">
             <!-- Sort By -->
@@ -35,10 +35,10 @@
                         <td class="py-4 px-6 text-sm text-gray-900">{{ $application->user->username }}</td>
                         <td class="py-4 px-6 text-sm">
                         @if ($application->status === 'pending')
-                            <button wire:click="acceptApplication({{ $application->id }})" wire:loading.attr="disabled" wire:target="acceptApplication" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mr-2">
+                            <button wire:click="$dispatch('openModal', { component: 'user.application.modal.application-confirmation-modal', arguments: { applicationId: {{ $application->id }}, actionType: 'accept' }})" wire:loading.attr="disabled" wire:target="acceptApplication" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mr-2">
                                 Accept
                             </button>
-                            <button wire:click="rejectApplication({{ $application->id }})" wire:loading.attr="disabled" wire:target="rejectApplication" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+                            <button wire:click="$dispatch('openModal', { component: 'user.application.modal.application-confirmation-modal', arguments: { applicationId: {{ $application->id }}, actionType: 'reject' }})" wire:loading.attr="disabled" wire:target="rejectApplication" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
                                 Reject
                             </button>
                         @elseif ($application->status === 'accepted')
