@@ -23,6 +23,16 @@
                     </div>
                     <div class="flex space-x-3">
                         <div class="flex space-x-3 items-center">
+                            <label class="w-40 text-sm font-medium text-gray-900">User Gender :</label>
+                            <select 
+                                wire:model.live='gender'
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                <option value="">All</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="flex space-x-3 items-center">
                             <label class="w-40 text-sm font-medium text-gray-900">User Type :</label>
                             <select 
                                 wire:model.live='admin'
@@ -42,6 +52,7 @@
                                 @include('livewire.includes.table-sortable-th', ['name' => 'first_name', 'displayName' => 'Name'])
                                 <th scope="col" class="px-4 py-3">IC</th>
                                 @include('livewire.includes.table-sortable-th', ['name' => 'email', 'displayName' => 'Email'])
+                                <th scope="col" class="px-4 py-3">Gender</th>
                                 @include('livewire.includes.table-sortable-th', ['name' => 'usertype', 'displayName' => 'User Type'])
                                 @include('livewire.includes.table-sortable-th', ['name' => 'date_of_birth', 'displayName' => 'Date of Birth'])
                                 @include('livewire.includes.table-sortable-th', ['name' => 'contact_number', 'displayName' => 'Contact Number'])
@@ -66,24 +77,25 @@
                                     <div class="group-hover:opacity-100 opacity-100">{{ $user->ic }}</div>
                                 </td>
                                 <td class="px-4 py-3">{{ $user->email }}</td>
+                                <td class="px-4 py-3">{{ $user->gender }}</td>
                                 <td class="px-4 py-3 text-green-500">{{ $user->usertype }}</td>
-                                <td class="px-4 py-3">{{ $user->date_of_birth }}</td>
+                                <td class="px-4 py-3">{{ $this->getFormattedDateOfBirth($user->date_of_birth) }}</td>
                                 <td class="px-4 py-3">{{ $user->contact_number }}</td>
                                 <td class="px-4 py-3">{{ $user->address }}</td>
                                 <td class="px-4 py-3">{{ $user->city }}</td>
                                 <td class="px-4 py-3">{{ $user->state }}</td>
-                                <td class="px-4 py-3">{{ $user->created_at->format('Y-m-d H:i:s') }}</td>
-                                <td class="px-4 py-3">{{ $user->updated_at->format('Y-m-d H:i:s') }}</td>
-                                <td class="px-4 py-3 flex items-center justify-end space-x-2">
+                                <td class="px-4 py-3">{{ $user->created_at->format('d-m-Y H:i:s') }}</td>
+                                <td class="px-4 py-3">{{ $user->updated_at->format('d-m-Y H:i:s') }}</td>
+                                <td class="px-0 py-3 flex items-center justify-center space-x-0 ml-auto">
                                     @if(auth()->user()->id !== $user->id)
-                                        <button wire:click="$dispatch('openModal', { component: 'delete-confirmation-modal', arguments: { userId: {{ $user->id }} }})" class="px-3 py-1 bg-slate-100 text-white rounded flex items-center justify-center">
-                                            <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="h-6 w-40">
+                                        <button wire:click="$dispatch('openModal', { component: 'delete-confirmation-modal', arguments: { userId: {{ $user->id }} }})" class="px-3 py-1 text-white rounded flex items-center justify-center flex-shrink-0">
+                                            <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="h-6 w-full">
                                         </button>
                                     @endif
-                                    <button wire:click="openViewUserModal({{ $user->id }})" class="px-3 py-1 bg-slate-100 text-white rounded flex items-center justify-center">
-                                        <img src="{{ asset('svg/view-icon.svg') }}" alt="View Icon" class="h-6 w-40">
+                                    <button wire:click="openViewUserModal({{ $user->id }})" class="px-3 py-1 text-white rounded flex items-center justify-center flex-shrink-0">
+                                        <img src="{{ asset('svg/view-icon.svg') }}" alt="View Icon" class="h-6 w-full">
                                     </button>
-                                </td>                                                                                                                               
+                                </td>                                                                                                                                                               
                             </tr>
                             @endforeach
                         </tbody>
@@ -101,8 +113,6 @@
                                 <option value="5">5</option>
                                 <option value="10">10</option>
                                 <option value="20">20</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
                             </select>
                         </div>
                     </div>

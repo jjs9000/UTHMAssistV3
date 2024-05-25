@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -19,6 +20,9 @@ class UserTable extends Component
 
     #[Url(history:true)]
     public $admin = '';
+    
+    #[Url(history:true)]
+    public $gender = '';
 
     #[Url(history:true)]
     public $sortBy = 'created_at';
@@ -49,6 +53,11 @@ class UserTable extends Component
 
         $this->sortBy = $sortByField;
     }
+
+    public function getFormattedDateOfBirth($dateOfBirth)
+    {
+        return Carbon::parse($dateOfBirth)->format('d F Y');
+    }
     
     public function render()
     {
@@ -56,6 +65,9 @@ class UserTable extends Component
             'users' => User::search($this->search)
             ->when($this->admin !== '', function($query){
                 $query->where('usertype', $this->admin);
+            })
+            ->when($this->gender !== '', function($query){
+                $query->where('gender', $this->gender);
             })
             ->orderBy($this->sortBy, $this->sortDir)
             ->paginate($this->perPage),
