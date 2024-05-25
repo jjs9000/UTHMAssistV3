@@ -37,8 +37,22 @@
     </div>
 
     <!-- Message Card -->
-    <div class="bg-gray-100 p-4 rounded-lg">
+    <div class="bg-gray-100 p-4 rounded-lg mb-4">
         <h3 class="text-xl font-semibold mb-2">Message</h3>
         <p class="text-gray-700">{{ $application->message }}</p>
+    </div>
+
+    <div class="bg-gray-100 p-4 rounded-lg">
+        <h3 class="text-xl font-semibold mb-2">Status</h3>
+        <div class="flex items-center text-gray-700">
+            <p class="px-2 py-1 text-sm font-semibold 
+                @if($application->status === 'accepted') bg-green-500 text-white
+                @elseif($application->status === 'rejected') bg-red-500 text-white
+                @else bg-blue-500 text-white
+                @endif
+                rounded">
+                {{ ucfirst($application->status) }}
+            </p>
+        </div>
     </div>
 </div>
