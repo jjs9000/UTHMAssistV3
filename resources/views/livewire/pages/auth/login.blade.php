@@ -41,7 +41,6 @@ new #[Layout('layouts.guest')] class extends Component
         <div>
             <x-input-label for="identity" :value="__('Email or Username')" />
             <x-text-input wire:model="form.identity" id="identity" class="block mt-1 w-full" type="text" name="identity" required autofocus />
-            <x-input-error :messages="$errors->get('identity')" class="mt-2" />
         </div>
 
 
@@ -53,8 +52,6 @@ new #[Layout('layouts.guest')] class extends Component
                             type="password"
                             name="password"
                             required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <!-- Remember Me -->
