@@ -88,11 +88,11 @@
                                 <td class="px-4 py-3">{{ $user->updated_at->format('d-m-Y H:i:s') }}</td>
                                 <td class="px-0 py-3 flex items-center justify-center space-x-0 ml-auto">
                                     @if(auth()->user()->id !== $user->id)
-                                        <button wire:click="$dispatch('openModal', { component: 'delete-confirmation-modal', arguments: { userId: {{ $user->id }} }})" class="px-3 py-1 text-white rounded flex items-center justify-center flex-shrink-0">
+                                        <button wire:click="$dispatch('openModal', { component: 'delete-confirmation-modal', arguments: { userId: {{ $user->id }} }})" class="px-3 py-1 hover:bg-gray-100 text-white rounded flex items-center justify-center flex-shrink-0">
                                             <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="h-6 w-full">
                                         </button>
                                     @endif
-                                    <button wire:click="openViewUserModal({{ $user->id }})" class="px-3 py-1 text-white rounded flex items-center justify-center flex-shrink-0">
+                                    <button wire:click="openViewUserModal({{ $user->id }})" class="px-3 py-1 hover:bg-gray-100 text-white rounded flex items-center justify-center flex-shrink-0">
                                         <img src="{{ asset('svg/view-icon.svg') }}" alt="View Icon" class="h-6 w-full">
                                     </button>
                                 </td>                                                                                                                                                               

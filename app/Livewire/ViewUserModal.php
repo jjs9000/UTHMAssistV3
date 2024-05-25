@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use LivewireUI\Modal\ModalComponent;
 
@@ -19,6 +20,11 @@ class ViewUserModal extends ModalComponent
     {
         $this->dispatch('viewUserModalClosed');
         $this->closeModal();  // Call the existing method from LivewireUI\Modal\ModalComponent
+    }
+
+    public function getFormattedDateOfBirth($dateOfBirth)
+    {
+        return Carbon::parse($dateOfBirth)->format('d F Y');
     }
 
     public function render(): View
