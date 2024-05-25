@@ -6,7 +6,7 @@
                 <small class="text-center text-xs font-medium">Tag Table</small>
             </button>
             <button wire:click="dispatch('showTagForm')" class="flex aspect-square min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5 transition-colors duration-300 ease-in-out hover:bg-indigo-100 focus:outline-none focus:bg-indigo-100 @unless($showTagTable) bg-indigo-100 @endif">
-                <img src="{{ asset('svg/add-user-icon.svg') }}" alt="Add User Icon" class="w-6 h-6 shrink-0">
+                <img src="{{ asset('svg/plus-icon.svg') }}" alt="Add User Icon" class="w-6 h-6 shrink-0">
                 <small class="text-center text-xs font-medium">Add Tag</small>
             </button>
         </nav>

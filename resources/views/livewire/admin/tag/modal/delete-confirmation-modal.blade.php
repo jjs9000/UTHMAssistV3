@@ -10,7 +10,7 @@
         <x-secondary-button wire:click="$dispatch('closeModal')">
             Cancel
         </x-secondary-button>
-        <x-danger-button class="ml-3" wire:click="deleteUser">
+        <x-danger-button class="ml-3" wire:click="deleteTag">
             Delete
         </x-danger-button>
     </div>

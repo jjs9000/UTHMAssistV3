@@ -1,7 +1,7 @@
 <div class="flex flex-wrap justify-center gap-6 mt-6">
     <!-- Total Users Card -->
     <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center w-48">
-        <img src="{{ asset('svg/user-icon.svg') }}" alt="User Icon" class="w-12 h-12 mb-4">
+        <img src="{{ asset('svg/user-icon-filled.svg') }}" alt="User Icon" class="w-12 h-12 mb-4">
         <span class="text-lg font-bold">{{ $totalUsers }}</span>
         <p class="text-gray-600">Users</p>
     </div>

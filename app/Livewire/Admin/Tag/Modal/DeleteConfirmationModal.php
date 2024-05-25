@@ -14,7 +14,7 @@ class DeleteConfirmationModal extends ModalComponent
         $this->tagId = $tagId;
     }
 
-    public function deleteUser()
+    public function deleteTag()
     {
         $tag = Tag::find($this->tagId);
 
