@@ -33,7 +33,7 @@
                 <div class="flex flex-col md:flex-row items-center justify-between">
                     <div class="md:w-1/2">
                         <h2 class="text-4xl font-bold mb-4">Welcome to UTHMAssist</h2>
-                        <p class="text-lg mb-8">UTHMAssist is a comprehensive platform designed specifically for UTHM students to find local job opportunities, manage applications, and connect with potential employers. Our goal is to help students earn extra income and gain valuable work experience while studying.</p>
+                        <p class="text-lg mb-8">UTHMAssist is a comprehensive platform designed specifically for UTHM students to find local task opportunities. Our goal is to help students earn extra income and strengthen student communities while studying.</p>
                         <button class="border-2 border-gray-900 text-gray-900 py-2 px-6 rounded-lg text-lg font-semibold hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">Learn More</button>
                     </div>
                     <div class="md:w-1/2 mt-8 md:mt-0">
@@ -56,7 +56,7 @@
                     <div class="md:w-1/3 text-center mb-8 md:mb-0">
                         <img src="{{ asset('svg/illustration/landing-page-3.svg') }}" alt="Apply on the Go" class="w-2/3 mx-auto mb-6">
                         <h3 class="text-2xl font-semibold mb-4">Apply on the Go</h3>
-                        <p>Seamlessly apply for jobs anytime, anywhere, with a user-friendly interface designed for busy students on the move.</p>
+                        <p>Seamlessly apply for tasks anytime, anywhere, with a user-friendly interface designed for busy students on the move.</p>
                     </div>
                     <div class="md:w-1/3 text-center">
                         <img src="{{ asset('svg/illustration/landing-page-4.svg') }}" alt="Direct Messaging" class="w-2/3 mx-auto mb-6">

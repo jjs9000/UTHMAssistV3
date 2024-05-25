@@ -44,10 +44,10 @@
                                 <td class="px-4 py-3">{{ $tag->created_at->format('Y-m-d H:i:s') }}</td>
                                 <td class="px-4 py-3">{{ $tag->updated_at->format('Y-m-d H:i:s') }}</td>
                                 <td class="px-4 py-3 flex items-center justify-end space-x-2">
-                                    <button wire:click="$dispatch('openModal', { component: 'admin.tag.modal.edit-modal', arguments: { tagId: {{ $tag->id }} }})" class="px-3 py-1 bg-slate-100 text-white rounded flex items-center justify-center">
+                                    <button wire:click="$dispatch('openModal', { component: 'admin.tag.modal.edit-modal', arguments: { tagId: {{ $tag->id }} }})" class="px-3 py-1 hover:bg-gray-100 text-white rounded flex items-center justify-center">
                                         <img src="{{ asset('svg/edit-icon.svg') }}" alt="Edit Icon" class="h-6 w-6">
                                     </button>
-                                    <button wire:click="$dispatch('openModal', { component: 'admin.tag.modal.delete-confirmation-modal', arguments: { tagId: {{ $tag->id }} }})" class="px-3 py-1 bg-slate-100 text-white rounded flex items-center justify-center">
+                                    <button wire:click="$dispatch('openModal', { component: 'admin.tag.modal.delete-confirmation-modal', arguments: { tagId: {{ $tag->id }} }})" class="px-3 py-1 hover:bg-gray-100 text-white rounded flex items-center justify-center">
                                         <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="h-6 w-6">
                                     </button>
                                 </td>
