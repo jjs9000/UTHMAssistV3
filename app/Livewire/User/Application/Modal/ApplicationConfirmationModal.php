@@ -9,6 +9,7 @@ class ApplicationConfirmationModal extends ModalComponent
 {
     public $applicationId;
     public $actionType;
+    public $rejectReason;
 
     public function mount($applicationId, $actionType)
     {
@@ -32,7 +33,11 @@ class ApplicationConfirmationModal extends ModalComponent
     {
         $application = Application::find($this->applicationId);
         if ($application) {
-            $application->status = 'rejected';
+            $application->update([
+                $application->status = 'rejected',
+                'reject_reason' => $this->rejectReason,  
+            ]);
+
             $application->save();
 
             $this->dispatch('applicationRejected'); // Refresh the applications list

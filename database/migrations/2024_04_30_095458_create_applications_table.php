@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('task_id')->constrained('task_postings');
             $table->text('message')->nullable();
             $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
+            $table->text('reject_reason')->nullable();
             $table->timestamps();
         });
     }

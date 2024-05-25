@@ -9,7 +9,7 @@ class Application extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['task_id', 'user_id', 'message'];
+    protected $fillable = ['task_id', 'user_id', 'message', 'reject_reason'];
 
     public function user()
     {

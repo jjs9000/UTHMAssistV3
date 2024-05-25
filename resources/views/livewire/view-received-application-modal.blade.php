@@ -38,11 +38,11 @@
 
     <!-- Message Card -->
     <div class="bg-gray-100 p-4 rounded-lg mb-4">
-        <h3 class="text-xl font-semibold mb-2">Message</h3>
+        <h3 class="text-xl font-semibold mb-2">Message From Applicant</h3>
         <p class="text-gray-700">{{ $application->message }}</p>
     </div>
 
-    <div class="bg-gray-100 p-4 rounded-lg">
+    <div class="bg-gray-100 p-4 rounded-lg mb-4">
         <h3 class="text-xl font-semibold mb-2">Status</h3>
         <div class="flex items-center text-gray-700">
             <p class="px-2 py-1 text-sm font-semibold 
@@ -55,4 +55,12 @@
             </p>
         </div>
     </div>
+
+    <!-- Reject reason card -->
+    @if ($application->status === 'rejected')
+    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+        <h3 class="text-xl font-semibold mb-2">Reason</h3>
+        <p class="text-gray-700">{{ $application->reject_reason }}</p>
+    </div>
+    @endif
 </div>
