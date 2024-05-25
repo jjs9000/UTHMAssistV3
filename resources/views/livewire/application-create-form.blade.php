@@ -8,10 +8,9 @@
         <!-- Application Message -->
         <div>
             <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Application Message (Optional):</label>
-            <textarea id="message" wire:model="message" rows="4" cols="50" class="border border-gray-300 rounded-lg w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400" placeholder="Enter your application message (Optional)"></textarea>
-            @error('message') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+            <x-textarea-input id="message" wire:model="message" rows="4" cols="50" class="border border-gray-300 rounded-lg w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400" placeholder="Enter your application message (Optional)"></x-textarea-input>
         </div>
 
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Apply</button>
+        <button type="submit" class="bg-gray-900 hover:ring-2 ring-offset-2 ring-gray-500 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Apply</button>
     </form>
 </div>
