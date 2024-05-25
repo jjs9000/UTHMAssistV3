@@ -90,6 +90,7 @@
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
                             </select>
+                            <x-input-error :messages="$errors->get('usertype')" class="text-red-500" />
                         </div>                        
     
                         <div>
