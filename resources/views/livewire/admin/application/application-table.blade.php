@@ -45,7 +45,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($applications as $application)
+                            @forelse($applications as $application)
                             <tr wire:key="{{ $application->id }}" class="border-b group">
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">{{ $application->id }}</td>
                                 <td class="px-4 py-3">{{ $application->user->username }}</td>
@@ -62,7 +62,13 @@
                                     </button>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="14" class="px-4 py-3 text-center text-gray-900 text-lg font-semibold">
+                                    No application found
+                                </td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

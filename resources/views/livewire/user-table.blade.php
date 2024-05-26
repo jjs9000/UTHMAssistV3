@@ -67,7 +67,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($users as $user)
+                            @forelse($users as $user)
                             <tr wire:key="{{ $user->id }}" class="border-b group">
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
                                     {{ $user->username }}</td>
@@ -97,7 +97,13 @@
                                     </button>
                                 </td>                                                                                                                                                               
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="14" class="px-4 py-3 text-center text-gray-900 text-lg font-semibold">
+                                    No user found
+                                </td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

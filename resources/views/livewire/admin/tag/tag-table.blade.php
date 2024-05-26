@@ -35,7 +35,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($tags as $tag)
+                            @forelse($tags as $tag)
                             <tr wire:key="{{ $tag->id }}" class="border-b group">
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
                                     {{ $tag->name }}
@@ -52,7 +52,13 @@
                                     </button>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="14" class="px-4 py-3 text-center text-gray-900 text-lg font-semibold">
+                                    No tag found
+                                </td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

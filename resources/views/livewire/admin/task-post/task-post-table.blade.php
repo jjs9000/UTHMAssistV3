@@ -53,7 +53,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($taskPosts as $taskPost)
+                            @forelse($taskPosts as $taskPost)
                             <tr wire:key="{{ $taskPost->id }}" class="border-b group">
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
                                     {{ $taskPost->title }}
@@ -73,7 +73,13 @@
                                     </button>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="14" class="px-4 py-3 text-center text-gray-900 text-lg font-semibold">
+                                    No task post found
+                                </td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
