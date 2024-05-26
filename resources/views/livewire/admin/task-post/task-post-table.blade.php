@@ -68,9 +68,9 @@
                                     <button wire:click="$dispatch('openModal', { component: 'admin.task-post.modal.view-modal', arguments: { taskPostId: {{ $taskPost->id }} }})" class="px-3 py-1 hover:bg-gray-100 text-white rounded flex items-center justify-center flex-shrink-0">
                                         <img src="{{ asset('svg/view-icon.svg') }}" alt="View Icon" class="h-6 w-6">
                                     </button>
-                                    {{-- <button wire:click="$dispatch('openModal', { component: 'admin.task-post.modal.delete-confirmation-modal', arguments: { taskPostId: {{ $taskPost->id }} }})" class="px-3 py-1 hover:bg-gray-100 text-white rounded flex items-center justify-center flex-shrink-0">
+                                    <button wire:click="$dispatch('openModal', { component: 'admin.task-post.modal.delete-confirmation-modal', arguments: { taskId: {{ $taskPost->id }} }})" class="px-3 py-1 hover:bg-gray-100 text-white rounded flex items-center justify-center flex-shrink-0">
                                         <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="h-6 w-6">
-                                    </button> --}}
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach
