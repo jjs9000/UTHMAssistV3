@@ -25,7 +25,13 @@
         <p><span class="font-semibold">Last Update:</span> {{ $user->updated_at->format('d F Y, h:i A') }}</p>        
     </div>
 
+    @if($user->is_suspended)
     <div class="flex justify-between space-x-2 mb-6">
-        <button class="flex-1 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:bg-red-600">Suspend</button>
+        <button wire:click="$dispatch('openModal', { component: 'admin.user.modal.confirmation-modal', arguments: { userId: {{ $user->id }}, action: 'unsuspend' }})" class="flex-1 px-4 py-2 bg-[#0F52BA] hover:ring-2 ring-offset-2 ring-gray-900 text-white rounded">Unsuspend</button>
     </div>
+    @else
+    <div class="flex justify-between space-x-2 mb-6">
+        <button wire:click="$dispatch('openModal', { component: 'admin.user.modal.confirmation-modal', arguments: { userId: {{ $user->id }}, action: 'suspend' }})" class="flex-1 px-4 py-2 bg-[#D22B2B] hover:ring-2 ring-offset-2 ring-gray-900 text-white rounded">Suspend</button>
+    </div>
+    @endif
 </div>

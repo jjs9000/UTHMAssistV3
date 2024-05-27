@@ -14,22 +14,26 @@ new #[Layout('layouts.guest')] class extends Component
     /**
      * Handle an incoming authentication request.
      */
-    public function login(): void
+     public function login(): void
     {
         $this->validate();
 
-        $this->form->authenticate();
+        try {
+            $this->form->authenticate();
 
-        Session::regenerate();
+            Session::regenerate();
 
-        $authenticatedUser = Auth::user();
+            $authenticatedUser = Auth::user();
 
-    if ($authenticatedUser && $authenticatedUser->usertype == 'admin') {
-        $this->redirect('admin/dashboard');
-    } else {
-        $this->redirect(route('task-posting.index'));
+            if ($authenticatedUser && $authenticatedUser->usertype == 'admin') {
+                $this->redirect('admin/dashboard');
+            } else {
+                $this->redirect(route('task-posting.index'));
+            }
+        } catch (ValidationException $e) {
+            $this->addError('form.identity', $e->getMessage());
+        }
     }
-}
 }; ?>
 
 <div>
@@ -40,7 +44,10 @@ new #[Layout('layouts.guest')] class extends Component
         <!-- Email Address/ Username -->
         <div>
             <x-input-label for="identity" :value="__('Email or Username')" />
-            <x-text-input wire:model="form.identity" id="identity" class="block mt-1 w-full" type="text" name="identity" required autofocus />
+            <x-text-input wire:model="form.identity" id="identity" class="block mt-1 w-full" type="text" name="identity" autofocus />
+            @error('form.identity')
+                <div class="text-red-500 mt-2 text-sm">{{ $message }}</div>
+            @enderror
         </div>
 
 
@@ -51,7 +58,10 @@ new #[Layout('layouts.guest')] class extends Component
             <x-text-input wire:model="form.password" id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
-                            required autocomplete="current-password" />
+                            autocomplete="current-password" />
+            @error('form.password')
+                <div class="text-red-500 mt-2 text-sm">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Remember Me -->

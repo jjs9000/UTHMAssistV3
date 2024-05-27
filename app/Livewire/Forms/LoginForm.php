@@ -37,6 +37,16 @@ class LoginForm extends Form
             $credentials = ['username' => $this->identity];
         }
 
+        // Attempt to find the user by email or username
+        $user = \App\Models\User::where($credentials)->first();
+
+        // Check if the user exists and is suspended
+        if ($user && $user->is_suspended) {
+            throw ValidationException::withMessages([
+                'identity' => trans('Your account has been suspended. Please contact administrator.'),
+            ]);
+        }
+
         // Attempt to authenticate with either email or username
         if (! Auth::attempt(array_merge($credentials, ['password' => $this->password]), $this->remember)) {
             RateLimiter::hit($this->throttleKey());

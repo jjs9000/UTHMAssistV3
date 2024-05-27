@@ -11,6 +11,8 @@ class ViewUserModal extends ModalComponent
 {
     public User $user;
 
+    protected $listeners = ['userStatusChanged' => '$refresh'];
+
     public function mount($user)
     {
         $this->user = $user;
