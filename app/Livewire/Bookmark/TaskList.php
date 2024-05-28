@@ -16,7 +16,9 @@ class TaskList extends Component
 
     public function render()
     {
-        $bookmarks = Bookmark::where('user_id', Auth::id())->paginate(5);
+        $bookmarks = Bookmark::where('user_id', Auth::id())
+        ->orderBy('created_at', 'desc')
+        ->paginate(5);
 
         $noBookmarkAvailable = $bookmarks->isEmpty();
 
