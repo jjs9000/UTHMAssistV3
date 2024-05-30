@@ -21,6 +21,7 @@ use App\Livewire\ApplicationList;
 use App\Livewire\ApplicationReceive;
 use App\Livewire\Bookmark\Index as BookmarkIndex;
 use App\Livewire\Dashboard\Index;
+use App\Livewire\Message\Index as MessageIndex;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,7 @@ Route::view('/', 'welcome');
 
 // Navigation Link For User
 Route::middleware(['auth', 'verified', 'redirect.if.admin'])->group(function () {
-    Route::get('/message', [MessageController::class, 'index'])->name('message.index');
+    Route::get('/message', MessageIndex::class)->name('message.index');
     Route::get('/dashboard', Index::class)->name('dashboard.index');
 });
 

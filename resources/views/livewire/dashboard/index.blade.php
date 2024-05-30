@@ -16,7 +16,7 @@
         @if($showUserProfile)
             <livewire:dashboard.profile.index />
         @else
-            {{-- <livewire:dashboard.profile.profile-picture-card /> --}}
+            {{-- <livewire:dashboard.timetable.timetable-manager /> --}}
         @endif
     </div>
 </div>
