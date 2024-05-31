@@ -22,6 +22,7 @@ use App\Livewire\ApplicationReceive;
 use App\Livewire\Bookmark\Index as BookmarkIndex;
 use App\Livewire\Dashboard\Index;
 use App\Livewire\Message\Index as MessageIndex;
+use App\Livewire\User\Profile\ViewUserProfile;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,20 +58,26 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/feedback', RatingIndex::class)->name('admin.rating.index');
 });
 
-// Task Posting Route (Livewire Component)
 Route::middleware(['auth', 'redirect.if.admin'])->group(function () {
+
+    // Task Posting Route (Livewire Component)
     Route::get('/task-posting-page', TaskPostingPage::class)->name('task-posting-page');
     Route::get('/task-posting', TaskPostingIndex::class)->name('task-posting.index');
     Route::get('/task-posting/{id}', TaskPostingShow::class)->name('task-posting.show');
     Route::get('/task-posting/create', [TaskPostingCreate::class, 'create'])->name('task-posting.create');
     Route::get('/task-posting/{taskPosting}/edit', [TaskPostingEdit::class, 'edit'])->name('task-posting.edit');
 
+    // Application Route (Livewire Component)
     Route::get('/application', Application::class)->name('application');
     Route::get('/application/create/{taskId}', ApplicationCreateForm::class)->name('application-create-form');
     Route::get('/application-list', ApplicationList::class)->name('application.list');
     Route::get('/application-receive', ApplicationReceive::class)->name('application.receive');
 
+    // Bookmark Route (Livewire Component)
     Route::get('/bookmark', BookmarkIndex::class)->name('bookmark.index');
+
+    // View User Profile Route (Livewire Component)
+    Route::get('/user/profile/{id}', ViewUserProfile::class)->name('user.profile');
 });
 
 
