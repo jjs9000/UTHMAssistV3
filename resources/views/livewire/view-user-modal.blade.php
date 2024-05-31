@@ -34,4 +34,8 @@
         <button wire:click="$dispatch('openModal', { component: 'admin.user.modal.confirmation-modal', arguments: { userId: {{ $user->id }}, action: 'suspend' }})" class="flex-1 px-4 py-2 bg-[#D22B2B] hover:ring-2 ring-offset-2 ring-gray-900 text-white rounded">Suspend</button>
     </div>
     @endif
+
+    <div class="flex justify-between space-x-2 mb-6">
+        <button wire:click="$dispatch('openModal', { component: 'admin.user.modal.report.view-user-report-modal', arguments: { userId: {{ $user->id }} }})" class="flex-1 px-4 py-2 bg-gray-900 hover:ring-2 ring-offset-2 ring-gray-900 text-white rounded">View User Report</button>
+    </div>
 </div>
