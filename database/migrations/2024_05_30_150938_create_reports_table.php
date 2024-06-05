@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('reporter_id')->constrained('users')->onDelete('cascade'); // ID of the user making the report
+            $table->foreignId('reported_user_id')->constrained('users')->onDelete('cascade'); // ID of the user being reported
             $table->enum('reason', ['spam', 'inappropriate_content', 'harassment']);
             $table->text('additional_reason')->nullable();
             $table->timestamps();

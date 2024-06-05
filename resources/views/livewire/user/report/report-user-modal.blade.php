@@ -9,7 +9,7 @@
         <form wire:submit.prevent="submitReport">
             <div class="mb-4">
                 <label for="reason" class="block font-medium text-gray-700">Reason:</label>
-                <select wire:model.defer="reason" id="reason" name="reason" class="block w-full mt-1 form-select rounded-lg">
+                <select wire:model.defer="reason" id="reason" name="reason" class="block w-full mt-1 form-select rounded-lg" aria-label="Reason">
                     <option value="">Select Reason</option>
                     <option value="spam">Spam</option>
                     <option value="inappropriate_content">Inappropriate Content</option>
@@ -19,9 +19,9 @@
             </div>
             <div class="mb-4">
                 <label for="additional_reason" class="block font-medium text-gray-700">Additional reason (optional):</label>
-                <textarea wire:model.defer="additionalReason" id="additional_reason" name="additional_reason" rows="3" class="block w-full mt-1 form-textarea rounded-lg"></textarea>
+                <textarea wire:model.defer="additionalReason" id="additional_reason" name="additional_reason" rows="3" class="block w-full mt-1 form-textarea rounded-lg" aria-label="Additional reason"></textarea>
             </div>
-            <div>
+            <div class="mt-6">
                 <button type="submit" class="px-4 py-2 bg-[#D22B2B] text-white rounded-lg shadow hover:transition duration-300 ease-in-out transform hover:scale-110">Submit Report</button>
             </div>
         </form>

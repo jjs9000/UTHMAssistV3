@@ -3,12 +3,12 @@
 namespace App\Livewire\User\Report;
 
 use App\Models\Report;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use LivewireUI\Modal\ModalComponent;
 
 class ReportUserModal extends ModalComponent
 {
-    public $userId;
+    public $userId; // ID of the user being reported
     public $reason;
     public $additionalReason;
 
@@ -19,14 +19,14 @@ class ReportUserModal extends ModalComponent
 
     public function submitReport()
     {
-
         $this->validate([
             'reason' => 'required|in:spam,inappropriate_content,harassment',
             'additionalReason' => 'nullable|string|max:255',
         ]);
 
         Report::create([
-            'user_id' => auth()->id(),
+            'reporter_id' => Auth::id(), // ID of the user making the report
+            'reported_user_id' => $this->userId, // ID of the user being reported
             'reason' => $this->reason,
             'additional_reason' => $this->additionalReason,
         ]);

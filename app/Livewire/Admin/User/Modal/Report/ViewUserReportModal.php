@@ -13,7 +13,8 @@ class ViewUserReportModal extends ModalComponent
     public function mount($userId)
     {
         $this->userId = $userId;
-        $this->reports = Report::where('user_id', $this->userId)->get();
+        // Fetch reports where reported_user_id matches the provided $userId
+        $this->reports = Report::where('reported_user_id', $this->userId)->get();
     }
 
     public function render()
