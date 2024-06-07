@@ -46,34 +46,36 @@
     <div class="mb-4 p-4 bg-gray-100 rounded-lg shadow-md text-center">
         <label class="block font-medium text-gray-700 mb-2">Rating:</label>
         <div class="flex justify-center items-center text-4xl text-yellow-500">
-            <span>★★★★☆</span>
+            @for ($i = 0; $i < round($averageRating); $i++)
+                <span>★</span>
+            @endfor
+            @for ($i = round($averageRating); $i < 5; $i++)
+                <span>☆</span>
+            @endfor
         </div>
-        <p class="text-gray-900 text-xl mt-2">4.5/5</p> <!-- Hard coded rating -->
-    </div>
+        <p class="text-gray-900 text-xl mt-2">{{ $averageRating }}/5</p>
+    </div>    
 
     <!-- Feedback Card -->
     <div class="mb-4 p-4 bg-gray-100 rounded-lg shadow-md">
-        <label class="block font-medium text-gray-700 mb-2">Feedback:</label>
-        <ul class="space-y-4">
-            <li class="flex items-start space-x-4">
-                <img src="{{ asset('images/default-profile.png') }}" alt="John Doe" class="w-8 h-8 rounded-full">
-                <div>
-                    <p class="text-gray-900">Great user, very cooperative! - John Doe</p>
-                    <div class="flex items-center text-yellow-500">
-                        <span>★★★★☆</span>
-                    </div>
-                </div>
-            </li>
-            <li class="flex items-start space-x-4">
-                <img src="{{ asset('images/default-profile.png') }}" alt="Jane Smith" class="w-8 h-8 rounded-full">
-                <div>
-                    <p class="text-gray-900">Prompt responses and very polite. - Jane Smith</p>
-                    <div class="flex items-center text-yellow-500">
-                        <span>★★★★★</span>
-                    </div>
-                </div>
-            </li>
-        </ul>
+        <h2 class="text-xl font-semibold mb-2">Feedback:</h2>
+        @if ($feedbacks->isEmpty())
+            <p>No feedback available.</p>
+        @else
+            <ul class="space-y-4">
+                @foreach ($feedbacks as $feedback)
+                    <li class="flex items-start space-x-4 border-2 border-gray-300 p-4 rounded-lg shadow-md">
+                        <p class="text-gray-900 font-semibold text-md">{{ $feedback->user->username }}</p>
+                        <div>
+                            <p class="text-gray-900">{{ $feedback->comment }}</p>
+                            <div class="flex items-center text-yellow-500">
+                                <span>{{ str_repeat('★', $feedback->rating) }}{{ str_repeat('☆', 5 - $feedback->rating) }}</span>
+                            </div>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
+        @endif
     </div>
 
     <!-- Report Button -->

@@ -12,9 +12,14 @@
     <!-- Task information -->
     <div class="mb-4">
         <div class="flex items-center mt-2 mb-2">
-            <p class="px-2 py-1 rounded text-md font-semibold text-white inline-block {{ $task->status == 'available' ? 'bg-green-500' : 'bg-red-500' }}">
-                {{ $task->status == 'available' ? 'Available' : 'Not Available' }}
-            </p>
+            <p class="px-2 py-1 rounded text-md font-semibold text-white inline-block 
+            @if($task->status == 'available') bg-green-500
+            @elseif($task->status == 'ongoing') bg-blue-500
+            @elseif($task->status == 'completed') bg-gray-500
+            @else bg-red-500
+            @endif">
+            {{ $task->status == 'available' ? 'Available' : ($task->status == 'ongoing' ? 'Ongoing' : ($task->status == 'completed' ? 'Completed' : 'Not Available')) }}
+        </p>        
         </div>        
         <div class="flex items-center mb-2">
             <p class="text-gray-700 inline-block"><strong>Posted:</strong> {{ $task->created_at->diffForHumans() }}</p>

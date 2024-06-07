@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('location', ['UTHM Parit Raja', 'UTHM Pagoh']);
             $table->text('location_detail');
             $table->date('deadline');
-            $table->enum('status', ['available', 'not_available'])->default('available');
+            $table->enum('status', ['available', 'not_available', 'ongoing', 'completed'])->default('available');
             $table->string('availability');
             $table->timestamps();
         });

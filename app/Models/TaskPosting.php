@@ -53,4 +53,9 @@ class TaskPosting extends Model
     {
         return $this->hasMany(Bookmark::class);
     }
+
+    public function feedback()
+    {
+        return $this->hasOne(Feedback::class);
+    }
 }

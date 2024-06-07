@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('feedback', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('task_id');
+            $table->unsignedBigInteger('user_id');
+            $table->tinyInteger('rating')->unsigned();
+            $table->text('comment')->nullable();
             $table->timestamps();
+
+            // Foreign key constraints
+            $table->foreign('task_id')->references('id')->on('task_postings')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

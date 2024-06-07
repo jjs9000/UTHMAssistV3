@@ -30,9 +30,14 @@
                                 <h3 class="text-lg font-semibold">{{ $task->title }}</h3>
                                 <p class="text-gray-700 absolute top-4 right-4"><strong>Posted</strong> {{ $task->created_at->diffForHumans() }}</p>
                                 <div class="flex items-center mt-2">
-                                    <p class="px-2 py-1 rounded text-md font-semibold text-white inline-block {{ $task->status == 'available' ? 'bg-green-500' : 'bg-red-500' }}">
-                                        {{ $task->status == 'available' ? 'Available' : 'Not Available' }}
-                                    </p>
+                                    <p class="px-2 py-1 rounded text-md font-semibold text-white inline-block 
+                                    @if($task->status == 'available') bg-green-500
+                                    @elseif($task->status == 'ongoing') bg-blue-500
+                                    @elseif($task->status == 'completed') bg-gray-500
+                                    @else bg-red-500
+                                    @endif">
+                                    {{ $task->status == 'available' ? 'Available' : ($task->status == 'ongoing' ? 'Ongoing' : ($task->status == 'completed' ? 'Completed' : 'Not Available')) }}
+                                </p>                                
                                 </div>
                                 <div class="flex items-center mt-2">                                 
                                     <!-- Calculate time remaining until the deadline -->
@@ -55,6 +60,7 @@
                                         <img src="{{ asset('svg/view-icon.svg') }}" alt="View Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
                                     </button>
                                 </div>
+                                @if ($task->status !== 'ongoing' && $task->status !== 'completed')
                                 <div>
                                     <button wire:click="editTask({{ $task->id }})">
                                         <img src="{{ asset('svg/edit-icon.svg') }}" alt="Edit Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
@@ -65,6 +71,7 @@
                                         <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
                                     </button>
                                 </div>
+                                @endif
                             </div>                            
                         </div>
                     @endforeach

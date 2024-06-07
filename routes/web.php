@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MessageController;
 use App\Livewire\Admin\Application\Index as ApplicationIndex;
+use App\Livewire\Admin\Dashboard\Index as DashboardIndex;
 use App\Livewire\Admin\Rating\Index as RatingIndex;
 use App\Livewire\Admin\Tag\Index as TagIndex;
 use App\Livewire\Admin\TaskPost\Index as TaskPostIndex;
@@ -21,7 +22,10 @@ use App\Livewire\ApplicationList;
 use App\Livewire\ApplicationReceive;
 use App\Livewire\Bookmark\Index as BookmarkIndex;
 use App\Livewire\Dashboard\Index;
+use App\Livewire\Message\ChatBox;
 use App\Livewire\Message\Index as MessageIndex;
+use App\Livewire\NotificationTest;
+use App\Livewire\TestComponent;
 use App\Livewire\User\Profile\ViewUserProfile;
 
 /*
@@ -39,10 +43,11 @@ Route::view('/', 'welcome');
 
 // Navigation Link For User
 Route::middleware(['auth', 'verified', 'redirect.if.admin'])->group(function () {
-    Route::get('/message', MessageIndex::class)->name('message.index');
+    Route::get('/message', ChatBox::class)->name('chat-box');
     Route::get('/dashboard', Index::class)->name('dashboard.index');
 });
 
+Route::get('/test', TestComponent::class)->name('test-component');
 // Admin & User Profile View Route
 Route::view('profile', 'profile')
     ->middleware(['auth'])
@@ -50,7 +55,7 @@ Route::view('profile', 'profile')
 
 // Admin Route
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('admin/dashboard', AdminDashboard::class)->name('admin-dashboard');
+    Route::get('admin/dashboard', DashboardIndex::class)->name('admin-dashboard');
     Route::get('/admin/user/{showUserTable?}', AdminUser::class)->name('admin-user');
     Route::get('/admin/task', TaskPostIndex::class)->name('admin.taskpost.index');
     Route::get('/admin/application', ApplicationIndex::class)->name('admin.application.index');

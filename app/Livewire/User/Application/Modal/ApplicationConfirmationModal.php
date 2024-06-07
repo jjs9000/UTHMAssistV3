@@ -22,8 +22,14 @@ class ApplicationConfirmationModal extends ModalComponent
         $application = Application::find($this->applicationId);
         if ($application) {
             $application->status = 'accepted';
-            $application->save();
-
+            $application->save(); // Save changes to the application status
+    
+            $task = $application->task;
+            if ($task) {
+                $task->status = 'ongoing';
+                $task->save(); // Save changes to the task status
+            }
+    
             $this->dispatch('applicationAccepted'); // Refresh the applications list
             $this->closeModal();
         }

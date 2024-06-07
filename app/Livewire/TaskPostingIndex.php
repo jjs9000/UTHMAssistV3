@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Bookmark;
+use App\Models\Feedback;
 use Livewire\Component;
 use App\Models\TaskPosting;
 use Illuminate\Support\Facades\Auth;
@@ -26,19 +27,26 @@ class TaskPostingIndex extends Component
         // Start with base query to retrieve all task postings
         $query = TaskPosting::where('user_id', '!=', auth()->id()) // Exclude tasks by the original poster
                             ->where('status', '!=', 'not_available') // Exclude tasks with status 'not_available'
+                            ->where('status', '!=', 'ongoing') // Exclude tasks with status 'not_available'
+                            ->where('status', '!=', 'completed') // Exclude tasks with status 'not_available'
                             ->whereDate('deadline', '>', now()); // Exclude expired tasks
         
         // Apply search filter if search term is not empty
         if (!empty($this->search)) {
             $searchTerm = "%{$this->search}%";
-            $query->where('title', 'like', $searchTerm)
-                  ->orWhereHas('tags', function ($query) use ($searchTerm) {
-                      $query->where('name', 'like', $searchTerm);
-                  })
-                  ->orWhereHas('user', function ($query) use ($searchTerm) {
-                      $query->where('username', 'like', $searchTerm);
-                  });
-        }        
+            $query->where('status', '!=', 'not_available') // Exclude tasks with status 'not_available'
+                ->where('status', '!=', 'ongoing') // Exclude tasks with status 'ongoing'
+                ->where('status', '!=', 'completed') // Exclude tasks with status 'completed'
+                ->where(function ($query) use ($searchTerm) {
+                    $query->where('title', 'like', $searchTerm)
+                            ->orWhereHas('tags', function ($query) use ($searchTerm) {
+                                $query->where('name', 'like', $searchTerm);
+                            })
+                            ->orWhereHas('user', function ($query) use ($searchTerm) {
+                                $query->where('username', 'like', $searchTerm);
+                            });
+                });
+        }       
         
         // Apply location filter if location is not empty
         if (!empty($this->location)) {

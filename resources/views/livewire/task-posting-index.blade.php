@@ -140,17 +140,7 @@
                                     @endif
                                     <p class="text-gray-700 font-semibold text-xl">{{ $selectedTask->user->username }}</p>
                                 </div>
-                                <div class="flex items-center mb-4">
-                                    <!-- Hardcoded star rating -->
-                                    <div class="flex text-yellow-500">
-                                        <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.75L18.1803 21.4019L16.5451 14.4791L22 9.59808L14.8595 8.99993L12 3L9.14047 8.99993L2 9.59808L7.45491 14.4791L5.81972 21.4019L12 17.75Z"/></svg>
-                                        <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.75L18.1803 21.4019L16.5451 14.4791L22 9.59808L14.8595 8.99993L12 3L9.14047 8.99993L2 9.59808L7.45491 14.4791L5.81972 21.4019L12 17.75Z"/></svg>
-                                        <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.75L18.1803 21.4019L16.5451 14.4791L22 9.59808L14.8595 8.99993L12 3L9.14047 8.99993L2 9.59808L7.45491 14.4791L5.81972 21.4019L12 17.75Z"/></svg>
-                                        <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.75L18.1803 21.4019L16.5451 14.4791L22 9.59808L14.8595 8.99993L12 3L9.14047 8.99993L2 9.59808L7.45491 14.4791L5.81972 21.4019L12 17.75Z"/></svg>
-                                        <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.75L18.1803 21.4019L16.5451 14.4791L22 9.59808L14.8595 8.99993L12 3L9.14047 8.99993L2 9.59808L7.45491 14.4791L5.81972 21.4019L12 17.75Z"/></svg>
-                                    </div>
-                                    <p class="ml-2 text-gray-700">(5.0)</p> <!-- Hardcoded rating value -->
-                                </div>
+                     
                                 <!-- View Profile Button -->
                                 <a href="{{ route('user.profile', ['id' => $selectedTask->user->id]) }}" target="_blank" class="absolute bottom-4 right-4 text-gray-900 px-4 py-2 rounded-lg hover:ring ring-offset-2 ring-gray-900 transition duration-300">View Profile</a>
                             </div>
