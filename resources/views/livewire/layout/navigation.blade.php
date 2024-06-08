@@ -51,6 +51,15 @@ new class extends Component
                         <x-nav-link :href="route('application')" :active="request()->routeIs('application')">
                             {{ __('Application') }}
                         </x-nav-link>
+
+                        <x-nav-link :href="route('messages')" :active="request()->routeIs('messages')">
+                            <div class="relative">
+                                <img src="{{ asset('svg/email-icon.svg') }}" alt="Email Icon" class="w-6 h-6">
+                                <span class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center unread_notification">
+                                    {{ auth()->user()->getMessageCount() }}
+                                </span>
+                            </div>
+                        </x-nav-link>
                     @endif
 
                     <!-- Displayed for admin -->

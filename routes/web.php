@@ -41,6 +41,11 @@ use App\Livewire\User\Profile\ViewUserProfile;
 
 Route::view('/', 'welcome');
 
+Route::get('unreadCount', function () {
+    $count = auth()->user()->getMessageCount();
+    return response()->json(['count' => $count]);
+})->name('unreadCount');
+
 // Navigation Link For User
 Route::middleware(['auth', 'verified', 'redirect.if.admin'])->group(function () {
     Route::get('/dashboard', Index::class)->name('dashboard.index');

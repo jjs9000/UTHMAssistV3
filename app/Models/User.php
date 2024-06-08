@@ -87,4 +87,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Feedback::class);
     }
+
+    public function getMessageCount(){
+        if(auth()->check()){
+            $count = ChMessage::where('to_id', auth()->id())->where('seen', '0')->count();
+            return $count;
+        }
+        return 0;
+    }
 }
