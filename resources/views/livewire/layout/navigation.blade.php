@@ -51,15 +51,6 @@ new class extends Component
                         <x-nav-link :href="route('application')" :active="request()->routeIs('application')">
                             {{ __('Application') }}
                         </x-nav-link>
-
-                        <x-nav-link :href="route('messages')" :active="request()->routeIs('messages')">
-                            <div class="relative">
-                                <img src="{{ asset('svg/email-icon.svg') }}" alt="Email Icon" class="w-6 h-6">
-                                <span class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center unread_notification">
-                                    {{ auth()->user()->getMessageCount() }}
-                                </span>
-                            </div>
-                        </x-nav-link>
                     @endif
 
                     <!-- Displayed for admin -->
@@ -89,6 +80,15 @@ new class extends Component
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <!-- Messages Link -->
+                <x-nav-link :href="route('messages')" :active="request()->routeIs('messages')">
+                    <div class="relative">
+                        <img src="{{ asset('svg/email-icon.svg') }}" alt="Email Icon" class="w-6 h-6">
+                        <span class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center unread_notification">
+                            {{ auth()->user()->getMessageCount() }}
+                        </span>
+                    </div>
+                </x-nav-link>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700  focus:outline-none transition ease-in-out duration-150">
