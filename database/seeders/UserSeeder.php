@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
         // Seed one admin
         User::create([
             'username' => 'admin',
+            'name' => 'administrator',
             'first_name' => 'Admin',
             'last_name' => 'User',
             'bio' => 'I am an admin, I am a student',
@@ -36,6 +37,7 @@ class UserSeeder extends Seeder
         // Seed one regular user
         User::create([
             'username' => 'user',
+            'name' => 'userRegular',
             'first_name' => 'Regular',
             'last_name' => 'User',
             'bio' => 'I am the user, I am a student',
@@ -57,6 +59,7 @@ class UserSeeder extends Seeder
         for ($i = 0; $i < 50; $i++) {
             User::create([
                 'username' => $faker->userName,
+                'name' => $faker->name,
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,
                 'bio' => $faker->paragraph,

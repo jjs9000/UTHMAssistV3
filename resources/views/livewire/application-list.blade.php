@@ -53,14 +53,17 @@
                     @foreach ($applications as $application)
                     <tr>
                         <td class="py-4 px-6 text-sm text-gray-900">{{ $application->task->title }}</td>
-                        <td class="py-4 px-6 text-sm text-gray-900">{{ $application->message }}</td>
+                        <td class="py-4 px-6 text-sm text-gray-900">{{ $application->message ?: 'No message provided.' }}</td>
                         <td class="py-4 px-6 text-sm">
                             <span class="px-2 py-1 text-sm font-semibold {{ $application->status === 'accepted' ? 'bg-green-500 text-white' : ($application->status === 'rejected' ? 'bg-red-500 text-white' : 'bg-blue-500 text-white') }} rounded">{{ ucfirst($application->status) }}</span>
                         </td>
                         <td class="py-4 px-6 text-sm text-center">
                             <button wire:click="$dispatch('openModal', { component: 'view-my-application-modal', arguments: { applicationId: {{ $application->id }} } })">
                                 <img src="{{ asset('svg/view-icon.svg') }}" alt="View Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
-                            </button>                                                        
+                            </button> 
+                            <button wire:click="$dispatch('openModal', { component: 'user.application.modal.applicant-chat-modal', arguments: { applicationId: {{ $application->id }} } })">
+                                <img src="{{ asset('svg/chat-icon-filled.svg') }}" alt="Chat Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
+                            </button>                                                     
                         </td>
                     </tr>
                     @endforeach

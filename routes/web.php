@@ -43,7 +43,6 @@ Route::view('/', 'welcome');
 
 // Navigation Link For User
 Route::middleware(['auth', 'verified', 'redirect.if.admin'])->group(function () {
-    Route::get('/message', ChatBox::class)->name('chat-box');
     Route::get('/dashboard', Index::class)->name('dashboard.index');
 });
 

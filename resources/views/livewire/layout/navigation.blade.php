@@ -51,10 +51,6 @@ new class extends Component
                         <x-nav-link :href="route('application')" :active="request()->routeIs('application')">
                             {{ __('Application') }}
                         </x-nav-link>
-                        
-                        <x-nav-link :href="route('message.index')" :active="request()->routeIs('message.index')">
-                            {{ __('Message') }}
-                        </x-nav-link>
                     @endif
 
                     <!-- Displayed for admin -->
@@ -76,7 +72,7 @@ new class extends Component
                         </x-nav-link>
 
                         <x-nav-link :href="route('admin.rating.index')" :active="request()->routeIs('admin.rating.index')">
-                            {{ __('Feedback & Reviews') }}
+                            {{ __('Feedback & Rating') }}
                         </x-nav-link>
                     @endif
                 </div>

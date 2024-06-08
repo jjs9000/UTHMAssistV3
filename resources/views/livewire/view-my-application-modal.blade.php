@@ -9,7 +9,7 @@
     <div class="bg-gray-100 p-4 rounded-lg mb-4">
         <h3 class="text-xl font-semibold mb-2">Message</h3>
         <div class="flex items-center text-gray-700">
-            {{ $application->message }}</>
+            {{ $application->message ?: 'No message provided.' }}
         </div>
     </div>
 
@@ -33,7 +33,7 @@
     <div class="bg-gray-100 p-4 rounded-lg mb-4">
         <h3 class="text-xl font-semibold mb-2">Reason</h3>
         <div class="flex items-center text-gray-700">
-            {{ $application->reject_reason }}</>
+            {{ $application->reject_reason ?: 'No reason provided.' }}
         </div>
     </div>
     @endif
