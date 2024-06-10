@@ -54,27 +54,47 @@ class UserSeeder extends Seeder
             'ic' => 'B7654321', // Sample IC
         ]);
 
+        // Seed one regular user
+        User::create([
+            'username' => 'user2',
+            'name' => 'userRegular2',
+            'first_name' => 'Regular',
+            'last_name' => 'User',
+            'bio' => 'I am the user 2, I am a student 2',
+            'email' => 'user2@student.uthm.edu.my',
+            'password' => bcrypt('password'), // Hash the password
+            'usertype' => 'user',
+            'gender' => 'male',
+            'date_of_birth' => '1990-01-02', // Sample date of birth
+            'contact_number' => '123456789', // Sample contact number
+            'address' => '123 User Street', // Sample address
+            'post_code' => '54321', // Sample postal code
+            'city' => 'User City', // Sample city
+            'state' => 'User State', // Sample state
+            'ic' => 'B7654322', // Sample IC
+        ]);
+
         // Seed 50 random users using Faker
-        $faker = Faker::create();
-        for ($i = 0; $i < 50; $i++) {
-            User::create([
-                'username' => $faker->userName,
-                'name' => $faker->name,
-                'first_name' => $faker->firstName,
-                'last_name' => $faker->lastName,
-                'bio' => $faker->paragraph,
-                'email' => $faker->unique()->userName . '@student.uthm.edu.my',
-                'password' => bcrypt('password'), // Hash the password
-                'usertype' => 'user',
-                'gender' => $faker->randomElement(['male', 'female']),
-                'date_of_birth' => $faker->date(),
-                'contact_number' => $faker->phoneNumber,
-                'address' => $faker->address,
-                'post_code' => $faker->postcode,
-                'city' => $faker->city,
-                'state' => $faker->state,
-                'ic' => strtoupper($faker->bothify('??######')), // Random string for IC
-            ]);
-        }
+        // $faker = Faker::create();
+        // for ($i = 0; $i < 50; $i++) {
+        //     User::create([
+        //         'username' => $faker->userName,
+        //         'name' => $faker->name,
+        //         'first_name' => $faker->firstName,
+        //         'last_name' => $faker->lastName,
+        //         'bio' => $faker->paragraph,
+        //         'email' => $faker->unique()->userName . '@student.uthm.edu.my',
+        //         'password' => bcrypt('password'), // Hash the password
+        //         'usertype' => 'user',
+        //         'gender' => $faker->randomElement(['male', 'female']),
+        //         'date_of_birth' => $faker->date(),
+        //         'contact_number' => $faker->phoneNumber,
+        //         'address' => $faker->address,
+        //         'post_code' => $faker->postcode,
+        //         'city' => $faker->city,
+        //         'state' => $faker->state,
+        //         'ic' => strtoupper($faker->bothify('??######')), // Random string for IC
+        //     ]);
+        // }
     }
 }

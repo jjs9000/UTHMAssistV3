@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
         // ]);
         
         $this->call([
-            TagSeeder::class,
             UserSeeder::class,
-            TaskPostingSeeder::class,
+            // TagSeeder::class,
+            // TaskPostingSeeder::class,
         ]);
     }
 }
