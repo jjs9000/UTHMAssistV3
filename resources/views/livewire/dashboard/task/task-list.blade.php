@@ -27,6 +27,7 @@
                 <tbody class="bg-white border-2 border-gray-900 divide-y divide-gray-900">
                     <!-- Loop through tasks and display them -->
                     @forelse ($applications as $application)
+                    @if ($application->task->status === 'ongoing')
                     <tr>
                         <td class="py-4 px-6 text-sm text-gray-900">{{ $application->task->title }}</td>
                         <td class="py-4 px-6 text-sm text-gray-900">{{ $application->user->username }}</td>
@@ -47,6 +48,7 @@
                             @endif
                         </td>
                     </tr>
+                    @endif
                     @empty
                     <tr>
                         <td colspan="4" class="py-4 px-6 text-center text-gray-900 font-semibold text-lg">No ongoing tasks</td>
