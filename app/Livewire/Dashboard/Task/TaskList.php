@@ -18,11 +18,11 @@ class TaskList extends Component
     {
         $userId = auth()->id();
 
-        $applications = Application::whereHas('task', function ($query) use ($userId) {
+        $applications = Application::where(function ($query) use ($userId) {
+            $query->where('user_id', $userId)
+                ->where('status', 'accepted');
+        })->orWhereHas('task', function ($query) use ($userId) {
             $query->where('user_id', $userId);
-        })->where(function ($query) use ($userId) {
-            $query->where('status', 'accepted')
-                  ->orWhere('user_id', $userId);
         });
 
         // Apply sorting
