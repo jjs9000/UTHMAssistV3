@@ -60,10 +60,12 @@
                         <td class="py-4 px-6 text-sm text-center">
                             <button wire:click="$dispatch('openModal', { component: 'view-my-application-modal', arguments: { applicationId: {{ $application->id }} } })">
                                 <img src="{{ asset('svg/view-icon.svg') }}" alt="View Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
-                            </button> 
+                            </button>
+                            @if ($application->status === 'accepted') 
                             <button wire:click="$dispatch('openModal', { component: 'user.application.modal.applicant-chat-modal', arguments: { applicationId: {{ $application->id }} } })">
                                 <img src="{{ asset('svg/chat-icon-filled.svg') }}" alt="Chat Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
-                            </button>                                                     
+                            </button>
+                            @endif                                                     
                         </td>
                     </tr>
                     @endforeach
