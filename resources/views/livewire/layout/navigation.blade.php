@@ -81,22 +81,24 @@ new class extends Component
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <!-- Messages Link -->
-                <x-nav-link :href="route('messages')" :active="request()->routeIs('messages')">
-                    <div class="relative">
-                        <img src="{{ asset('svg/email-icon.svg') }}" alt="Email Icon" class="w-6 h-6">
-                        <span class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center unread_notification">
-                            {{ auth()->user()->getMessageCount() }}
-                        </span>
-                    </div>
-                </x-nav-link>
+                @if (Auth::check() && Auth::user()->usertype === 'user')
+                    <x-nav-link :href="route('messages')" :active="request()->routeIs('messages')">
+                        <div class="relative">
+                            <img src="{{ asset('svg/email-icon.svg') }}" alt="Email Icon" class="w-6 h-6">
+                            <span class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center unread_notification">
+                                {{ auth()->user()->getMessageCount() }}
+                            </span>
+                        </div>
+                    </x-nav-link>
+                @endif
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700  focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <div x-data="{{ json_encode(['name' => auth()->user()->first_name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 01-1.414 0l-4-4a1 1 010-1.414z" clip-rule="evenodd" />
                                 </svg>
                             </div>
                         </button>
@@ -143,7 +145,7 @@ new class extends Component
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400  hover:text-gray-500  hover:bg-gray-100  focus:outline-none focus:bg-gray-100  focus:text-gray-500  transition duration-150 ease-in-out">
+                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -156,15 +158,44 @@ new class extends Component
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')" wire:navigate>
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+            @if (Auth::check() && Auth::user()->usertype === 'user')
+                <x-responsive-nav-link :href="route('task-posting.index')" :active="request()->routeIs('task-posting.index')" wire:navigate>
+                    {{ __('Home') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('task-posting-page')" :active="request()->routeIs('task-posting-page')" wire:navigate>
+                    {{ __('Task') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('application')" :active="request()->routeIs('application')" wire:navigate>
+                    {{ __('Application') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('messages')" :active="request()->routeIs('messages')" wire:navigate>
+                    {{ __('Messages') }}
+                </x-responsive-nav-link>
+            @endif
+
+            @if (Auth::check() && Auth::user()->usertype === 'admin')
+                <x-responsive-nav-link :href="route('admin-user')" :active="request()->routeIs('admin-user')" wire:navigate>
+                    {{ __('User') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.taskpost.index')" :active="request()->routeIs('admin.taskpost.index')" wire:navigate>
+                    {{ __('Task Post') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.application.index')" :active="request()->routeIs('admin.application.index')" wire:navigate>
+                    {{ __('Application') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.tag.index')" :active="request()->routeIs('admin.tag.index')" wire:navigate>
+                    {{ __('Tag') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.rating.index')" :active="request()->routeIs('admin.rating.index')" wire:navigate>
+                    {{ __('Feedback & Rating') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200 ">
+        <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800 " x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
+                <div class="font-medium text-base text-gray-800" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
                 <div class="font-medium text-sm text-gray-500">{{ auth()->user()->email }}</div>
             </div>
 

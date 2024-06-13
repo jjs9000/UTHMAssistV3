@@ -1,4 +1,4 @@
-<div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+<div class="max-w-4xl mx-auto p-6">
     <!-- User Profile Header -->
     <div class="flex items-center mb-6">
         @if ($user->gender === 'male')
@@ -10,7 +10,7 @@
     </div>
 
     <!-- User Details Card -->
-    <div class="mb-4 p-4 bg-gray-100 rounded-lg shadow-md">
+    <div class="mb-4 p-4 bg-white rounded-lg shadow-md">
         <!-- Username -->
         <div class="flex items-center mb-2">
             <img src="{{ asset('svg/user-icon-filled.svg') }}" alt="User Icon" class="w-6 h-6 mr-2">
@@ -43,7 +43,7 @@
     </div>
 
     <!-- Rating Card -->
-    <div class="mb-4 p-4 bg-gray-100 rounded-lg shadow-md text-center">
+    <div class="mb-4 p-4 bg-white rounded-lg shadow-md text-center">
         <label class="block font-medium text-gray-700 mb-2">Rating:</label>
         <div class="flex justify-center items-center text-4xl text-yellow-500">
             @for ($i = 0; $i < round($averageRating); $i++)
@@ -57,7 +57,7 @@
     </div>    
 
     <!-- Feedback Card -->
-    <div class="mb-4 p-4 bg-gray-100 rounded-lg shadow-md">
+    <div class="mb-4 p-4 bg-white rounded-lg shadow-md">
         <h2 class="text-xl font-semibold mb-2">Feedback:</h2>
         @if ($feedbacks->isEmpty())
             <p>No feedback available.</p>
