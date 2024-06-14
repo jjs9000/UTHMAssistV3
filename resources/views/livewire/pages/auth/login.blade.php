@@ -28,7 +28,8 @@ new #[Layout('layouts.guest')] class extends Component
             if ($authenticatedUser && $authenticatedUser->usertype == 'admin') {
                 $this->redirect('admin/dashboard');
             } else {
-                $this->redirect(route('task-posting.index'));
+            // Redirect to the intended route or to HOME by default
+            $this->redirect(RouteServiceProvider::HOME);
             }
         } catch (ValidationException $e) {
             $this->addError('form.identity', $e->getMessage());
