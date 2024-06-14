@@ -1,4 +1,4 @@
-<div>
+<div class="max-w-7xl mx-auto px-4">
     <!-- Success message -->
     @if (session()->has('success'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
@@ -13,22 +13,22 @@
         </div>
     @endif
 
-    <div class="flex">
-        <div class="w-1/2 p-4">
-                @if ($postedTasks->isEmpty())
-                    <div class="flex flex-col justify-center items-center p-6 text-center">
-                        <p class="text-2xl font-semibold py-4">Post a task!</p>
-                        <div class="mx-auto w-1/2">
-                            <img src="{{ asset('svg/illustration/task-post-page.svg') }}" alt="Job Illustration" class="w-full h-auto">
-                        </div>
+    <div class="flex flex-col lg:flex-row">
+        <div class="w-full lg:w-1/2 p-4">
+            @if ($postedTasks->isEmpty())
+                <div class="flex flex-col justify-center items-center p-6 text-center">
+                    <p class="text-2xl font-semibold py-4">Post a task!</p>
+                    <div class="mx-auto w-full sm:w-1/2">
+                        <img src="{{ asset('svg/illustration/task-post-page.svg') }}" alt="Job Illustration" class="w-full h-auto">
                     </div>
-                @else
+                </div>
+            @else
                 <div class="grid grid-cols-1 gap-4">
                     @foreach ($postedTasks as $task)
-                        <div class="bg-white border rounded-lg shadow-md">
-                            <div class="p-4 relative">
+                        <div class="bg-white border rounded-lg shadow-md p-4">
+                            <div class="relative">
                                 <h3 class="text-lg font-semibold">{{ $task->title }}</h3>
-                                <p class="text-gray-700 absolute top-4 right-4"><strong>Posted</strong> {{ $task->created_at->diffForHumans() }}</p>
+                                <p class="text-gray-700 absolute top-4 right-4">{{ $task->shortDiffForHumans }}</p>
                                 <div class="flex items-center mt-2">
                                     <p class="px-2 py-1 rounded text-md font-semibold text-white inline-block 
                                     @if($task->status == 'available') bg-green-500
@@ -37,10 +37,9 @@
                                     @else bg-red-500
                                     @endif">
                                     {{ $task->status == 'available' ? 'Available' : ($task->status == 'ongoing' ? 'Ongoing' : ($task->status == 'completed' ? 'Completed' : 'Not Available')) }}
-                                </p>                                
+                                    </p>
                                 </div>
-                                <div class="flex items-center mt-2">                                 
-                                    <!-- Calculate time remaining until the deadline -->
+                                <div class="flex items-center mt-2">
                                     @if ($task->deadline)
                                         @php
                                             $expirationDate = \Carbon\Carbon::parse($task->deadline);
@@ -53,7 +52,7 @@
                                         <p class="text-md"><strong>Expired in:</strong> {{ $expiredIn }}</p>
                                     @endif
                                 </div>
-                            </div>                                
+                            </div>
                             <div class="flex justify-end space-x-4 p-2">
                                 <div>
                                     <button wire:click="$dispatch('openModal', { component: 'view-task-modal', arguments: { taskId: {{ $task->id }} }})">
@@ -61,37 +60,37 @@
                                     </button>
                                 </div>
                                 @if ($task->status !== 'ongoing' && $task->status !== 'completed')
-                                <div>
-                                    <button wire:click="editTask({{ $task->id }})">
-                                        <img src="{{ asset('svg/edit-icon.svg') }}" alt="Edit Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
-                                    </button>
-                                </div>
-                                <div>
-                                    <button wire:click="$dispatch('openModal', { component: 'delete-task-confirmation-modal', arguments: { taskId: {{ $task->id }} }})">
-                                        <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
-                                    </button>
-                                </div>
+                                    <div>
+                                        <button wire:click="editTask({{ $task->id }})">
+                                            <img src="{{ asset('svg/edit-icon.svg') }}" alt="Edit Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button wire:click="$dispatch('openModal', { component: 'delete-task-confirmation-modal', arguments: { taskId: {{ $task->id }} }})">
+                                            <img src="{{ asset('svg/delete-icon.svg') }}" alt="Delete Icon" class="w-6 h-6 hover:cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
+                                        </button>
+                                    </div>
                                 @endif
-                            </div>                            
+                            </div>
                         </div>
                     @endforeach
-                </div>                
-                    <div class="mt-2 mb-12 p-2">
-                        {{ $postedTasks->links() }}
-                    </div>
-                @endif
+                </div>
+                <div class="mt-2 mb-12 p-2">
+                    {{ $postedTasks->links() }}
+                </div>
+            @endif
         </div>
-        
-        <div class="w-1/2 p-4">
+
+        <div class="w-full lg:w-1/2 p-4">
             <div class="bg-white border shadow-md rounded-lg p-6">
                 <div class="flex flex-col">
                     @if ($editTaskId)
                         {{-- Update form --}}
                         <livewire:task-posting-create :task="$editTaskDetails" :key="'edit-' . $editTaskId" />
                         <div class="flex items-center justify-end mt-4" wire:click="cancelEdit">
-                            <x-danger-button class="bg-gray-500 text-white rounded hover:bg-gray-600">
+                            <button class="w-full bg-[#D22B2B] border-2 text-white py-2 px-4 md:px-6 rounded-lg text-base md:text-lg font-semibold hover:cursor-pointer hover:bg-red-500">
                                 Cancel
-                            </x-danger-button>
+                            </button>
                         </div>
                     @else
                         {{-- Task creation form --}}
@@ -101,6 +100,4 @@
             </div>
         </div>
     </div>
-    
-    
 </div>
