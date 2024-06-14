@@ -1,24 +1,24 @@
-<div class="max-w px-4">
+<div class="max-w-md mx-auto px-0">
     <h2 class="text-3xl text-center font-semibold mb-6">Task Posting Form</h2>
 
-    <form wire:submit.prevent="createTask" class="rounded px-8 pt-6 pb-8">
+    <form wire:submit.prevent="createTask" class="rounded px-0 pt-6 pb-0">
         @csrf
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="mb-4">
-                <x-input-label for="title" :value="__('Title')" />
-                <x-text-input wire:model="title" id="title" class="mt-1 block w-full" type="text" name="title"/>
-            </div>
-            <div class="mb-4">
-                <x-input-label for="location" :value="__('Location')" />
-                <select wire:model="location" id="location" name="location" class="mt-1 block border-gray-300 w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                    <option value="">Select Location</option>
-                    <option value="UTHM Parit Raja">UTHM Parit Raja</option>
-                    <option value="UTHM Pagoh">UTHM Pagoh</option>
-                </select>
-                <x-input-error :messages="$errors->get('location')" class="text-red-500" />
-            </div>
+        <div class="mb-4">
+            <x-input-label for="title" :value="__('Title')" />
+            <x-text-input wire:model="title" id="title" class="mt-1 block w-full" type="text" name="title"/>
         </div>
+        
+        <div class="mb-4">
+            <x-input-label for="location" :value="__('Location')" />
+            <select wire:model="location" id="location" name="location" class="mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <option value="">Select Location</option>
+                <option value="UTHM Parit Raja">UTHM Parit Raja</option>
+                <option value="UTHM Pagoh">UTHM Pagoh</option>
+            </select>
+            <x-input-error :messages="$errors->get('location')" class="text-red-500" />
+        </div>
+
         <div class="mb-4">
             <x-input-label for="description" :value="__('Description')" />
             <x-textarea-input wire:model="description" id="description" class="mt-1 block w-full" name="description" />
@@ -29,7 +29,7 @@
             <x-textarea-input wire:model="requirement" id="requirement" class="mt-1 block w-full" name="requirement" />
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="mb-4">
                 <x-input-label for="availability" :value="__('Availability')" />
                 <x-text-input wire:model="availability" id="availability" class="block mt-1 w-full" type="text" name="availability" />
@@ -48,7 +48,7 @@
             <x-textarea-input wire:model="location_detail" id="location_detail" class="mt-1 block w-full" name="location_detail" />
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="mb-4">
                 <x-input-label for="deadline" :value="__('Deadline')" />
                 <x-text-input wire:model="deadline" id="deadline" class="mt-1 block w-full" type="date" name="deadline" />
@@ -56,7 +56,7 @@
 
             <div class="mb-4">
                 <x-input-label for="status" :value="__('Status')" />
-                <select wire:model="status" id="status" name="status" class="mt-1 block border-gray-300 w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <select wire:model="status" id="status" name="status" class="mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                     <option value="">Select Status</option>
                     <option value="available">Available</option>
                     <option value="not_available">Not Available</option>
@@ -76,9 +76,9 @@
         </div>
 
         <div class="flex items-center justify-end">
-            <x-primary-button class="bg-gray-500 text-white rounded hover:bg-gray-600">
-                {{ __('Submit') }}
-            </x-primary-button>
+            <button class="w-full bg-gray-900 text-white py-2 px-4 md:px-6 rounded-lg text-base md:text-lg font-semibold hover:cursor-pointer hover:bg-gray-700">
+                Submit
+            </button>
         </div>
     </form>
 </div>
