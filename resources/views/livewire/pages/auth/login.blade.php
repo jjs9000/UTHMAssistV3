@@ -37,7 +37,7 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
+{{-- <div>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -94,5 +94,69 @@ new #[Layout('layouts.guest')] class extends Component
                 {{ __('Create an account') }}
             </a>
         </div>
+    </form>
+</div> --}}
+
+<div>
+    <!-- Session Status -->
+    <x-auth-session-status class="mb-4" :status="session('status')" />
+
+    <form wire:submit="login">
+    <div class="py-16">
+        <div class="bg-white flex rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
+            <div class="hidden lg:block lg:w-1/2 bg-cover">
+                <img src="{{ asset('svg/illustration/login-illustration.svg') }}" alt="Illustration" class="w-full">
+            </div>
+            <div class="w-full p-8 lg:w-1/2">
+                <h2 class="text-4xl font-extrabold text-gray-900 text-center">UTHMAssist</h2>
+                <p class="text-sm text-gray-600 text-center">Login to your account</p>
+                <div class="mt-4 flex items-center justify-between">
+                    <span class="border-b w-full lg:w-full"></span>
+                </div>
+                <!-- Email Address/ Username -->
+                <div class="mt-4">
+                    <label for="identity" class="block text-gray-700 text-sm font-bold mb-2">Email or Username</label>
+                    <x-text-input wire:model="form.identity" id="identity" class="block mt-1 w-full" type="text" name="identity" autofocus />
+                    @error('form.identity')
+                        <div class="text-red-500 mt-2 text-sm">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mt-4">
+                    <div class="flex justify-between">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                        @if (Route::has('password.request'))
+                            <a class="text-xs text-gray-500" href="{{ route('password.request') }}" wire:navigate>
+                                {{ __('Forgot your password?') }}
+                            </a>
+                        @endif
+                    </div>
+                    <x-text-input wire:model="form.password" id="password" class="block mt-1 w-full"
+                                    type="password"
+                                    name="password"
+                                    autocomplete="current-password" />
+                    @error('form.password')
+                        <div class="text-red-500 mt-2 text-sm">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="block mt-4">
+                    <label for="remember" class="inline-flex items-center">
+                        <input wire:model="form.remember" id="remember" type="checkbox" class="rounded  border-gray-300  text-indigo-600 shadow-sm focus:ring-indigo-500  " name="remember">
+                        <span class="ms-2 text-sm text-gray-600 ">{{ __('Remember me') }}</span>
+                    </label>
+                </div>
+                <div class="mt-8">
+                    <button class="bg-gray-900 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">Login</button>
+                </div>
+                <div class="mt-4 flex items-center justify-center">
+                    <span class="text-sm text-gray-600">{{ __('or') }}</span>
+                </div>
+                <div class="mt-2 flex items-center justify-center">
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}" wire:navigate>
+                        {{ __('Create an account') }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
     </form>
 </div>
