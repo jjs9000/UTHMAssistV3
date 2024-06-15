@@ -168,9 +168,7 @@ new class extends Component
                 <x-responsive-nav-link :href="route('application')" :active="request()->routeIs('application')" wire:navigate>
                     {{ __('Application') }}
                 </x-responsive-nav-link>
-                {{-- <x-responsive-nav-link :href="route('messages')" :active="request()->routeIs('messages')" wire:navigate>
-                    {{ __('Messages') }}
-                </x-responsive-nav-link> --}}
+
                 <a href="{{ route('messages') }}" class="block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-gray-600 border-gray-300 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out">
                     {{ __('Messages') }}
                 </a>
@@ -203,8 +201,16 @@ new class extends Component
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile')" wire:navigate>
+                <x-responsive-nav-link :href="route('bookmark.index')" wire:navigate>
+                    {{ __('Saved Task') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('dashboard.index')" wire:navigate>
                     {{ __('Profile') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('profile')" wire:navigate>
+                    {{ __('Setting') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
