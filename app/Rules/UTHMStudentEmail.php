@@ -15,8 +15,8 @@ class UTHMStudentEmail implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (!str_ends_with($value, '@student.uthm.edu.my')) {
-            $fail('The :attribute must be a valid UTHM student email address.');
+        if (!str_ends_with($value, '@student.uthm.edu.my') && !str_ends_with($value, '@uthm.edu.my')) {
+            $fail('The :attribute must be a valid UTHM student or staff email address.');
         }
     }
 }
