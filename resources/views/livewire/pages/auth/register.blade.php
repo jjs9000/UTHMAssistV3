@@ -301,10 +301,21 @@ new #[Layout('layouts.guest')] class extends Component
                         <div class="text-center mb-10">
                             <h1 class="font-bold text-3xl text-gray-900">REGISTER</h1>
                             <p>Enter your information to register</p>
+                            <div class="mt-4 mb-4 flex items-center justify-between">
+                                <span class="border-b w-1/2 lg:w-1/2"></span>
+                                <p class="px-3">or</p>
+                                <span class="border-b w-1/2 lg:w-1/2"></span>
+                            </div>
+                            <div class="flex flex-row justify-center items-center">
+                            <p>Already have an account?</p>
+                            <a href="{{ route('login') }}" class="underline text-sm text-gray-600 hover:text-gray-900 ml-2">
+                                Log in
+                            </a>
+                            </div>
                         </div>
                         <div>
                             <!-- Step 1: Personal Information -->
-                            <div x-show="step === 1">
+                            <div x-show="step === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div>
                                         <x-input-label for="first_name" :value="__('First Name')" />
@@ -342,7 +353,7 @@ new #[Layout('layouts.guest')] class extends Component
                             </div>
 
                             <!-- Step 2: Additional Information -->
-                            <div x-show="step === 2">
+                            <div x-show="step === 2" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
                                     <div>
                                         <x-input-label for="ic" :value="__('IC')" />
@@ -381,7 +392,7 @@ new #[Layout('layouts.guest')] class extends Component
                             </div>
 
                             <!-- Step 3: Address Information -->
-                            <div x-show="step === 3">
+                            <div x-show="step === 3" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                                     <div>
                                         <x-input-label for="post_code" :value="__('Post Code')" />
@@ -412,7 +423,7 @@ new #[Layout('layouts.guest')] class extends Component
                             </div>
 
                             <!-- Step 4: Password Information -->
-                            <div x-show="step === 4">
+                            <div x-show="step === 4" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                                     <div>
                                         <x-input-label for="password" :value="__('Password')" />
