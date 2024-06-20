@@ -55,26 +55,26 @@ class UserSeeder extends Seeder
         ]);
 
         // Seed 50 random users using Faker
-        $faker = Faker::create();
-        for ($i = 0; $i < 50; $i++) {
-            User::create([
-                'username' => $faker->userName,
-                'name' => $faker->name,
-                'first_name' => $faker->firstName,
-                'last_name' => $faker->lastName,
-                'bio' => $faker->paragraph,
-                'email' => $faker->unique()->userName . '@student.uthm.edu.my',
-                'password' => bcrypt('password'), // Hash the password
-                'usertype' => 'user',
-                'gender' => $faker->randomElement(['male', 'female']),
-                'date_of_birth' => $faker->date(),
-                'contact_number' => $faker->phoneNumber,
-                'address' => $faker->address,
-                'post_code' => $faker->postcode,
-                'city' => $faker->city,
-                'state' => $faker->state,
-                'ic' => strtoupper($faker->bothify('??######')), // Random string for IC
-            ]);
-        }
+        // $faker = Faker::create();
+        // for ($i = 0; $i < 50; $i++) {
+        //     User::create([
+        //         'username' => $faker->userName,
+        //         'name' => $faker->name,
+        //         'first_name' => $faker->firstName,
+        //         'last_name' => $faker->lastName,
+        //         'bio' => $faker->paragraph,
+        //         'email' => $faker->unique()->userName . '@student.uthm.edu.my',
+        //         'password' => bcrypt('password'), // Hash the password
+        //         'usertype' => 'user',
+        //         'gender' => $faker->randomElement(['male', 'female']),
+        //         'date_of_birth' => $faker->date(),
+        //         'contact_number' => $faker->phoneNumber,
+        //         'address' => $faker->address,
+        //         'post_code' => $faker->postcode,
+        //         'city' => $faker->city,
+        //         'state' => $faker->state,
+        //         'ic' => strtoupper($faker->bothify('??######')), // Random string for IC
+        //     ]);
+        // }
     }
 }
