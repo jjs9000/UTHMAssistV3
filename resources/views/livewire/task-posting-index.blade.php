@@ -48,7 +48,7 @@
                                 </button>
                                 <!-- Task list card content -->
                                 <div wire:click="showTask({{ $taskPosting->id }})" class="bg-white flex flex-col gap-0 ml-40 p-4 rounded-lg cursor-pointer hover:ring ring-gray-900 shadow-md">
-                                        <h2 class="text-xl font-semibold">{{ $taskPosting->title }}</h2>
+                                        <h2 class="text-xl font-semibold mb-2">{{ $taskPosting->title }}</h2>
                                         <div class="flex items-center">
                                             <img src="{{ asset('svg/location-icon.svg') }}" alt="Location Icon" class="h-6 w-6 mr-2">
                                             <p class="text-gray-700">{{ $taskPosting->location }}</p>
@@ -61,7 +61,7 @@
                                             <img src="{{ asset('svg/user-icon.svg') }}" alt="User Icon" class="h-6 w-6 mr-2">
                                             <p class="text-gray-700">{{ $taskPosting->user->username }}</p>
                                         </div>
-                                        <div class="flex items-center">
+                                        <div class="flex items-center mt-2">
                                             @foreach ($taskPosting->tags as $tag)
                                                 <span class="inline-block bg-gray-900 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2 mb-2">{{ $tag->name }}</span>
                                             @endforeach
