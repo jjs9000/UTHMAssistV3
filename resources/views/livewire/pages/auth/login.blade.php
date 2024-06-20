@@ -98,11 +98,11 @@ new #[Layout('layouts.guest')] class extends Component
 </div> --}}
 
 <div>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
     <form wire:submit="login">
     <div class="py-16">
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4 text-center" :status="session('status')" />
+        
         <div class="bg-white flex rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
             <div class="hidden lg:block lg:w-1/2 bg-cover">
                 <img src="{{ asset('svg/illustration/login-illustration.svg') }}" alt="Illustration" class="w-full">
