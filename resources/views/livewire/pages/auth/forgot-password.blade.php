@@ -61,14 +61,14 @@ new #[Layout('layouts.guest')] class extends Component
 </div> --}}
 
 <div>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
+    
     <form wire:submit="sendPasswordResetLink">
-    <div id="content" role="main" class="w-full  max-w-md mx-auto p-6">
-        <div class="mt-7 bg-white  rounded-xl shadow-lg border-2 border-gray-900">
-        <div class="p-4 sm:p-7">
-            <div class="text-center">
+        <div id="content" role="main" class="w-full  max-w-md mx-auto p-6">
+            <div class="mt-7 bg-white  rounded-xl shadow-lg border-2 border-gray-900">
+                <div class="p-4 sm:p-7">
+                    <div class="text-center">
+                <!-- Session Status -->
+                <x-auth-session-status class="mb-4" :status="session('status')" />
             <h1 class="block text-2xl font-bold text-gray-800">Forgot password?</h1>
             <div class="mb-4 text-sm text-gray-600 ">
                 {{ __('Provide your email and we will email you a password reset link') }}
