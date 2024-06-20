@@ -75,7 +75,7 @@
                     <img src="{{ asset('svg/illustration/landing-page-5.svg') }}" alt="Farris Hirzan" class="w-24 h-24 md:w-32 md:h-32 rounded-full mb-4 md:mb-0 mr-0 md:mr-6">
                     <div class="text-left">
                         <h3 class="text-xl md:text-2xl font-semibold mb-2">Farris Hirzan</h3>
-                        <p class="text-sm md:text-base text-gray-700 mb-4">I am a student at Universiti Tun Hussein Onn Malaysia (UTHM) and the developer of UTHMAssist. For my Final Year Project, I created this system to help strengthen the communities of UTHM Students by providing opportunities among them.</p>
+                        <p class="text-sm md:text-base text-gray-700 mb-4">I am an undergraduate student pursuing Bachelor's Degree in Information Technology at Universiti Tun Hussein Onn Malaysia (UTHM) and the developer of UTHMAssist. For my Final Year Project, I created this system to help strengthen the communities of UTHM Students by providing opportunities among them.</p>
                         <p class="text-sm md:text-base text-gray-700">UTHMAssist was developed using <strong>Laravel, Livewire, TailwindCSS and MySQL.</strong></p>
                     </div>
                 </div>
