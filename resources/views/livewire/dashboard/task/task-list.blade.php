@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        @if ($applications->isEmpty())
+        @if ($noApplications)
         <div class="p-6 text-center">
             <p class="text-lg font-semibold text-gray-700">No ongoing tasks</p>
         </div>

@@ -25,6 +25,11 @@ class TaskList extends Component
             $query->where('user_id', $userId);
         });
 
+        // Check if there are any applications with the task status 'ongoing'
+        $noApplications = Application::whereHas('task', function ($query) {
+            $query->where('status', 'ongoing');
+        })->count() == 0;
+
         // Apply sorting
         if ($this->sortBy === 'desc') {
             $applications->orderBy('created_at', 'desc');
@@ -35,7 +40,8 @@ class TaskList extends Component
         $applications = $applications->paginate(5);
 
         return view('livewire.dashboard.task.task-list', [
-            'applications' => $applications, 
+            'applications' => $applications,
+            'noApplications' => $noApplications,
         ]);
     }
 }
