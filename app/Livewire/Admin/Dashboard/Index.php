@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Dashboard;
 
 use App\Models\Application;
+use App\Models\Feedback;
 use App\Models\Tag;
 use App\Models\TaskPosting;
 use App\Models\User;
@@ -25,7 +26,7 @@ class Index extends Component
         $totalTaskPostings = TaskPosting::count();
 
         // Hardcoded value for total feedback & reviews (replace with actual logic)
-        $totalFeedbackReviews = 100;
+        $totalFeedbackReviews = Feedback::count();
 
         return view('livewire.admin.dashboard.index',[
             'totalUsers' => $totalUsers,
