@@ -69,7 +69,7 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
+{{-- <div>
     <form wire:submit="resetPassword">
         <!-- Email Address -->
         <div>
@@ -100,6 +100,47 @@ new #[Layout('layouts.guest')] class extends Component
             <x-primary-button>
                 {{ __('Reset Password') }}
             </x-primary-button>
+        </div>
+    </form>
+</div> --}}
+
+<div>
+    <form wire:submit="resetPassword">
+        <div id="content" role="main" class="w-full max-w-md mx-auto p-6">
+            <div class="mt-7 bg-white rounded-xl shadow-lg border-2 border-gray-900">
+                <div class="p-4 sm:p-7">
+                    <div class="text-center">
+                        <h1 class="block text-2xl font-bold text-gray-800">Reset password</h1>
+                    </div>
+                    <div class="mt-5">
+                        <div class="grid gap-y-4">
+                            <!-- Email Address -->
+                            <div>
+                                <x-input-label for="email" :value="__('Email')" />
+                                <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" autofocus autocomplete="username" />
+                            </div>
+                            <!-- Password -->
+                            <div class="mt-4">
+                                <x-input-label for="password" :value="__('Password')" />
+                                <x-text-input wire:model="password" id="password" class="block mt-1 w-full" type="password" name="password" autocomplete="new-password" />
+                            </div>
+                            <!-- Confirm Password -->
+                            <div class="mt-4">
+                                <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                                <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
+                                              type="password"
+                                              name="password_confirmation" autocomplete="new-password" />
+                                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                            </div>
+                            <div class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-gray-900 text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm">
+                                <button>
+                                    {{ __('Reset Password') }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 </div>
