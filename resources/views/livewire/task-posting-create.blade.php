@@ -51,7 +51,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="mb-4">
                 <x-input-label for="deadline" :value="__('Deadline')" />
-                <x-text-input wire:model="deadline" id="deadline" class="mt-1 block w-full" type="date" name="deadline" />
+                <x-text-input wire:model="deadline" id="deadline" class="mt-1 block w-full" type="date" name="deadline" onkeydown="return false" />
             </div>
 
             <div class="mb-4">

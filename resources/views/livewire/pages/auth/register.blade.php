@@ -98,7 +98,6 @@ new #[Layout('layouts.guest')] class extends Component
             'last_name' => 'required|string|max:25',
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class, new UTHMStudentEmail],
             'username' => ['required', 'string', 'max:15', 'unique:'.User::class],
-            'contact_number' => 'required|string|max:12',
         ]);
 
         $this->currentStep = 2;
@@ -107,10 +106,10 @@ new #[Layout('layouts.guest')] class extends Component
     public function validateStep2()
     {
         $this->validate([
+            'contact_number' => 'required|string|max:12',
             'ic' => 'required|string|max:12',
             'date_of_birth' => 'required|date',
             'gender' => ['required', 'string', Rule::in(['male', 'female'])],
-            'address' => 'required|string|max:255',
         ]);
 
         $this->currentStep = 3;
@@ -119,9 +118,10 @@ new #[Layout('layouts.guest')] class extends Component
     public function validateStep3()
     {
         $this->validate([
+            'address' => 'required|string|max:255',
             'post_code' => 'required|string|max:20',
-            'state' => 'required|string|max:25',
             'city' => 'required|string|max:50',
+            'state' => 'required|string|max:25',
         ]);
 
         $this->currentStep = 4;
@@ -182,8 +182,8 @@ new #[Layout('layouts.guest')] class extends Component
 
         $this->redirect(RouteServiceProvider::HOME, navigate: true);
     }
-
-}; ?>
+};
+?>
 
 {{-- <div>
     <form wire:submit.prevent="register" enctype="multipart/form-data">
@@ -307,16 +307,16 @@ new #[Layout('layouts.guest')] class extends Component
                                 <span class="border-b w-1/2 lg:w-1/2"></span>
                             </div>
                             <div class="flex flex-row justify-center items-center">
-                            <p>Already have an account?</p>
-                            <a href="{{ route('login') }}" class="underline text-sm text-gray-600 hover:text-gray-900 ml-2">
-                                Log in
-                            </a>
+                                <p>Already have an account?</p>
+                                <a href="{{ route('login') }}" class="underline text-sm text-gray-600 hover:text-gray-900 ml-2">
+                                    Log in
+                                </a>
                             </div>
                         </div>
                         <div>
                             <!-- Step 1: Personal Information -->
                             <div x-show="step === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <x-input-label for="first_name" :value="__('First Name')" />
                                         <x-text-input wire:model.defer="first_name" id="first_name" class="block mt-1 w-full" type="text" name="first_name" autofocus autocomplete="first_name" />
@@ -326,22 +326,17 @@ new #[Layout('layouts.guest')] class extends Component
                                         <x-input-label for="last_name" :value="__('Last Name')" />
                                         <x-text-input wire:model.defer="last_name" id="last_name" class="block mt-1 w-full" type="text" name="last_name" autofocus autocomplete="last_name" />
                                     </div>
-
-                                    <div>
-                                        <x-input-label for="username" :value="__('Username')" />
-                                        <x-text-input wire:model.defer="username" id="username" class="block mt-1 w-full" type="text" name="username" autocomplete="username" />
-                                    </div>
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                                     <div>
-                                        <x-input-label for="email" :value="__('Email')" />
-                                        <x-text-input wire:model.defer="email" id="email" class="block mt-1 w-full" type="email" name="email" />
+                                        <x-input-label for="username" :value="__('Username')" />
+                                        <x-text-input wire:model.defer="username" id="username" class="block mt-1 w-full" type="text" name="username" autocomplete="username" />
                                     </div>
 
                                     <div>
-                                        <x-input-label for="contact_number" :value="__('Contact Number')" />
-                                        <x-text-input wire:model.defer="contact_number" id="contact_number" class="block mt-1 w-full" type="tel" name="contact_number" autocomplete="contact_number" />
+                                        <x-input-label for="email" :value="__('Email')" />
+                                        <x-text-input wire:model.defer="email" id="email" class="block mt-1 w-full" type="email" name="email" />
                                     </div>
                                 </div>
 
@@ -354,15 +349,22 @@ new #[Layout('layouts.guest')] class extends Component
 
                             <!-- Step 2: Additional Information -->
                             <div x-show="step === 2" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                    <div>
+                                        <x-input-label for="contact_number" :value="__('Contact Number')" />
+                                        <x-text-input wire:model.defer="contact_number" id="contact_number" class="block mt-1 w-full" type="tel" name="contact_number" autocomplete="contact_number" />
+                                    </div>
+
                                     <div>
                                         <x-input-label for="ic" :value="__('IC')" />
                                         <x-text-input wire:model.defer="ic" id="ic" class="block mt-1 w-full" type="text" name="ic" autocomplete="ic" />
                                     </div>
+                                </div>
 
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                                     <div>
                                         <x-input-label for="date_of_birth" :value="__('Date of Birth')" />
-                                        <x-text-input wire:model.defer="date_of_birth" id="date_of_birth" class="block mt-1 w-full" type="date" name="date_of_birth" autocomplete="date_of_birth" />
+                                        <x-text-input wire:model.defer="date_of_birth" id="date_of_birth" class="block mt-1 w-full" type="date" name="date_of_birth" autocomplete="date_of_birth" onkeydown="return false" />
                                     </div>
 
                                     <div class="mb-4">
@@ -374,11 +376,6 @@ new #[Layout('layouts.guest')] class extends Component
                                         </select>
                                         <x-input-error :messages="$errors->get('gender')" class="text-red-500" />
                                     </div>
-                                </div>
-
-                                <div class="mt-4">
-                                    <x-input-label for="address" :value="__('Address')" />
-                                    <x-textarea-input wire:model.defer="address" id="address" class="block mt-1 w-full" name="address" autocomplete="address">{{ old('address') }}</x-textarea-input>
                                 </div>
 
                                 <div class="flex items-center justify-between mt-4">
@@ -393,6 +390,13 @@ new #[Layout('layouts.guest')] class extends Component
 
                             <!-- Step 3: Address Information -->
                             <div x-show="step === 3" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                                <div class="grid grid-cols-1 gap-4 mt-4">
+                                    <div>
+                                        <x-input-label for="address" :value="__('Address')" />
+                                        <x-textarea-input wire:model.defer="address" id="address" class="block mt-1 w-full" name="address" autocomplete="address">{{ old('address') }}</x-textarea-input>
+                                    </div>
+                                </div>
+
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                                     <div>
                                         <x-input-label for="post_code" :value="__('Post Code')" />
@@ -400,15 +404,13 @@ new #[Layout('layouts.guest')] class extends Component
                                     </div>
 
                                     <div>
-                                        <x-input-label for="state" :value="__('State')" />
-                                        <x-text-input wire:model.defer="state" id="state" class="block mt-1 w-full" type="text" name="state" autocomplete="state" />
-                                    </div>
-                                </div>
-
-                                <div class="grid grid-cols-1 gap-4 mt-4">
-                                    <div>
                                         <x-input-label for="city" :value="__('City')" />
                                         <x-text-input wire:model.defer="city" id="city" class="block mt-1 w-full" type="text" name="city" autocomplete="city" />
+                                    </div>
+
+                                    <div>
+                                        <x-input-label for="state" :value="__('State')" />
+                                        <x-text-input wire:model.defer="state" id="state" class="block mt-1 w-full" type="text" name="state" autocomplete="state" />
                                     </div>
                                 </div>
 
