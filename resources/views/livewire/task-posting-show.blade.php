@@ -78,4 +78,21 @@
         <h2 class="text-xl font-semibold mb-2">Requirement</h2>
         <p class="text-gray-700">{{ $task->requirement }}</p>
     </div>
+
+    <!-- Posted By Card -->
+    <div class="bg-gray-100 p-4 rounded-lg shadow mt-4 relative">
+        <h2 class="text-lg font-semibold mb-2">Posted By</h2>
+        <div class="flex items-center mb-4 space-x-4">
+            <!-- Profile Picture -->
+            @if($task->user->gender === 'male')
+                <img src="{{ asset('svg/avatar/male.svg') }}" alt="Male Icon" class="h-24 w-24 mr-2">
+            @else
+                <img src="{{ asset('svg/avatar/female.svg') }}" alt="Female Icon" class="h-24 w-24 mr-2">
+            @endif
+            <p class="text-gray-700 font-semibold text-xl">{{ $task->user->username }}</p>
+        </div>
+
+        <!-- View Profile Button -->
+        <a href="{{ route('user.profile', ['id' => $task->user->id]) }}" target="_blank" class="absolute bottom-4 right-4 text-gray-900 px-4 py-2 rounded-lg hover:ring ring-offset-2 ring-gray-900 transition duration-300">View Profile</a>
+    </div>
 </div>
