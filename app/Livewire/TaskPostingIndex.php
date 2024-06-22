@@ -70,7 +70,7 @@ class TaskPostingIndex extends Component
         }
         
         // Fetch task postings based on the applied filters and paginate the results
-        $taskPostings = $query->paginate(5);
+        $taskPostings = $query->paginate(9);
         
         $noTasksAvailable = $taskPostings->isEmpty();
 
@@ -90,7 +90,7 @@ class TaskPostingIndex extends Component
 
     public function showTask($taskId)
     {
-        $this->selectedTask = TaskPosting::find($taskId);
+        $this->dispatch('redirectToTask', $taskId);
     }
 
     #[On('redirectToTaskPostingPage')]
