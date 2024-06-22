@@ -67,7 +67,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/feedback', RatingIndex::class)->name('admin.rating.index');
 });
 
-Route::middleware(['auth', 'redirect.if.admin'])->group(function () {
+Route::middleware(['auth', 'redirect.if.admin', 'verified'])->group(function () {
 
     // Task Posting Route (Livewire Component)
     Route::get('/task-posting-page', TaskPostingPage::class)->name('task-posting-page');
