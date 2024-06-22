@@ -1,4 +1,4 @@
-<div>
+{{-- <div>
     <div>
         <nav class="z-20 flex shrink-0 grow-0 justify-around gap-4 border-t border-gray-200 bg-white/50 p-2.5 shadow-lg backdrop-blur-lg fixed top-2/4 -translate-y-2/4 left-6 min-h-[auto] min-w-[64px] flex-col rounded-lg border">
             <button wire:click="dispatch('showApplicationTable')" class="flex aspect-square min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5 transition-colors duration-300 ease-in-out hover:bg-indigo-100 focus:outline-none focus:bg-indigo-100 @if($showApplicationTable) bg-indigo-100 @endif">
@@ -16,7 +16,10 @@
         @if($showApplicationTable)
             <livewire:admin.application.application-table />
         @else
-            {{-- <livewire:admin.task-post.form /> --}}
+            <livewire:admin.task-post.form />
         @endif
     </div>
+</div> --}}
+<div>
+    <livewire:admin.application.application-table />
 </div>
