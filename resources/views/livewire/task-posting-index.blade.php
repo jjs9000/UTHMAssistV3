@@ -47,7 +47,7 @@
                                 </button>
                                 <!-- Task list card content wrapped in an anchor tag -->
                                 <a href="{{ route('task-posting.show', ['id' => $taskPosting->id]) }}" class="block">
-                                    <div class="bg-white flex flex-col gap-0 p-4 rounded-lg cursor-pointer hover:ring ring-gray-900 shadow-md h-64 w-74 mx-auto">
+                                    <div class="bg-white flex flex-col gap-0 p-4 rounded-lg cursor-pointer hover:ring ring-gray-900 shadow-md h-74 w-74 mx-auto">
                                         <h2 class="text-xl font-semibold mb-2">{{ $taskPosting->title }}</h2>
                                         <div class="flex items-center">
                                             <img src="{{ asset('svg/location-icon.svg') }}" alt="Location Icon" class="h-6 w-6 mr-2">
@@ -65,6 +65,11 @@
                                             @foreach ($taskPosting->tags as $tag)
                                                 <span class="inline-block bg-gray-900 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2 mb-2">{{ $tag->name }}</span>
                                             @endforeach
+                                        </div>
+                                        <div class="flex justify-between items-center mt-2">
+                                            <div>
+                                                <a href="{{ route('user.profile', ['id' => $taskPosting->user->id]) }}" target="_blank" class="bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-500">View Profile</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
